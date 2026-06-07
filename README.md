@@ -12,7 +12,7 @@ It turns a raw topic, draft, story, screenshot, or idea into:
 2. Xiaohongshu title options.
 3. Cover copy and carousel page structure.
 4. Page-by-page visual direction.
-5. Image-generation prompts or text-image instructions.
+5. Default Image 2 / image generation for cover and inner-page backgrounds.
 6. Publish-ready body copy, tags, and comment CTA.
 7. A publishing checklist.
 8. Optional handoff to browser automation, stopping before the final publish click.
@@ -44,6 +44,21 @@ Install or enable xiaohongshu-ops-skill
 
 If the dependencies are not available, the workflow still outputs a complete manual posting package.
 
+## Default Image Mode
+
+The default asset mode is `image_gen hybrid`.
+
+That means the workflow should generate visual backgrounds by default, then keep exact Chinese text as overlay copy. This avoids the common problem where an image model makes Chinese cover text look wrong.
+
+Default generation target:
+
+- 1 cover background.
+- 2-4 reusable inner-page backgrounds.
+- Optional ending-page background.
+- Exact page copy for manual text overlay.
+
+You only need to say "不要出图" when you want text-only output.
+
 ## Trigger Examples
 
 ```text
@@ -56,6 +71,10 @@ If the dependencies are not available, the workflow still outputs a complete man
 
 ```text
 把这段经历做成小红书 8 页图文，并给我封面和每页提示词
+```
+
+```text
+用澄Cc小红书工作流做今天这篇：我又因为同事一句话开始自我怀疑了
 ```
 
 ## Default Safety Rule
@@ -87,4 +106,3 @@ This workflow is designed to orchestrate existing public skills:
 
 - `xhs-visual-director-skill` by ziguishian, MIT License.
 - `xiaohongshu-ops-skill` by Xiangyu-CAS.
-

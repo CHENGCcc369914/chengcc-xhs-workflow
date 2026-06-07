@@ -4,7 +4,9 @@
 
 - Ratio: 3:4
 - Page count:
-- Asset mode: text-image / generated background / hybrid
+- Asset mode: image_gen hybrid by default
+- Generated assets: cover background / inner backgrounds / ending background
+- Text handling: exact Chinese text is overlay copy, not baked into generated images
 
 ## Cover
 
@@ -12,6 +14,8 @@
 - Sub copy:
 - Visual anchor:
 - Background:
+- Image 2 prompt:
+- Overlay text:
 
 ## Pages
 
@@ -26,6 +30,14 @@
 | 7 | Small step |  |  |  |
 | 8 | CTA |  |  |  |
 
+## Image Generation
+
+- Default action: generate images unless the user explicitly says no.
+- Cover background:
+- Inner background set:
+- Ending background:
+- Fallback prompt pack:
+
 ## Publish Copy
 
 - Title:
@@ -39,5 +51,6 @@
 - [ ] One idea per page.
 - [ ] No private details.
 - [ ] AI is not overclaimed.
+- [ ] Image generation ran or fallback prompts were supplied.
+- [ ] Exact Chinese text is handled as overlay copy.
 - [ ] Publish button not clicked automatically.
-

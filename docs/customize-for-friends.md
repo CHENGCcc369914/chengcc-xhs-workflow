@@ -20,6 +20,7 @@ To reuse this workflow for another creator, replace the brand profile before cha
 
 - One workflow owns one job.
 - Content writing, visual direction, and publishing are separate layers.
+- Image generation is on by default in `image_gen hybrid` mode.
 - Stop before the final publish click by default.
 - Exact cover text should be added in a reliable text tool when possible.
 - Do not copy competitor posts or images.
@@ -39,4 +40,3 @@ Keep:
 - visual director second
 - publish package third
 - safety check last
-

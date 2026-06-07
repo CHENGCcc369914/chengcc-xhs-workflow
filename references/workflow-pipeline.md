@@ -41,13 +41,26 @@ Output from visual director:
 
 ## Layer 3: Asset Production
 
-Choose one:
+Default to `image_gen hybrid`:
+
+- Generate cover and inner-page background visuals with Codex image generation / Image 2.
+- Keep exact Chinese text as overlay copy in Xiaohongshu, Figma, Canva, HTML, or another design layer.
+- Do not ask the user to request image generation each time; assume it is part of the workflow.
+
+Fallback modes:
 
 - Text-image mode: use Xiaohongshu platform "文字配图" or a design tool for exact text.
 - Generated-background mode: generate background/visuals, add exact text elsewhere.
 - Full image generation mode: use only when text accuracy is not critical.
 
 Rule: exact Chinese cover text should not depend entirely on an image generation model.
+
+Default output from this layer:
+
+- 1 generated cover background.
+- 2-4 reusable generated inner-page backgrounds.
+- exact overlay text for every page.
+- prompt pack as fallback if the image tool is unavailable.
 
 ## Layer 4: Publish Package
 
@@ -74,4 +87,3 @@ Safe path:
 5. Check title length.
 6. Check cover/title/body exist.
 7. Stop before final publish click.
-

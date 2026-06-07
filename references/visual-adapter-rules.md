@@ -46,6 +46,25 @@ Ending page:
 - Optional AI prompt.
 - Soft comment CTA.
 
+## Image 2 Default
+
+Use Codex image generation / Image 2 by default for visual backgrounds, not for final Chinese text.
+
+Generate:
+
+- one feed-readable cover background with a clear blank text area
+- reusable inner-page paper or desk backgrounds
+- orange Cc / citrus / note-taking motifs as subtle identity signals
+
+Avoid generating:
+
+- baked-in Chinese title text
+- fake app UI that looks like an AI product ad
+- overly smooth stock illustrations
+- glossy 3D icons unless the user explicitly asks for them
+
+The final page copy should be supplied as overlay text.
+
 ## Color
 
 Suggested palette:
@@ -66,4 +85,3 @@ Reject the design if:
 - It feels like a teacher lecturing.
 - Orange dominates so much that it becomes noisy.
 - The page is pretty but the message is not clear.
-

@@ -5,7 +5,7 @@
 - 输入类型：个人场景 + 关系情绪。
 - 目标读者：容易因为朋友回复慢而自我怀疑的人。
 - 传播目标：共鸣评论 + 收藏。
-- 推荐图文模式：7 页 3:4 图文，文字配图或奶白纸张背景。
+- 推荐图文模式：7 页 3:4 图文，默认 Image 2 生成背景 + 后期叠加中文文字。
 
 ## 内容内核
 
@@ -22,6 +22,7 @@
 - 不建议风格：冷科技、黑底杂志、强 AI 工具广告。
 - 封面结构：大标题 + 小注释 + 一个橙色 Cc 角标。
 - 画幅：3:4。
+- 出图策略：生成 1 张封面背景 + 3 张可复用内页背景；不要让模型直接生成中文标题。
 
 ## 图文配置
 
@@ -32,6 +33,14 @@
 5. 第 5 页：课题分离不是变冷漠，是把自己的心先放回自己这里。
 6. 第 6 页：我会这样问 AI：帮我把这件事拆成事实、解释、情绪、下一步。
 7. 结尾页：今天先做一件小事：不要拿没回消息证明自己不重要。
+
+## 图像 / 版式 Prompt
+
+- 封面背景：warm cream diary paper on a desk, one orange C-shaped citrus peel mark, soft natural morning light, subtle chat bubble shadows, clean blank area for Chinese title overlay, human handmade texture, 3:4, no text
+- 内页通用：warm paper note background, orange pen marks, small tape corners, soft shadow, subtle real-life desk traces, enough blank space for short Chinese overlay text, 3:4, no text
+- 关键页：a folded note with orange underline and a half-visible phone chat silhouette, calm reflective mood, warm cream and orange palette, 3:4, no readable text
+- Image 2 生成状态：默认生成；如果工具不可用，保留以上 prompt 作为手动出图包。
+- 文字叠加说明：所有中文标题、页文案、标签均后期叠加，不直接交给图片模型生成。
 
 ## 发布文案
 
@@ -75,5 +84,5 @@
 - 没有暴露真实朋友身份。
 - 没有心理治疗承诺。
 - AI 只是辅助拆解。
+- 图片只生成背景，不生成中文正文。
 - 适合先测试评论共鸣。
-
