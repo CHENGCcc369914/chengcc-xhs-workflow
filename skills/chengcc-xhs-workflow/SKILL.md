@@ -1,250 +1,241 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this skill whenever the user wants to turn a topic, personal scene, draft, screenshot, product idea, or rough thought into a Xiaohongshu image-text carousel package, especially when they say 一键配置图文, 小红书图文工作流, 澄Cc, 生成封面和轮播页, Image 2 出图, or 推进到发布页. This skill orchestrates content writing, xhs-visual-director-style visual planning, default Image 2/image_gen visual generation, publish-ready copy, and a safety-gated Xiaohongshu publish handoff."
+description: "Use this skill when the user wants a complete Xiaohongshu image-text workflow from creator defaults / media console to topic options, carousel copy, Image 2 full-card prompts, publish-safety review, and WorkBuddy draft handoff. Triggers include 澄Cc默认资料, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 小红书工作流, WorkBuddy发布草稿, or shareable skill for friends."
 ---
 
-# ChengCc Xiaohongshu Image-Text Workflow
+# ChengCc Xiaohongshu Workflow Skill
 
-This is an orchestration skill. It does not replace visual design or publishing skills. It coordinates them into one reliable workflow:
+This is a shareable orchestration skill:
 
-Topic or scene -> content core -> carousel visual plan -> image prompts/assets -> publish package -> optional semi-automated posting.
+Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> publish review -> WorkBuddy draft handoff.
 
-## 0. Default Image Generation
+It ships with 澄Cc defaults, but must be customizable for other creators.
 
-Default mode is `image_gen hybrid`.
+## 0. Replaceable Creator Slots
 
-Unless the user explicitly says not to generate images, assume the workflow should call Codex image generation / Image 2 after the content core and visual direction are ready. If the `image_gen` tool is available, use it directly.
+Before creating content, identify these slots:
 
-Use image generation for:
+| Slot | 澄Cc default | Friend replacement |
+|---|---|---|
+| Creator profile | `references/brand-profile-chengcc.md` | own profile |
+| Confirmed console | 澄Cc self-media console / default资料 | own creator console |
+| Visual style | `references/visual-adapter-rules.md` | own visual rules |
+| Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
+| Image mode | Image 2 full-card | own image model/style |
+| Publishing handoff | WorkBuddy draft | own operator/manual flow |
 
-- cover background or symbolic visual
-- inner-page backgrounds
-- orange/Cc visual motifs
-- diary, paper, desk, note, chat, light, shadow, and emotional atmosphere
+If a friend has no console yet, ask for or infer a minimal profile:
 
-Do not rely on image generation for exact Chinese text. Generate clean backgrounds or symbolic visuals first, then provide exact Chinese text as overlay copy for Xiaohongshu, Figma, Canva, HTML, or another design layer.
+- account name
+- target reader
+- persona
+- 3-5 content pillars
+- visual references
+- AI/tool boundary
+- hard avoids
 
-If the image generation tool is unavailable, degrade to a prompt pack and say that images were not generated in this run.
+Do not hard-code Cc's private local paths into shareable output.
 
-If the user provides no visual preference, generate 1 cover background and 3 reusable inner-page background directions rather than asking first.
+## 1. Required Reads
 
-## 1. Dependency Awareness
-
-Prefer the available local skills when they exist:
-
-- Use `xhs-visual-director` or `xhs-visual-director-skill` for page-by-page visual direction, cover hierarchy, 3:4 carousel design, and visual review.
-- Use `xiaohongshu-ops` for Xiaohongshu browser operations, uploads, publish-page navigation, and the final pre-publish checkpoint.
-- Use a content writer skill if present. If not present, use the content rules in this skill and the templates in this repo.
-
-If a dependency is unavailable, do not fail. Degrade gracefully:
-
-- Without visual-director: still produce the carousel plan and prompts.
-- Without browser/publishing tool: output a manual copy-paste publishing package.
-- Without image generation: output image prompts and text-image layout instructions.
-
-## 2. Read Only What Is Needed
-
-For `澄Cc`, read:
+For 澄Cc:
 
 1. `references/brand-profile-chengcc.md`
 2. `references/workflow-pipeline.md`
 3. `references/visual-adapter-rules.md`
 4. `references/publish-safety.md`
+5. `docs/workflow-phases.md`
+6. `docs/publish-review-2026.md`
 
-For another creator, read `docs/customize-for-friends.md` and ask for or infer a replacement brand profile.
+If the active environment also has `cc-xhs-personal-growth-writer`, use it for 澄Cc content voice and local console lookup.
 
-For output formatting, use:
+For another creator:
 
-- `templates/post-brief.md`
-- `templates/carousel-plan.md`
+1. `docs/customize-for-friends.md`
+2. the creator's own profile / console / visual reference
+3. `references/workflow-pipeline.md`
+4. `references/publish-safety.md`
+5. `docs/publish-review-2026.md`
 
-## 3. Brand Default: 澄Cc
+## 2. Workflow Phases
 
-Default identity:
+### Phase A: Topic Options
 
-- Account name: `澄Cc`
-- Avatar/visual symbol: `Cc`, orange, diary/recording feeling.
-- Persona: a newly working friend who reflects carefully.
-- Audience: workplace newcomers, people who want to become clearer, personal-growth readers, AI beginners.
-- Content: relationships, self-doubt, emotion stuck points, diary/recording, AI as a small next-step helper.
-- Tone: friend-like, real, reflective, not preachy.
+First output 10 topics suitable for the creator. Do not jump straight into a finished article unless the user has already picked a topic.
 
-Default visual:
+Each topic must include:
 
-- Warm cream paper.
-- Orange as energy accent.
-- Diary, notes, light, paper texture, small real-life traces.
-- Clean but not sterile.
-- Human and natural before "tech".
+- title / hook
+- scene
+- target reader
+- why it fits the creator
+- suggested carousel angle
+- visual route: Style B default or Style A strong-emotion backup
 
-Avoid:
+Use `templates/topic-options.md`.
 
-- Cold AI tech style.
-- Glossy app-icon style.
-- Overly childish orange mascot.
-- Guru language.
-- Heavy sales pitch.
+Then wait for the user to pick one.
 
-## 4. Workflow
+### Phase B: Carousel Draft
 
-### Step 1: Intake
+After topic selection, produce:
 
-Classify the input:
+- final title
+- 4-page carousel structure by default
+- per-page card text
+- body copy
+- tags
+- comment CTA
+- Image 2 prompt for each complete card
+- privacy and risk notes
 
-- Topic only.
-- Personal scene.
-- Full draft.
-- Screenshot/reference image.
-- Product or AI workflow idea.
-- Existing note that needs visual packaging.
+Do not generate images before the user confirms the card copy.
 
-Extract:
+### Phase C: Content Approval Gate
 
-- Core message.
-- Target reader.
-- Reader emotion.
-- Desired action: collect, comment, save, DM, or publish.
-- Risk level: private story, relationship, workplace, emotional health, product hint.
+Ask the user to confirm:
 
-If input is thin, do not ask many questions first. Produce a usable v1 and list what extra details would improve it.
+- card copy
+- body copy
+- visual route
+- whether AI chat screenshot is needed
+- whether image generation should run now
 
-### Step 2: Content Core
+If edits are requested, revise copy first. Then regenerate Image 2 prompts.
 
-Produce a compact content brief:
+### Phase D: Image 2 Full-Card Production
 
-- One-sentence point.
-- Real or simulated scene.
-- Wrong interpretation or stuck point.
-- New angle.
-- AI next-step action, only if it genuinely helps.
-- One small action readers can do today.
+Default for 澄Cc:
 
-### Step 3: Visual Direction
+- 3:4 vertical card
+- final Chinese text baked in
+- Style B as default visual
+- Style A only for strong-emotion topics
+- original orange IP only, small and secondary
+- no other characters / borrowed IP / fake screenshots
 
-Use the visual director layer if available. Apply `references/visual-adapter-rules.md` before asking it for output.
+If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
-The visual plan must include:
+### Phase E: Publish Review
 
-- Recommended style.
-- Styles to reject.
-- Cover hierarchy.
-- Page count, usually 6-8 pages.
-- Page-by-page layout.
-- Per-page visual prompt or text-image instruction.
-- Readability checks for mobile.
+Run `references/publish-safety.md` and `docs/publish-review-2026.md`.
 
-### Step 4: Asset Plan
+If issues exist:
 
-Use `image_gen hybrid` as the default asset mode. Other modes are fallbacks:
+1. list the issue
+2. explain risk
+3. revise the affected card/body/tag/prompt
+4. rerun the check
 
-1. Platform text-image mode: best when words must be precise.
-2. Generated-image mode: best for atmosphere or symbolic backgrounds.
-3. Hybrid mode: generated background + platform or design-tool text overlay.
+If clean, continue to WorkBuddy handoff.
 
-Default to hybrid mode. For Xiaohongshu covers, keep precise Chinese text outside the image model when the title must be exact.
+### Phase F: WorkBuddy Draft Handoff
 
-When image generation is available, generate:
+Output a precise WorkBuddy instruction using `templates/workbuddy-handoff.md`.
 
-- 1 cover background
-- 2-4 reusable inner-page backgrounds
-- optional ending-page background if the CTA needs a different mood
+The instruction should say:
 
-Name each generated asset by intended page use. If files cannot be emitted or saved, still output the prompts and overlay text clearly.
+- open Xiaohongshu Creator Center image-text publishing page
+- upload images in order
+- fill title/body/tags
+- mark AI-generated/AI-assisted content if the platform exposes the option or if the generated cards are primarily AI-generated
+- save as draft or stop before publish
+- do not click final publish unless the current user explicitly says so
 
-### Step 5: Publish Package
+## 3. 澄Cc Defaults
 
-Output:
+Persona:
 
-- Title options, at least one under 20 Chinese characters.
-- Final selected title.
-- Cover copy.
-- Page-by-page carousel copy.
-- Body text.
-- Tags, 5-8.
-- Comment CTA.
-- Publish notes and privacy edits.
+- 00后应届生 / 初入职场新手.
+- Writes to peers still in school, close to graduation, or just entering work.
+- Uses real personal confusion to create same-circle resonance.
 
-### Step 6: Optional Publish Handoff
+Tone:
 
-If `xiaohongshu-ops` and browser automation are available:
+- friend-like, young, clear, not teacher-like.
+- no hard preaching.
+- AI is a shared method, not a course or tool pitch.
 
-1. Confirm image files exist or choose text-image mode.
-2. Open Xiaohongshu publishing page.
-3. Enter image-text flow.
-4. Upload or create cover/images.
-5. Fill title and body.
-6. Append tags.
-7. Validate cover/title/body.
-8. Stop before the final publish click.
+Content pillars:
 
-Never click the final publish button unless the user explicitly confirms in the current turn.
+- graduation and early-career confusion
+- friend relationships
+- self-doubt
+- emotional stuck points
+- AI as a subtle method share
 
-## 5. Default Output Contract
+Visual:
 
-Use this structure unless the user asks for another format:
+- Style B default: young lifestyle-aesthetic magazine, abstract, trendy, healing, premium, dopamine but controlled.
+- Style A backup: Gen-Z emotional sticker poster, only for strong-emotion hooks.
+
+## 4. Default Output Contract
+
+Use this structure unless the user asks otherwise:
 
 ```markdown
-## 任务判断
-- 输入类型：
-- 目标读者：
-- 传播目标：
-- 推荐图文模式：
+## 读取和定位
+- 使用资料：
+- 可替换 slot：
+- 账号定位：
+- 默认视觉：
 
-## 内容内核
-- 一句话观点：
-- 场景：
-- 卡住点：
-- 换个角度：
-- AI 小动作：
-- 读者行动：
+## 10 个选题
+| # | 选题 | 场景 | 适配理由 | 图文角度 | 视觉路线 |
+|---|---|---|---|---|---|
 
-## 视觉方向
-- 推荐风格：
-- 不建议风格：
-- 封面结构：
-- 画幅：
-- 色彩与材质：
+## 等待选择
+请从 10 个里选 1 个；选完我再做 4 页图文、正文和 Image 2 prompt。
+```
 
-## 图文配置
-1. 封面：
-2. 第 2 页：
-3. 第 3 页：
-4. 第 4 页：
-5. 第 5 页：
-6. 第 6 页：
-7. 结尾页：
+After the user picks:
 
-## 图像 / 版式 Prompt
-- 封面：
-- 内页通用：
-- 关键页：
-- Image 2 生成状态：
-- 文字叠加说明：
+```markdown
+## 图文方案
+- 标题：
+- 页数：
+- 视觉路线：
+
+## 4 页卡片
+1.
+2.
+3.
+4.
+
+## 正文
+
+## Image 2 完整卡片 Prompt
+- Page 1:
+- Page 2:
+- Page 3:
+- Page 4:
 
 ## 发布文案
 - 标题：
 - 正文：
 - 标签：
-- 评论区引导：
 
-## 发布前检查
-- 字数：
+## 发布审核
+- AI 标识：
+- 原创/侵权：
 - 隐私：
-- 误导承诺：
-- AI 是否过度：
-- 是否停在发布前：
+- 真实性：
+- 平台风险：
+- 结论：
+
+## WorkBuddy 草稿指令
+...
 ```
 
-## 6. Quality Gate
+## 5. Quality Gate
 
-Before finishing, check:
+Before finishing, verify:
 
-- Is the account voice friend-like rather than teacher-like?
-- Does the carousel have a save-worthy structure?
-- Is the cover readable on a phone?
-- Is orange used as a symbol, not as noisy decoration?
-- Is AI a small helper, not the protagonist?
-- Were images generated by default when the tool was available?
-- Is all exact Chinese text handled as overlay copy rather than baked into generated images?
-- Is there no medical, mental-health treatment, legal, financial, or guaranteed-outcome claim?
-- If publishing was attempted, did the workflow stop before the final publish click?
+- Did the workflow start from creator defaults / confirmed console?
+- Did it offer 10 topics before drafting if no topic was selected?
+- Did it wait for content approval before image generation?
+- Are all creator-specific parts replaceable?
+- Is the body additive rather than a duplicate of card text?
+- Is AI framed as a method share rather than hard-sold teaching?
+- Did the 2026 publish review run?
+- Does WorkBuddy stop at draft / pre-publish unless explicitly told to publish?

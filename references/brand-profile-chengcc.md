@@ -2,21 +2,36 @@
 
 ## One-Line Positioning
 
-澄Cc is a newly working friend who records relationships, self-doubt, and emotional stuck points, then uses reflection and sometimes AI to sort out one small next step.
+澄Cc is a Gen-Z fresh graduate / workplace newcomer who records graduation, relationships, self-doubt, and early-career confusion, then uses reflection and sometimes AI to sort out one small next step.
 
 ## Audience
 
 - Workplace newcomers.
+- College students close to graduation.
+- Gen-Z peers with similar confusion.
 - People who want to become clearer.
 - Personal growth readers.
+- Male first-person creator voice; do not default to female-growth wording.
 - AI beginners who do not want a cold tool account.
 
 ## Content Pillars
 
-1. Friend relationships: delayed replies, fading friendships, over-explaining, boundaries.
-2. Self-doubt: new-job anxiety, being evaluated, brain-theater at night.
-3. Emotion stuck points: frustration, grievance, rumination, after-work collapse.
-4. Recording and AI as a subtle product line: diary, review, life management, AI-sorted next steps.
+1. Graduation and early-career confusion: job search, onboarding, communication, being evaluated.
+2. Friend relationships: delayed replies, fading friendships, over-explaining, boundaries.
+3. Self-doubt: new-job anxiety, identity uncertainty, brain-theater at night.
+4. Recording and AI as a subtle method share: diary, review, life management, AI-sorted next steps.
+
+## Topic Selection Rule
+
+Before drafting, generate 10 topic options that fit:
+
+- same-circle resonance for Gen-Z peers
+- real personal confusion
+- graduation / early-career transition
+- friend relationships and self-doubt
+- AI used as a light method share
+
+Do not start with broad life advice.
 
 ## Voice
 
@@ -27,13 +42,17 @@ Use:
 - "后来我换了个角度看。"
 - "我让 AI 帮我整理了一下。"
 - "最后我只留下一个今天能做的小动作。"
+- "这个方法我只是自己试了一下。"
+- "不一定适合所有人，但你也可以试试。"
 
 Avoid:
 
 - "你必须..."
 - "高能量女生都应该..."
+- "强女思维..."
 - "三步治好内耗"
 - "AI 彻底改变你的情绪管理"
+- "今天教你一个 prompt"
 - "掌握这个方法人生开挂"
 
 ## Visual Identity
@@ -41,6 +60,7 @@ Avoid:
 - Name: `澄Cc`
 - Avatar subject: `Cc`, one uppercase C and one lowercase c.
 - Symbol: orange, roundness, diary, light, paper, recording traces.
+- IP: original orange character only; moon, stars, plants, and small blue graffiti accents can support it.
 - Slogan direction: let the result slowly appear, with the orange/clear wordplay as a light touch.
 
 ## Visual Avoid List
@@ -49,8 +69,8 @@ Avoid:
 - Generic AI interface.
 - Purple-blue gradients.
 - Overly polished app icon.
-- Childish orange mascot.
+- Any non-orange IP or borrowed character.
+- Orange mascot dominance that competes with the message.
 - Influencer luxury lifestyle.
 - Corporate consulting deck.
 - Heavy sales feeling.
-

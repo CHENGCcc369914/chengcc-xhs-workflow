@@ -1,42 +1,74 @@
 # Customize For Friends
 
-To reuse this workflow for another creator, replace the brand profile before changing the workflow itself.
+This workflow is shareable because it separates the fixed pipeline from creator-specific defaults.
 
-## Fill This In
+## Replace These Slots
+
+Ask the friend to provide:
 
 - Account name:
-- Target reader:
+- Confirmed creator console / positioning doc:
+- Target readers:
 - Persona:
-- Topics:
-- Visual symbol:
+- Content pillars:
+- Common real scenes:
+- Visual references:
 - Main colors:
-- Tone:
+- Typography preference:
+- IP / symbol / mascot rules:
+- AI/tool boundary:
 - Hard avoid list:
-- Product or business line, if any:
-- Publishing frequency:
-- Content format:
+- Publishing operator:
 
-## Keep These Rules
+## Keep These Pipeline Rules
 
-- One workflow owns one job.
-- Content writing, visual direction, and publishing are separate layers.
-- Image generation is on by default in `image_gen hybrid` mode.
-- Stop before the final publish click by default.
-- Exact cover text should be added in a reliable text tool when possible.
-- Do not copy competitor posts or images.
+- Read creator defaults before writing.
+- Generate 10 topic options first.
+- Wait for the creator to pick one topic.
+- Draft carousel copy and body copy.
+- Wait for content approval before image generation.
+- Use Image 2 full-card mode only after copy is locked.
+- Run publish safety review before handoff.
+- WorkBuddy or another operator saves draft / stops before final publish by default.
 
 ## Replace 澄Cc Defaults
 
 Replace:
 
 - `澄Cc`
-- orange diary-page visual rules
-- friend-reflection persona
-- AI as next-step helper
+- 00后应届生 / 初入职场新手
+- orange IP
+- Style B lifestyle magazine visual
+- Style A emotional sticker visual
+- graduation / workplace newcomer topics
+- WorkBuddy account-specific instructions
 
 Keep:
 
-- content core first
-- visual director second
-- publish package third
-- safety check last
+- creator-defaults first
+- topic-selection gate
+- content-approval gate
+- publish-review gate
+- final human publish confirmation
+
+## Minimal Friend Profile Template
+
+```markdown
+# Creator Profile
+
+## Positioning
+
+## Target Reader
+
+## Persona
+
+## Content Pillars
+
+## Visual System
+
+## AI / Tool Boundary
+
+## Hard Avoids
+
+## Publishing Handoff
+```

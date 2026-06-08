@@ -3,54 +3,53 @@
 ## Format
 
 - Ratio: 3:4
-- Page count:
-- Asset mode: image_gen hybrid by default
-- Generated assets: cover background / inner backgrounds / ending background
-- Text handling: exact Chinese text is overlay copy, not baked into generated images
+- Page count: 4 by default
+- Asset mode: Image 2 full-card after copy lock
+- Visual route: Style B default / Style A strong-emotion backup / custom
+- Text handling: final Chinese text baked into generated cards after approval
 
 ## Cover
 
 - Main copy:
 - Sub copy:
 - Visual anchor:
-- Background:
 - Image 2 prompt:
-- Overlay text:
+- Risk note:
 
 ## Pages
 
-| Page | Goal | Copy | Visual Direction | Prompt / Layout Notes |
-|---|---|---|---|---|
-| 1 | Cover |  |  |  |
-| 2 | Pain |  |  |  |
-| 3 | Scene |  |  |  |
-| 4 | Reframe |  |  |  |
-| 5 | Method |  |  |  |
-| 6 | AI action |  |  |  |
-| 7 | Small step |  |  |  |
-| 8 | CTA |  |  |  |
+| Page | Goal | Card Copy | Visual Direction | Image 2 Prompt Notes | Risk |
+|---|---|---|---|---|---|
+| 1 | Cover |  |  |  |  |
+| 2 | Real feeling |  |  |  |  |
+| 3 | Reframe |  |  |  |  |
+| 4 | AI method / screenshot |  |  |  |  |
 
-## Image Generation
+## Body Copy
 
-- Default action: generate images unless the user explicitly says no.
-- Cover background:
-- Inner background set:
-- Ending background:
-- Fallback prompt pack:
+```text
 
-## Publish Copy
+```
 
-- Title:
-- Body:
-- Tags:
-- Comment CTA:
+## Tags
 
-## Checks
+```text
 
-- [ ] Cover readable at feed size.
-- [ ] One idea per page.
-- [ ] No private details.
-- [ ] AI is not overclaimed.
-- [ ] Image generation ran or fallback prompts were supplied.
-- [ ] Exact Chinese text is handled as overlay copy.
-- [ ] Publish button not clicked automatically.
+```
+
+## Publish Review
+
+- AI label:
+- Authenticity:
+- Originality/IP:
+- Privacy:
+- Claims:
+- Platform hygiene:
+- Decision: pass / revise / block
+
+## WorkBuddy Handoff Ready
+
+- [ ] Images/prompts ready.
+- [ ] Title/body/tags final.
+- [ ] Review passed.
+- [ ] Draft-only instruction included.

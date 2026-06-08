@@ -1,28 +1,46 @@
 # XHS Post Brief
 
-## Input
+## Creator Defaults
 
-- Topic or scene:
-- Intended account:
-- Publish goal: collect / comment / DM / test direction / publish today
-- Raw materials:
+- Creator:
+- Confirmed console:
+- Target reader:
+- Persona:
+- Content pillars:
+- Visual system:
+- AI/tool boundary:
+- Replaceable slots:
+
+## Selected Topic
+
+- Topic number:
+- Hook:
+- Scene:
+- Target reader:
+- Why it fits:
+- Visual route:
 
 ## Content Core
 
 - One-sentence point:
-- Target reader:
-- Reader pain:
 - Real scene:
 - Stuck interpretation:
 - New angle:
-- AI helper action:
+- AI method share:
 - One small reader action:
+
+## Draft Gate
+
+- Card copy confirmed: yes / no
+- Body copy confirmed: yes / no
+- Visual route confirmed: yes / no
+- Ready for Image 2: yes / no
 
 ## Risk Notes
 
 - Privacy:
-- Workplace:
-- Relationship:
-- Emotional-health claim:
-- Product/sales hint:
-
+- Authenticity:
+- AI label:
+- Copyright/IP:
+- Medical/legal/financial/career claims:
+- Platform risk:

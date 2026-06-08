@@ -4,13 +4,41 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 
 ## Use This Direction
 
-- Warm paper.
-- Orange as accent and identity.
-- Natural light.
-- Diary, sticky notes, small desk objects, paper texture.
-- Real recording traces: creases, stains, shadows, tape, annotations.
-- Human-made but still clean.
-- Clear mobile readability.
+- Default to Style B: young lifestyle-aesthetic magazine cover, abstract, trendy, healing, premium, dopamine but controlled.
+- Use Style A only for strong-emotion topics: Gen-Z emotional sticker poster, higher impact, street sticker collage.
+- Warm cream / light beige background.
+- Yellow, orange, light orange, and warm white as the core palette.
+- Electric blue and mint green as controlled accents.
+- Original anthropomorphic orange IP only: round orange, leaf, blush, thick black outline.
+- Moon, stars, plants, and graffiti strokes as optional supporting motifs.
+- Abstract color fields, bento-box composition, independent magazine cover feeling.
+- Typography must look designed: custom editorial Chinese display lettering for Style B; hand-lettered sticker typography for Style A.
+- Clear mobile hierarchy: one biggest sentence, one smaller support sentence, one optional rounded info box.
+
+## Style Route
+
+### Style B: Default
+
+Use for most posts.
+
+- young lifestyle-aesthetic magazine
+- abstract color fields
+- bento-box / editorial composition
+- premium but still Gen-Z
+- dopamine palette, controlled saturation
+- generous whitespace
+- orange IP small and secondary
+
+### Style A: Strong-Emotion Backup
+
+Use only when the topic has a strong emotional hook.
+
+- Gen-Z emotional sticker poster
+- hand-lettered sticker typography
+- street collage feeling
+- bigger emotional keyword
+- higher visual impact
+- do not overuse, or the account becomes noisy
 
 ## Avoid This Direction
 
@@ -20,17 +48,23 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 - Neon cyberpunk.
 - Purple-blue gradients.
 - Smooth generic AI icons.
-- Cartoon orange mascot.
+- Any mascot or character that is not the original orange IP.
+- Large orange mascot competing with the title.
 - Overly premium lifestyle photography.
 - Dense consulting-slide layout.
+- Feminine pastel overload.
+- Pages where every text block has the same visual weight.
+- System-font title or PPT-like typography.
+- Too many decorative elements that make the page noisy.
 
 ## Page Design
 
 Cover:
 
 - One strong emotional sentence.
-- One clear visual anchor.
-- No more than 2 text levels.
+- One deeper support sentence.
+- One small orange IP visual anchor.
+- No more than 3 text levels.
 - Title must be readable at feed size.
 
 Inner pages:
@@ -39,31 +73,34 @@ Inner pages:
 - Short sentences.
 - Visible hierarchy: main point, small note, optional example.
 - Include real-scene details instead of abstract slogans.
+- Use big/small contrast; do not scatter equal-weight text around the page.
 
 Ending page:
 
-- One small action.
-- Optional AI prompt.
+- One small action or AI answer.
+- Optional real AI chat screenshot frame.
 - Soft comment CTA.
 
 ## Image 2 Default
 
-Use Codex image generation / Image 2 by default for visual backgrounds, not for final Chinese text.
+Use Codex image generation / Image 2 by default for complete final cards after the Chinese card copy is confirmed.
 
 Generate:
 
-- one feed-readable cover background with a clear blank text area
-- reusable inner-page paper or desk backgrounds
-- orange Cc / citrus / note-taking motifs as subtle identity signals
+- four 3:4 Xiaohongshu image-text cards by default
+- Chinese card text baked into the generated design
+- one small original orange IP per page when useful
+- a blank rounded frame if a real AI chat screenshot needs to be inserted
 
 Avoid generating:
 
-- baked-in Chinese title text
+- Chinese text before final copy is confirmed
 - fake app UI that looks like an AI product ad
 - overly smooth stock illustrations
 - glossy 3D icons unless the user explicitly asks for them
+- other IPs, people, animals, borrowed characters, or multi-character mascot groups
 
-The final page copy should be supplied as overlay text.
+If the user changes card text after generation, regenerate that card. Do not patch text afterward unless the user explicitly asks for an editable design-layer version.
 
 ## Color
 
@@ -75,6 +112,7 @@ Suggested palette:
 - Deep orange: `#C86412`
 - Ink brown: `#29231E`
 - Warm gray: `#766B60`
+- Accent blue: use sparingly for graffiti marks and neutral balance.
 
 ## Visual Review
 
@@ -85,3 +123,7 @@ Reject the design if:
 - It feels like a teacher lecturing.
 - Orange dominates so much that it becomes noisy.
 - The page is pretty but the message is not clear.
+- The picture text duplicates the body copy with no added value.
+- Visual hierarchy is flat and the reader cannot tell where to look first.
+- Style A is used for an ordinary topic without strong emotional need.
+- Style B becomes too plain and loses young visual impact.

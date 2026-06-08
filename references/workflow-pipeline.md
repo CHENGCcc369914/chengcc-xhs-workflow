@@ -1,89 +1,118 @@
 # Workflow Pipeline
 
-## Layer 1: Content Core
+## Phase A: Read Creator Defaults
 
-Goal: turn a raw scene into a small point worth saving.
+Goal: understand the creator before generating ideas.
 
-Output:
+Inputs:
 
-- topic
-- reader pain
-- real or simulated scene
-- stuck interpretation
-- new angle
-- AI prompt or next-step action
-- title candidates
-- body copy
-- comment CTA
+- creator profile
+- confirmed media console / positioning doc
+- visual rules
+- content pillars
+- hard avoids
+- publishing operator
 
-## Layer 2: Visual Direction
+For 澄Cc, use:
 
-Goal: turn the content into a 3:4 Xiaohongshu carousel.
+- 00后应届生 / 初入职场新手
+- target readers: in-school, soon-to-graduate, fresh workplace peers
+- Style B default, Style A backup
+- AI as method sharing, not teaching
 
-Use `xhs-visual-director-skill` when available.
+For friends, replace those defaults with their own.
 
-Input to visual director:
+## Phase B: Generate 10 Topics
 
-- content core
+Goal: help the creator choose, not force one direction.
+
+Each topic includes:
+
+- hook
+- real-scene seed
 - target reader
-- save/comment goal
-- brand profile
-- visual adapter rules
-- page count
+- reason it fits the account
+- carousel angle
+- visual route
 
-Output from visual director:
+Do not produce final copy until the user picks one topic.
 
-- style judgment
-- cover hierarchy
-- page-by-page structure
-- image prompts
-- visual review checklist
+## Phase C: Draft Carousel Package
 
-## Layer 3: Asset Production
+Goal: turn the chosen topic into a confirmable image-text package.
 
-Default to `image_gen hybrid`:
-
-- Generate cover and inner-page background visuals with Codex image generation / Image 2.
-- Keep exact Chinese text as overlay copy in Xiaohongshu, Figma, Canva, HTML, or another design layer.
-- Do not ask the user to request image generation each time; assume it is part of the workflow.
-
-Fallback modes:
-
-- Text-image mode: use Xiaohongshu platform "文字配图" or a design tool for exact text.
-- Generated-background mode: generate background/visuals, add exact text elsewhere.
-- Full image generation mode: use only when text accuracy is not critical.
-
-Rule: exact Chinese cover text should not depend entirely on an image generation model.
-
-Default output from this layer:
-
-- 1 generated cover background.
-- 2-4 reusable generated inner-page backgrounds.
-- exact overlay text for every page.
-- prompt pack as fallback if the image tool is unavailable.
-
-## Layer 4: Publish Package
-
-Package everything:
+Default output:
 
 - final title
-- cover
-- image list or text-image instructions
+- 4-page carousel plan
+- page-by-page card copy
 - body copy
 - tags
 - comment CTA
-- privacy edits
+- Image 2 full-card prompts
+- risk notes
 
-## Layer 5: Publishing Operation
+Default 4 pages:
 
-Use `xiaohongshu-ops-skill` when available.
+1. Cover.
+2. Real feeling / brain-theater.
+3. Reframe / hidden method.
+4. AI answer / screenshot-frame.
 
-Safe path:
+## Phase D: Content Approval
 
-1. Upload image-text note.
-2. Add images or generate text image.
-3. Fill title.
-4. Fill body and tags.
-5. Check title length.
-6. Check cover/title/body exist.
-7. Stop before final publish click.
+Before image generation, ask for approval of:
+
+- card text
+- body text
+- visual route
+- screenshot requirement
+- image generation timing
+
+If copy changes later, regenerate Image 2 prompts and affected images.
+
+## Phase E: Image 2 Full-Card Production
+
+Default to `image_gen full-card`:
+
+- lock exact card copy first
+- generate complete 3:4 cards
+- include final Chinese text directly in the image
+- use screenshot-frame mode when a real AI chat image should be inserted
+
+Fallback:
+
+- prompt pack only
+- editable hybrid mode if the user explicitly wants design-layer text
+- manual image production handoff
+
+## Phase F: 2026 Publish Review
+
+Run the review after images/prompts and before WorkBuddy handoff.
+
+Check:
+
+- AI generated/synthetic content labeling
+- no AI account hosting / fake automation
+- no fake experiences, fake screenshots, or fake claims
+- no IP/portrait/copyright misuse
+- no low-quality batch sameness
+- no privacy exposure
+- no medical/legal/financial/career guarantees
+- no misleading external traffic or fake engagement
+- no platform-sensitive or illegal content
+
+If a problem exists, revise and rerun review.
+
+## Phase G: WorkBuddy Draft Handoff
+
+If review passes:
+
+- prepare image order
+- final title
+- final body
+- tags
+- AI label instruction
+- draft-save instruction
+
+WorkBuddy should save as draft or stop before final publish unless the user explicitly asks it to publish in the current turn.
