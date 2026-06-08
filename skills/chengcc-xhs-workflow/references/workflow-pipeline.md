@@ -93,6 +93,14 @@ Prompt-only output is a fallback, not the normal path. Use it only when Image 2 
 
 Run the review after images/prompts and before WorkBuddy handoff.
 
+First choose the target platform:
+
+- default `xiaohongshu` for Xiaohongshu-first image-text posts
+- `douyin` for Douyin
+- `wechat_channels` for WeChat Channels
+- `wechat_official_account` for WeChat Official Account
+- multiple platform codes for cross-posting
+
 Check:
 
 - AI generated/synthetic content labeling
@@ -104,18 +112,21 @@ Check:
 - no medical/legal/financial/career guarantees
 - no misleading external traffic or fake engagement
 - no platform-sensitive or illegal content
+- platform-specific requirements from `docs/platform-publish-rules-2026.md`
 
-If a problem exists, revise and rerun review.
+If a problem exists, revise and rerun the affected platform review. Cross-posting requires a separate pass/revise/block decision for each platform.
 
 ## Phase G: WorkBuddy Draft Handoff
 
 If review passes:
 
+- target platform and draft surface
 - prepare image order
 - final title
 - final body
 - tags
 - AI label instruction
+- platform-specific risk notes
 - draft-save instruction
 
 WorkBuddy should save as draft or stop before final publish unless the user explicitly asks it to publish in the current turn.

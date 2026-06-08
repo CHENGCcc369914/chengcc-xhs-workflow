@@ -1,6 +1,6 @@
 # ChengCc XHS Workflow
 
-A shareable Xiaohongshu image-text workflow skill for turning creator-specific positioning into publish-ready carousel drafts.
+A shareable Xiaohongshu-first image-text workflow skill for turning creator-specific positioning into publish-ready carousel drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account.
 
 The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and publishing handoff.
 
@@ -14,7 +14,7 @@ The complete route is:
 4. Build the carousel plan, card copy, body copy, tags, and Image 2 full-card prompts.
 5. Wait for content approval before image generation.
 6. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
-7. Run the 2026 publish safety review.
+7. Select the target platform and run the 2026 platform publish safety review.
 8. If clean, output a WorkBuddy handoff instruction to upload images, fill title/body/tags, save as draft, and wait for human confirmation.
 
 ## Default Trigger
@@ -40,7 +40,8 @@ The workflow is reusable because these parts are replaceable:
 | Visual system | `references/visual-adapter-rules.md` | own visual style and Image 2 rules |
 | Topic sources | emotion / graduation / workplace newcomer | own content pillars |
 | Publishing operator | WorkBuddy | WorkBuddy / manual / browser automation |
-| Safety rules | `references/publish-safety.md` | keep platform rules, add niche-specific rules |
+| Target platform | `xiaohongshu` by default | `xiaohongshu` / `douyin` / `wechat_channels` / `wechat_official_account` |
+| Safety rules | `references/publish-safety.md` + `docs/platform-publish-rules-2026.md` | keep platform rules, add niche-specific rules |
 
 ## Current 澄Cc Defaults
 
@@ -52,15 +53,18 @@ The workflow is reusable because these parts are replaceable:
 - Visual backup: Style A, Gen-Z emotional sticker poster for strong-emotion topics only.
 - Image mode: `image_gen full-card`; final Chinese text is baked into the card after copy lock.
 
-## 2026 Publish Review
+## 2026 Platform Publish Review
 
-The review gate is based on:
+The review gate is platform-aware. Supported target platform codes:
 
-- China AI generated/synthetic content labeling rules effective from 2025-09-01.
-- Xiaohongshu 2026 AI governance reporting: active AI labeling, anti-AI-account-hosting, anti-fake-experience, anti-infringement, anti-low-quality batch content.
-- Standard Xiaohongshu content safety checks: privacy, originality, no misleading claims, no illegal/sensitive content, no fake engagement, no medical/legal/financial/career guarantees.
+- `xiaohongshu`: 小红书图文 / 视频
+- `douyin`: 抖音图文 / 视频
+- `wechat_channels`: 微信视频号图文 / 视频
+- `wechat_official_account`: 微信公众号文章 / 图文 / 短视频
 
-Before high-risk publishing, refresh platform rules because Xiaohongshu policies can change.
+The gate checks AI/synthetic content labeling, authenticity, originality, privacy, copyright, claims, commercial/activity disclosure, external diversion, and platform-specific requirements.
+
+Before high-risk publishing, refresh platform rules because policies can change.
 
 ## Recommended Skill Stack
 
@@ -73,11 +77,16 @@ This repo is the orchestration layer. It can work alone, but works best with:
 
 ## Install
 
-Copy this repo's skill folder into your agent skills directory:
+Manual install:
 
 ```bash
+mkdir -p ~/.agents/skills
 cp -R skills/chengcc-xhs-workflow ~/.agents/skills/
 ```
+
+The `skills/chengcc-xhs-workflow/` folder is self-contained. Do not copy only
+`SKILL.md`; the skill also needs its bundled `references/`, `docs/`,
+`templates/`, and `examples/` folders.
 
 Then invoke it with a creator profile and console:
 
@@ -89,19 +98,21 @@ Then invoke it with a creator profile and console:
 
 ```text
 skills/chengcc-xhs-workflow/SKILL.md
-references/brand-profile-chengcc.md
-references/workflow-pipeline.md
-references/visual-adapter-rules.md
-references/publish-safety.md
-docs/customize-for-friends.md
-docs/workflow-phases.md
-docs/publish-review-2026.md
-templates/topic-options.md
-templates/post-brief.md
-templates/carousel-plan.md
-templates/workbuddy-handoff.md
-examples/sample-input.md
-examples/sample-output.md
+skills/chengcc-xhs-workflow/references/brand-profile-chengcc.md
+skills/chengcc-xhs-workflow/references/workflow-pipeline.md
+skills/chengcc-xhs-workflow/references/visual-adapter-rules.md
+skills/chengcc-xhs-workflow/references/publish-safety.md
+skills/chengcc-xhs-workflow/docs/customize-for-friends.md
+skills/chengcc-xhs-workflow/docs/workflow-phases.md
+skills/chengcc-xhs-workflow/docs/publish-review-2026.md
+skills/chengcc-xhs-workflow/docs/platform-publish-rules-2026.md
+skills/chengcc-xhs-workflow/templates/topic-options.md
+skills/chengcc-xhs-workflow/templates/post-brief.md
+skills/chengcc-xhs-workflow/templates/carousel-plan.md
+skills/chengcc-xhs-workflow/templates/platform-review.md
+skills/chengcc-xhs-workflow/templates/workbuddy-handoff.md
+skills/chengcc-xhs-workflow/examples/sample-input.md
+skills/chengcc-xhs-workflow/examples/sample-output.md
 ```
 
 ## Safety Boundary

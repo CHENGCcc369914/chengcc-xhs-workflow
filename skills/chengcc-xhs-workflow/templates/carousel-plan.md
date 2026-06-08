@@ -7,6 +7,7 @@
 - Asset mode: Image 2 full-card after copy lock
 - Visual route: Style B default / Style A strong-emotion backup / custom
 - Text handling: final Chinese text baked into generated cards after approval
+- Target platform: xiaohongshu / douyin / wechat_channels / wechat_official_account
 
 ## Cover
 
@@ -39,11 +40,14 @@
 
 ## Publish Review
 
+- Target platform:
 - AI label:
 - Authenticity:
 - Originality/IP:
 - Privacy:
 - Claims:
+- Commercial/diversion/activity:
+- Platform-specific rules:
 - Platform hygiene:
 - Decision: pass / revise / block
 
@@ -51,5 +55,6 @@
 
 - [ ] Images/prompts ready.
 - [ ] Title/body/tags final.
-- [ ] Review passed.
+- [ ] Target platform selected.
+- [ ] Platform review passed.
 - [ ] Draft-only instruction included.

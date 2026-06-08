@@ -19,6 +19,7 @@
 - Target reader:
 - Why it fits:
 - Visual route:
+- Target platform:
 
 ## Content Core
 
@@ -43,4 +44,5 @@
 - AI label:
 - Copyright/IP:
 - Medical/legal/financial/career claims:
-- Platform risk:
+- Commercial/diversion/activity:
+- Platform-specific risk:

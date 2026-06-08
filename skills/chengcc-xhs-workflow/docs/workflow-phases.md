@@ -55,27 +55,38 @@ If text changes, regenerate.
 
 ## 5. Review
 
-Run 2026 publish review:
+Run 2026 publish review after selecting the target platform:
+
+- `xiaohongshu`
+- `douyin`
+- `wechat_channels`
+- `wechat_official_account`
+
+Check:
 
 - AI labeling
 - authenticity
 - originality
 - privacy
 - claims
+- commercial/diversion/activity risks
+- platform-specific rules
 - platform hygiene
 
-If blocked, revise before handoff.
+If cross-posting, run one review per platform. If blocked, revise before handoff.
 
 ## 6. WorkBuddy Handoff
 
 Output one precise instruction for WorkBuddy:
 
+- target platform and draft surface
 - where to publish
 - image order
 - title
 - body
 - tags
 - AI label
+- platform review result
 - save as draft / stop before publish
 
 Final publish needs current-turn user confirmation.

@@ -18,6 +18,7 @@ Ask the friend to provide:
 - IP / symbol / mascot rules:
 - AI/tool boundary:
 - Hard avoid list:
+- Target platform(s):
 - Publishing operator:
 
 ## Keep These Pipeline Rules
@@ -28,7 +29,8 @@ Ask the friend to provide:
 - Draft carousel copy and body copy.
 - Wait for content approval before image generation.
 - Use Image 2 full-card mode only after copy is locked.
-- Run publish safety review before handoff.
+- Select target platform and run publish safety review before handoff.
+- If cross-posting, review each platform separately.
 - WorkBuddy or another operator saves draft / stops before final publish by default.
 
 ## Replace 澄Cc Defaults
@@ -41,6 +43,7 @@ Replace:
 - Style B lifestyle magazine visual
 - Style A emotional sticker visual
 - graduation / workplace newcomer topics
+- Xiaohongshu as the default target platform, if the friend mainly publishes elsewhere
 - WorkBuddy account-specific instructions
 
 Keep:
@@ -48,7 +51,7 @@ Keep:
 - creator-defaults first
 - topic-selection gate
 - content-approval gate
-- publish-review gate
+- target-platform publish-review gate
 - final human publish confirmation
 
 ## Minimal Friend Profile Template
@@ -71,4 +74,11 @@ Keep:
 ## Hard Avoids
 
 ## Publishing Handoff
+
+## Target Platforms
+
+- xiaohongshu:
+- douyin:
+- wechat_channels:
+- wechat_official_account:
 ```
