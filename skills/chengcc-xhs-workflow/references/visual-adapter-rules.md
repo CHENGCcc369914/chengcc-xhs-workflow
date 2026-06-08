@@ -5,6 +5,8 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 ## Use This Direction
 
 - Default to Style B: young lifestyle-aesthetic magazine cover, abstract, trendy, healing, premium, dopamine but controlled.
+- Current Style B cover default: trend magazine poster cover, white-space heavy, Chinese oversized typography as the primary visual, editorial annotations and numbering as secondary atmosphere.
+- Rhythm rule: Page 1 is the high-impact cover. Pages 2-4 are explanatory reading pages; reduce headline scale and prioritize content visualization.
 - Use Style A only for strong-emotion topics: Gen-Z emotional sticker poster, higher impact, street sticker collage.
 - Warm cream / light beige background.
 - Yellow, orange, light orange, and warm white as the core palette.
@@ -22,6 +24,11 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 Use for most posts.
 
 - young lifestyle-aesthetic magazine
+- trend magazine poster cover
+- white / warm-cream negative space
+- oversized Chinese headline as first visual focus
+- creative typography, diagonal / offset / circled / underlined emphasis
+- small English editorial notes, numbering, arrows, and blue hand-drawn marks as atmosphere only
 - abstract color fields
 - bento-box / editorial composition
 - premium but still Gen-Z
@@ -59,10 +66,18 @@ Use only when the topic has a strong emotional hook.
 
 ## Page Design
 
+Core hierarchy:
+
+- Treat page 1 as a poster cover.
+- Treat pages 2-4 as editorial reading pages.
+- The cover earns the tap; the inner pages carry the explanation.
+- Inner-page creativity should come from composition, whitespace, small illustrations, cards, annotations, and evidence frames, not from making every headline huge.
+
 Cover:
 
-- One strong emotional sentence.
-- One deeper support sentence.
+- One oversized Chinese emotional sentence as the first visual.
+- One deeper support sentence, smaller and clearly secondary.
+- Editorial notes / number / English microcopy are allowed, but only as atmosphere.
 - One small orange IP visual anchor.
 - No more than 3 text levels.
 - Title must be readable at feed size.
@@ -71,9 +86,23 @@ Inner pages:
 
 - One idea per page.
 - Short sentences.
+- Headline size must be clearly smaller than the cover, usually 8%-18% of the page height.
+- The headline is navigation, not the main visual object.
+- Use content visualization before typographic impact: album cards, chat bubbles, sticky notes, timelines, real screenshot frames, or small orange-IP actions.
+- Orange IP may demonstrate the page action, such as browsing an album, reading chat records, holding a phone, or asking AI, but it must not become the main subject.
+- Keep the same visual DNA as the cover: warm white space, black type, one orange emphasis, small blue hand-drawn marks, editorial numbering.
 - Visible hierarchy: main point, small note, optional example.
 - Include real-scene details instead of abstract slogans.
 - Use big/small contrast; do not scatter equal-weight text around the page.
+- Preserve roughly 25%-40% whitespace.
+- Prefer one content object as the page center: a photo-album strip, chat record stack, two-column distinction, memo card, or real AI screenshot frame.
+- Reject and regenerate if an inner page looks like another cover, has a headline visually equal to the cover, or fills the page with same-weight text.
+
+Default inner-page logic for emotion/reflection posts:
+
+- Page 2: behavior scene. Example: the original orange IP browsing albums or old chat records; 2-3 small notes explain the feeling.
+- Page 3: reframe page. Example: two clean information blocks such as "I thought / Actually" or "old evidence / current need"; quietly embeds the method without sounding like a lecture.
+- Page 4: AI evidence page. The real AI chat screenshot or a blank screenshot frame is the main object; headline stays small and the margin notes explain what AI helped separate.
 
 Ending page:
 
@@ -125,5 +154,7 @@ Reject the design if:
 - The page is pretty but the message is not clear.
 - The picture text duplicates the body copy with no added value.
 - Visual hierarchy is flat and the reader cannot tell where to look first.
+- Inner pages look like another cover instead of a reading/explanation page.
+- Inner-page headline is larger than or visually equal to the cover headline.
 - Style A is used for an ordinary topic without strong emotional need.
 - Style B becomes too plain and loses young visual impact.
