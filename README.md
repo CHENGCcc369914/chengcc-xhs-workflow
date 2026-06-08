@@ -13,7 +13,7 @@ The complete route is:
 3. Wait for the creator to pick one topic.
 4. Build the carousel plan, card copy, body copy, tags, and Image 2 full-card prompts.
 5. Wait for content approval before image generation.
-6. Generate complete Image 2 cards or output the exact prompts if image generation is unavailable.
+6. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
 7. Run the 2026 publish safety review.
 8. If clean, output a WorkBuddy handoff instruction to upload images, fill title/body/tags, save as draft, and wait for human confirmation.
 

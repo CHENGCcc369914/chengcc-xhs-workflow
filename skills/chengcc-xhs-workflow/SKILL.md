@@ -114,6 +114,14 @@ Default for 澄Cc:
 - original orange IP only, small and secondary
 - no other characters / borrowed IP / fake screenshots
 
+Execution rule:
+
+- After the user approves card copy, actually call the available image generation / Image 2 tool to create the cards.
+- Do not stop at prompts when the image tool is available.
+- If image generation fails, retry with a shorter prompt once.
+- Only fall back to a prompt pack when the tool is unavailable or repeated generation attempts fail.
+- State clearly whether images were generated or only prompts were produced.
+
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
 ### Phase E: Publish Review

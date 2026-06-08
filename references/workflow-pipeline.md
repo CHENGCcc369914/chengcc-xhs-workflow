@@ -76,6 +76,7 @@ If copy changes later, regenerate Image 2 prompts and affected images.
 Default to `image_gen full-card`:
 
 - lock exact card copy first
+- call the available image generation / Image 2 tool after copy approval
 - generate complete 3:4 cards
 - include final Chinese text directly in the image
 - use screenshot-frame mode when a real AI chat image should be inserted
@@ -85,6 +86,8 @@ Fallback:
 - prompt pack only
 - editable hybrid mode if the user explicitly wants design-layer text
 - manual image production handoff
+
+Prompt-only output is a fallback, not the normal path. Use it only when Image 2 is unavailable or repeated generation attempts fail.
 
 ## Phase F: 2026 Publish Review
 

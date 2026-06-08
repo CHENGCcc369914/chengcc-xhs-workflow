@@ -43,6 +43,12 @@ Then ask for approval before generation.
 
 Use Image 2 full-card prompts after card text is locked.
 
+After content approval, the agent should actually call the image generation / Image 2 tool when it is available.
+
+Do not treat prompt output as completed image generation.
+
+If Image 2 fails, retry once with a shorter prompt. If it still fails, output the prompt pack and mark the image step as blocked by tool failure.
+
 Do not default to post-added text.
 
 If text changes, regenerate.
