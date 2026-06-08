@@ -39,6 +39,7 @@ The workflow is reusable because these parts are replaceable:
 | Confirmed console | creator's local/cloud media console | own media console / positioning doc |
 | Visual system | `references/visual-adapter-rules.md` | own visual style and Image 2 rules |
 | Topic sources | emotion / graduation / workplace newcomer | own content pillars |
+| Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
 | Publishing operator | WorkBuddy | WorkBuddy / manual / browser automation |
 | Target platform | `xiaohongshu` by default | `xiaohongshu` / `douyin` / `wechat_channels` / `wechat_official_account` |
 | Safety rules | `references/publish-safety.md` + `docs/platform-publish-rules-2026.md` | keep platform rules, add niche-specific rules |

@@ -24,6 +24,7 @@ Before creating content, identify these slots:
 | Visual style | `references/visual-adapter-rules.md` | own visual rules |
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
+| Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
 | Publishing handoff | WorkBuddy draft for Xiaohongshu by default | own target platform and operator/manual flow |
 
 If a friend has no console yet, ask for or infer a minimal profile:
@@ -126,6 +127,7 @@ Execution rule:
 - Only fall back to a prompt pack when the tool is unavailable or repeated generation attempts fail.
 - State clearly whether images were generated or only prompts were produced.
 - If only prompts were produced, do not mark the workflow as ready for WorkBuddy image upload.
+- After images are generated, copy the final publish-ready images to the creator's image export folder and use those copied paths in the WorkBuddy handoff. Keep the original generated files in place.
 
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
@@ -233,6 +235,7 @@ After the user picks:
 ## Image 2 生成状态
 - 结果：已生成 / 仅输出 prompt / 失败
 - 图片顺序：
+- 导出目录：
 - 失败原因与下一步：
 
 ## 发布文案

@@ -5,6 +5,7 @@
 - Ratio: 3:4
 - Page count: 4 by default
 - Asset mode: Image 2 full-card after copy lock
+- Export folder:
 - Visual route: Style B default / Style A strong-emotion backup / custom
 - Text handling: final Chinese text baked into generated cards after approval
 - Target platform: xiaohongshu / douyin / wechat_channels / wechat_official_account
@@ -54,6 +55,7 @@
 ## WorkBuddy Handoff Ready
 
 - [ ] Images/prompts ready.
+- [ ] Final images copied to export folder.
 - [ ] Title/body/tags final.
 - [ ] Target platform selected.
 - [ ] Platform review passed.

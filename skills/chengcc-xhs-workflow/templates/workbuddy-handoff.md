@@ -33,6 +33,8 @@ Then:
 
 ## Image Order
 
+Use the copied publish-ready files from the creator's image export folder.
+
 1.
 2.
 3.

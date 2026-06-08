@@ -12,6 +12,7 @@ Inputs:
 - content pillars
 - hard avoids
 - publishing operator
+- image export folder
 
 For 澄Cc, use:
 
@@ -19,6 +20,7 @@ For 澄Cc, use:
 - target readers: in-school, soon-to-graduate, fresh workplace peers
 - Style B default, Style A backup
 - AI as method sharing, not teaching
+- image export folder: `/Users/ccc/Pictures/小红书运营图片`
 
 For friends, replace those defaults with their own.
 
@@ -80,6 +82,8 @@ Default to `image_gen full-card`:
 - generate complete 3:4 cards
 - include final Chinese text directly in the image
 - use screenshot-frame mode when a real AI chat image should be inserted
+- copy final publish-ready images into the creator's image export folder
+- keep original generated files in their default generation directory
 
 Fallback:
 
@@ -122,6 +126,7 @@ If review passes:
 
 - target platform and draft surface
 - prepare image order
+- use image paths from the creator's image export folder
 - final title
 - final body
 - tags
