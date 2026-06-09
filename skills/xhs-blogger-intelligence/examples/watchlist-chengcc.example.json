@@ -1,0 +1,234 @@
+{
+  "schema_version": "0.1.0",
+  "owner": {
+    "creator_name": "澄Cc",
+    "niche": "00后应届生 / 初入职场 / 情绪成长 / AI复盘分享",
+    "rag_consumer": "cc-xhs-personal-growth-writer",
+    "notes": "This is a replaceable example watchlist. Friends should replace it with their own benchmark accounts."
+  },
+  "collection_policy": {
+    "cadence": "daily",
+    "max_recent_posts_per_account": 10,
+    "public_content_only": true,
+    "store_raw_in_repo": false,
+    "notes": "Keep raw collection snapshots in local/private storage, not in this shareable repo."
+  },
+  "accounts": [
+    {
+      "display_name": "心理师 bestta",
+      "xhs_user_id": null,
+      "profile_url": null,
+      "status": "pending_id_confirmation",
+      "priority": "medium",
+      "source_groups": [
+        "previous_distilled_benchmark"
+      ],
+      "content_lanes": [
+        "psychology",
+        "emotion",
+        "personal_growth"
+      ],
+      "collection_reason": "Previously distilled benchmark. Confirm the public account id before automated collection.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": null,
+        "bio": null,
+        "following": null,
+        "followers": null,
+        "likes_and_collects": null,
+        "other": {}
+      },
+      "notes": "Keep as pending until local distilled source confirms exact profile."
+    },
+    {
+      "display_name": "KnowYourself",
+      "xhs_user_id": null,
+      "profile_url": null,
+      "status": "pending_id_confirmation",
+      "priority": "medium",
+      "source_groups": [
+        "previous_distilled_benchmark"
+      ],
+      "content_lanes": [
+        "psychology",
+        "relationship",
+        "self_awareness"
+      ],
+      "collection_reason": "Previously distilled benchmark. Confirm the public account id before automated collection.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": null,
+        "bio": null,
+        "following": null,
+        "followers": null,
+        "likes_and_collects": null,
+        "other": {}
+      },
+      "notes": "Useful as high-level psychology/content framing reference."
+    },
+    {
+      "display_name": "芝士Rebecca.",
+      "xhs_user_id": "6118470936",
+      "profile_url": null,
+      "status": "active",
+      "priority": "high",
+      "source_groups": [
+        "previous_distilled_benchmark",
+        "user_added_watchlist"
+      ],
+      "content_lanes": [
+        "female_power",
+        "personal_growth",
+        "viewpoint",
+        "life_daily"
+      ],
+      "collection_reason": "Already in previous benchmark set and re-confirmed by user-provided profile snapshot.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": "江苏",
+        "bio": "女性力量｜个人成长｜观点分享 / 生活日常｜自我提升｜好物分享 / “生活不是过渡，你不能到了未来才快乐。”",
+        "following": "50",
+        "followers": "8.1万",
+        "likes_and_collects": "400万",
+        "other": {
+          "zodiac": "巨蟹座",
+          "category": "文化博主"
+        }
+      },
+      "notes": "Deduplicated with previous benchmark list."
+    },
+    {
+      "display_name": "小马赛克mosaic",
+      "xhs_user_id": null,
+      "profile_url": null,
+      "status": "pending_id_confirmation",
+      "priority": "medium",
+      "source_groups": [
+        "previous_distilled_benchmark"
+      ],
+      "content_lanes": [
+        "emotion",
+        "self_expression",
+        "young_audience"
+      ],
+      "collection_reason": "Previously distilled benchmark. Confirm exact account before collection.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": null,
+        "bio": null,
+        "following": null,
+        "followers": null,
+        "likes_and_collects": null,
+        "other": {}
+      },
+      "notes": ""
+    },
+    {
+      "display_name": "莉至/利宝",
+      "xhs_user_id": null,
+      "profile_url": null,
+      "status": "needs_name_confirmation",
+      "priority": "low",
+      "source_groups": [
+        "previous_distilled_benchmark"
+      ],
+      "content_lanes": [
+        "emotion",
+        "growth"
+      ],
+      "collection_reason": "Previously distilled benchmark name is inconsistent in memory; confirm exact account before collection.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": null,
+        "bio": null,
+        "following": null,
+        "followers": null,
+        "likes_and_collects": null,
+        "other": {}
+      },
+      "notes": "Do not collect until name/account is confirmed."
+    },
+    {
+      "display_name": "几口酱聊AI/几口猫聊AI",
+      "xhs_user_id": null,
+      "profile_url": null,
+      "status": "needs_name_confirmation",
+      "priority": "low",
+      "source_groups": [
+        "previous_distilled_benchmark"
+      ],
+      "content_lanes": [
+        "AI",
+        "AI_method_share",
+        "content_workflow"
+      ],
+      "collection_reason": "Previously distilled benchmark name is inconsistent in memory; confirm exact account before collection.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": null,
+        "bio": null,
+        "following": null,
+        "followers": null,
+        "likes_and_collects": null,
+        "other": {}
+      },
+      "notes": "Useful for AI-as-method boundary after identity confirmation."
+    },
+    {
+      "display_name": "小柴人不纠结",
+      "xhs_user_id": "95070214643",
+      "profile_url": null,
+      "status": "active",
+      "priority": "high",
+      "source_groups": [
+        "user_added_watchlist"
+      ],
+      "content_lanes": [
+        "emotion_stability",
+        "anxiety_relief",
+        "happiness_collection"
+      ],
+      "collection_reason": "New user-added benchmark for emotional stability and anti-overthinking topics.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": "广东",
+        "bio": "丢掉焦虑，收藏快乐 / 做个情绪稳定不纠结的小太阳",
+        "following": "0",
+        "followers": "4579",
+        "likes_and_collects": "14.4万",
+        "other": {}
+      },
+      "notes": "Good match for emotional internal friction topics."
+    },
+    {
+      "display_name": "林之的备忘录",
+      "xhs_user_id": "6861683503",
+      "profile_url": null,
+      "status": "active",
+      "priority": "high",
+      "source_groups": [
+        "user_added_watchlist"
+      ],
+      "content_lanes": [
+        "growth_dry_goods",
+        "daily_sharing",
+        "life_observation",
+        "writing"
+      ],
+      "collection_reason": "New user-added benchmark for growth writing, everyday observation, and memo-like rhythm.",
+      "public_profile_snapshot": {
+        "snapshot_date": "2026-06-09",
+        "ip_location": "江苏",
+        "bio": "🥕成长干货｜日常分享｜生活观察 / 💭97年ISFJ文字工作者📷业余摄影狮 / 🍄‍🟫“无论东南西北，都是向前” / 🤝 lzgoodjob@163.com",
+        "following": "161",
+        "followers": "1.8万",
+        "likes_and_collects": "57.7万",
+        "other": {
+          "age": "28岁",
+          "city": "江苏苏州"
+        }
+      },
+      "notes": "Useful for clear, readable, lived-experience writing structure."
+    }
+  ]
+}

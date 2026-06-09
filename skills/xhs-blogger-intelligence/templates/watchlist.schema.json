@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/xhs-blogger-intelligence/watchlist.schema.json",
+  "title": "XHS Blogger Intelligence Watchlist",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "owner",
+    "collection_policy",
+    "accounts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "object",
+      "required": [
+        "creator_name",
+        "niche",
+        "rag_consumer"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "creator_name": {
+          "type": "string"
+        },
+        "niche": {
+          "type": "string"
+        },
+        "rag_consumer": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "collection_policy": {
+      "type": "object",
+      "required": [
+        "cadence",
+        "max_recent_posts_per_account",
+        "public_content_only",
+        "store_raw_in_repo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cadence": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "daily",
+            "weekly"
+          ]
+        },
+        "max_recent_posts_per_account": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "public_content_only": {
+          "type": "boolean",
+          "const": true
+        },
+        "store_raw_in_repo": {
+          "type": "boolean",
+          "const": false
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "accounts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "status",
+          "priority",
+          "source_groups",
+          "collection_reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "type": "string"
+          },
+          "xhs_user_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "profile_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "paused",
+              "pending_id_confirmation",
+              "needs_name_confirmation"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "source_groups": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "content_lanes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "collection_reason": {
+            "type": "string"
+          },
+          "public_profile_snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "snapshot_date": {
+                "type": "string"
+              },
+              "ip_location": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "bio": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "following": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "followers": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "likes_and_collects": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "other": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

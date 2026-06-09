@@ -1,6 +1,13 @@
 # ChengCc XHS Workflow
 
-A shareable Xiaohongshu-first image-text workflow skill for turning creator-specific positioning into publish-ready carousel drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
+A shareable Xiaohongshu-first content system.
+
+It currently contains two skills:
+
+- `chengcc-xhs-workflow`: turns creator positioning into publish-ready carousel packages, with Image 2, platform review, WorkBuddy handoff, and performance loop.
+- `xhs-blogger-intelligence`: maintains benchmark blogger watchlists, collects public post signals through an adapter such as redbook, distills note-cards and blogger-profiles, and provides RAG briefs for the writer workflow.
+
+The main publishing workflow supports Xiaohongshu-first image-text drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
 The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and publishing handoff.
 
@@ -82,12 +89,24 @@ The loop does not invent metrics and does not require a specific analytics tool.
 
 ## Recommended Skill Stack
 
-This repo is the orchestration layer. It can work alone, but works best with:
+This repo is the orchestration and intelligence layer. It can work alone, but works best with:
 
+- `xhs-blogger-intelligence` for benchmark monitoring and RAG briefs.
 - A creator-specific writing skill, such as `cc-xhs-personal-growth-writer`.
 - Image generation / Image 2.
 - WorkBuddy for Creator Center operations.
 - Optional Xiaohongshu browser/publishing skill for manual fallback checks.
+
+The intended route is:
+
+```text
+xhs-blogger-intelligence
+-> RAG brief
+-> cc-xhs-personal-growth-writer
+-> chengcc-xhs-workflow
+-> WorkBuddy draft
+-> Phase H performance loop
+```
 
 ## Install
 
@@ -96,11 +115,12 @@ Manual install:
 ```bash
 mkdir -p ~/.agents/skills
 cp -R skills/chengcc-xhs-workflow ~/.agents/skills/
+cp -R skills/xhs-blogger-intelligence ~/.agents/skills/
 ```
 
-The `skills/chengcc-xhs-workflow/` folder is self-contained. Do not copy only
-`SKILL.md`; the skill also needs its bundled `references/`, `docs/`,
-`templates/`, and `examples/` folders.
+Each folder under `skills/` is self-contained. Do not copy only `SKILL.md`;
+each skill also needs its bundled `references/`, `docs/`, `templates/`, and
+`examples/` folders when present.
 
 Then invoke it with a creator profile and console:
 
@@ -129,8 +149,19 @@ skills/chengcc-xhs-workflow/templates/workbuddy-handoff.md
 skills/chengcc-xhs-workflow/templates/performance-loop.md
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
+skills/xhs-blogger-intelligence/SKILL.md
+skills/xhs-blogger-intelligence/docs/data-flow.md
+skills/xhs-blogger-intelligence/docs/redbook-adapter.md
+skills/xhs-blogger-intelligence/templates/watchlist.schema.json
+skills/xhs-blogger-intelligence/templates/note-card.md
+skills/xhs-blogger-intelligence/templates/blogger-profile.md
+skills/xhs-blogger-intelligence/templates/rag-brief.md
+skills/xhs-blogger-intelligence/templates/collection-run.md
+skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json
 ```
 
 ## Safety Boundary
 
-The skill may prepare a WorkBuddy handoff. It should not silently publish. WorkBuddy should upload/fill/save draft and wait for the creator's confirmation unless the current-turn instruction explicitly asks to publish.
+The publishing workflow may prepare a WorkBuddy handoff. It should not silently publish. WorkBuddy should upload/fill/save draft and wait for the creator's confirmation unless the current-turn instruction explicitly asks to publish.
+
+The blogger intelligence workflow should only use public benchmark content, keep raw collection data local/private, avoid storing credentials in the repo, and pass paraphrased learning briefs downstream instead of copied original posts.
