@@ -25,6 +25,7 @@ Use for most posts.
 
 - young lifestyle-aesthetic magazine
 - trend magazine poster cover
+- Japanese / lifestyle editorial page order: large whitespace, one dominant subject, strict alignment, sparse microcopy, corner numbering
 - white / warm-cream negative space
 - oversized Chinese headline as first visual focus
 - creative typography, diagonal / offset / circled / underlined emphasis
@@ -35,6 +36,16 @@ Use for most posts.
 - dopamine palette, controlled saturation
 - generous whitespace
 - orange IP small and secondary
+
+Reference absorption rules:
+
+- Learn the editorial order, not the exact magazine image, people, outfits, layout, or copy.
+- Use one primary visual subject per page: screenshot, album spread, chat-record stack, orange-IP action, or one information structure.
+- Treat whitespace as design. Do not fill empty space with stickers, arrows, icons, or extra text just to make the page look rich.
+- Microcopy, English labels, page numbers, circles, and arrows are atmosphere and navigation only; they must not become visual noise.
+- Align information blocks strictly: number, title, and body text should share a clear baseline / column logic.
+- Labels must not cover screenshot text; orange IP must not cover card text.
+- If multiple elements compete for first attention, delete or downscale elements before adding decoration.
 
 ### Style A: Strong-Emotion Backup
 
@@ -97,6 +108,7 @@ Inner pages:
 - Preserve roughly 25%-40% whitespace.
 - Prefer one content object as the page center: a photo-album strip, chat record stack, two-column distinction, memo card, or real AI screenshot frame.
 - Reject and regenerate if an inner page looks like another cover, has a headline visually equal to the cover, or fills the page with same-weight text.
+- Reject and revise if any icon, label, sticker, or mascot overlaps readable text or breaks alignment.
 
 Default inner-page logic for emotion/reflection posts:
 
