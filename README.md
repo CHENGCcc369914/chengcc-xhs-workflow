@@ -1,6 +1,6 @@
 # ChengCc XHS Workflow
 
-A shareable Xiaohongshu-first image-text workflow skill for turning creator-specific positioning into publish-ready carousel drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account.
+A shareable Xiaohongshu-first image-text workflow skill for turning creator-specific positioning into publish-ready carousel drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
 The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and publishing handoff.
 
@@ -16,6 +16,7 @@ The complete route is:
 6. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
 7. Select the target platform and run the 2026 platform publish safety review.
 8. If clean, output a WorkBuddy handoff instruction to upload images, fill title/body/tags, save as draft, and wait for human confirmation.
+9. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
 
 ## Default Trigger
 
@@ -43,6 +44,7 @@ The workflow is reusable because these parts are replaceable:
 | Publishing operator | WorkBuddy | WorkBuddy / manual / browser automation |
 | Target platform | `xiaohongshu` by default | `xiaohongshu` / `douyin` / `wechat_channels` / `wechat_official_account` |
 | Safety rules | `references/publish-safety.md` + `docs/platform-publish-rules-2026.md` | keep platform rules, add niche-specific rules |
+| Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
 
 ## Current 澄Cc Defaults
 
@@ -66,6 +68,17 @@ The review gate is platform-aware. Supported target platform codes:
 The gate checks AI/synthetic content labeling, authenticity, originality, privacy, copyright, claims, commercial/activity disclosure, external diversion, and platform-specific requirements.
 
 Before high-risk publishing, refresh platform rules because policies can change.
+
+## Performance Loop
+
+The final phase borrows the score / predict / retro / rubric mechanism and makes each post reusable as learning data.
+
+Use it in two moments:
+
+- Before final publish: score the final package and record a prediction.
+- After publish: compare real platform metrics against the prediction and update the creator rubric.
+
+The loop does not invent metrics and does not require a specific analytics tool. Use creator-provided screenshots, WorkBuddy output, platform analytics, or another approved data source.
 
 ## Recommended Skill Stack
 
@@ -107,11 +120,13 @@ skills/chengcc-xhs-workflow/docs/customize-for-friends.md
 skills/chengcc-xhs-workflow/docs/workflow-phases.md
 skills/chengcc-xhs-workflow/docs/publish-review-2026.md
 skills/chengcc-xhs-workflow/docs/platform-publish-rules-2026.md
+skills/chengcc-xhs-workflow/docs/performance-loop.md
 skills/chengcc-xhs-workflow/templates/topic-options.md
 skills/chengcc-xhs-workflow/templates/post-brief.md
 skills/chengcc-xhs-workflow/templates/carousel-plan.md
 skills/chengcc-xhs-workflow/templates/platform-review.md
 skills/chengcc-xhs-workflow/templates/workbuddy-handoff.md
+skills/chengcc-xhs-workflow/templates/performance-loop.md
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
 ```

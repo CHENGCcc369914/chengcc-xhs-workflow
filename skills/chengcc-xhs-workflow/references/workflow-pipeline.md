@@ -135,3 +135,45 @@ If review passes:
 - draft-save instruction
 
 WorkBuddy should save as draft or stop before final publish unless the user explicitly asks it to publish in the current turn.
+
+## Phase H: Performance Loop
+
+Goal: turn every published post into a measurable learning loop.
+
+Use:
+
+- `docs/performance-loop.md`
+- `templates/performance-loop.md`
+
+This phase has two parts:
+
+1. Before final publish: score the final package and record predictions.
+2. After publish: compare real platform data with the prediction and update the creator rubric.
+
+Do not invent metrics. If the post is only saved as a draft, create the pre-publish score and prediction only. If the user later provides screenshots, WorkBuddy analytics, or platform numbers, run the retro section.
+
+Default score dimensions:
+
+- creator fit
+- hook strength
+- card readability
+- body/card non-duplication
+- visual distinctiveness
+- AI method-share naturalness
+- save/comment potential
+- platform safety
+
+Default prediction fields:
+
+- expected 24-hour and 72-hour views / likes / saves / comments / follows
+- likely comment themes
+- likely weak point
+- highest-risk assumption
+
+Retro rules:
+
+- Compare prediction vs actual metrics.
+- Separate content-quality problems from distribution/timing noise.
+- Capture one next experiment.
+- Update the rubric only when the signal is strong or repeated across posts.
+- Never recommend fake engagement, fake comments, fake purchases, or misleading growth tactics.

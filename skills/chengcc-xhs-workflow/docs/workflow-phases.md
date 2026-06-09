@@ -90,3 +90,19 @@ Output one precise instruction for WorkBuddy:
 - save as draft / stop before publish
 
 Final publish needs current-turn user confirmation.
+
+## 7. Performance Loop
+
+After the final package is ready, run the performance loop from `docs/performance-loop.md` and `templates/performance-loop.md`.
+
+This phase exists to make the workflow improve over time:
+
+- score the final content package before publishing
+- predict likely performance before looking at data
+- record actual platform data after publishing
+- compare prediction and reality
+- update the creator rubric carefully
+
+Do not fabricate platform metrics. If the post has not been published or no data is available, output only the pre-publish score, prediction, and an empty retro shell.
+
+Do not overfit one post. One post can suggest a hypothesis; repeated signals across posts can update the rubric.

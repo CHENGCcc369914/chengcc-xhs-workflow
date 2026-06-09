@@ -1,13 +1,13 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this skill when the user wants a complete Xiaohongshu-first image-text workflow from creator defaults / media console to topic options, carousel copy, Image 2 full-card prompts, platform publish-safety review, and WorkBuddy draft handoff. Triggers include 澄Cc默认资料, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 小红书工作流, 2026发布审核, WorkBuddy发布草稿, or shareable skill for friends."
+description: "Use this skill when the user wants a complete Xiaohongshu-first image-text workflow from creator defaults / media console to topic options, carousel copy, Image 2 full-card prompts, platform publish-safety review, WorkBuddy draft handoff, and post-publish performance loop. Triggers include 澄Cc默认资料, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 小红书工作流, 2026发布审核, WorkBuddy发布草稿, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends."
 ---
 
 # ChengCc Xiaohongshu Workflow Skill
 
 This is a shareable orchestration skill:
 
-Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> WorkBuddy draft handoff.
+Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> WorkBuddy draft handoff -> performance loop.
 
 It ships with 澄Cc defaults, but must be customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
@@ -26,6 +26,7 @@ Before creating content, identify these slots:
 | Image mode | Image 2 full-card | own image model/style |
 | Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
 | Publishing handoff | WorkBuddy draft for Xiaohongshu by default | own target platform and operator/manual flow |
+| Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
 
 If a friend has no console yet, ask for or infer a minimal profile:
 
@@ -50,6 +51,7 @@ For 澄Cc:
 5. `docs/workflow-phases.md`
 6. `docs/publish-review-2026.md`
 7. `docs/platform-publish-rules-2026.md`
+8. `docs/performance-loop.md`
 
 If the active environment also has `cc-xhs-personal-growth-writer`, use it for 澄Cc content voice and local console lookup.
 
@@ -61,10 +63,19 @@ For another creator:
 4. `references/publish-safety.md`
 5. `docs/publish-review-2026.md`
 6. `docs/platform-publish-rules-2026.md`
+7. `docs/performance-loop.md`
 
 ## 2. Workflow Phases
 
-### Phase A: Topic Options
+### Phase A: Creator Defaults
+
+Confirm the creator profile and replaceable slots before generating ideas.
+
+For 澄Cc, use the bundled brand profile and confirmed console rules. For friends, use their own profile, positioning, visual system, topic map, image export folder, and publishing operator.
+
+If the user has not selected a creator profile, infer a minimal profile only when the input is enough. Otherwise ask for the missing creator basics.
+
+### Phase B: Topic Options
 
 First output 10 topics suitable for the creator. Do not jump straight into a finished article unless the user has already picked a topic.
 
@@ -81,7 +92,7 @@ Use `templates/topic-options.md`.
 
 Then wait for the user to pick one.
 
-### Phase B: Carousel Draft
+### Phase C: Carousel Draft
 
 After topic selection, produce:
 
@@ -96,7 +107,7 @@ After topic selection, produce:
 
 Do not generate images before the user confirms the card copy.
 
-### Phase C: Content Approval Gate
+### Phase D: Content Approval Gate
 
 Ask the user to confirm:
 
@@ -108,7 +119,7 @@ Ask the user to confirm:
 
 If edits are requested, revise copy first. Then regenerate Image 2 prompts.
 
-### Phase D: Image 2 Full-Card Production
+### Phase E: Image 2 Full-Card Production
 
 Default for 澄Cc:
 
@@ -131,7 +142,7 @@ Execution rule:
 
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
-### Phase E: Publish Review
+### Phase F: Publish Review
 
 Choose the target platform before review:
 
@@ -150,7 +161,7 @@ If issues exist:
 
 If clean, continue to WorkBuddy handoff.
 
-### Phase F: WorkBuddy Draft Handoff
+### Phase G: WorkBuddy Draft Handoff
 
 Output a precise WorkBuddy instruction using `templates/workbuddy-handoff.md`.
 
@@ -163,6 +174,26 @@ The instruction should say:
 - if no platform AI label field is visible, include the disclosure text required by the review in the body/caption
 - save as draft or stop before publish
 - do not click final publish unless the current user explicitly says so
+
+### Phase H: Performance Loop
+
+Use `docs/performance-loop.md` and `templates/performance-loop.md`.
+
+This phase closes the loop after a final package is ready and after the platform post has real data. It borrows the score / predict / retro / rubric mechanism, but it must not depend on a specific external skill or fabricate platform data.
+
+Run it in two moments:
+
+1. Pre-publish or pre-final-click: score the final package and record a prediction.
+2. Post-publish: compare actual metrics against the prediction, then update the creator rubric.
+
+Rules:
+
+- If no platform metrics are available yet, create the prediction and an empty retro template instead of inventing numbers.
+- Predictions must be written before looking at actual results.
+- Use actual platform data supplied by the user, WorkBuddy, screenshots, or an approved analytics source.
+- Treat one post as a hypothesis, not a permanent rule. Update the rubric only when a signal is strong or repeated.
+- Keep the loop creator-specific and replaceable. A friend can use their own targets, metrics, and scoring weights.
+- Do not use the performance loop to justify fake engagement, bait, fake comments, fake purchases, or misleading growth tactics.
 
 ## 3. 澄Cc Defaults
 
@@ -255,6 +286,13 @@ After the user picks:
 
 ## WorkBuddy 草稿指令
 ...
+
+## Phase H 发布后复盘
+- Pre-publish score:
+- Prediction:
+- Actual metrics:
+- Retro:
+- Rubric update:
 ```
 
 ## 5. Quality Gate
@@ -271,3 +309,6 @@ Before finishing, verify:
 - Was the target platform selected?
 - Did the 2026 platform publish review run for every target platform?
 - Does WorkBuddy stop at draft / pre-publish unless explicitly told to publish?
+- Was a pre-publish score and prediction recorded when the user wants a performance loop?
+- Did the post-publish retro use real metrics rather than invented data?
+- Did the rubric update avoid overfitting to one weak signal?
