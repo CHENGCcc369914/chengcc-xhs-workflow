@@ -75,6 +75,25 @@ The script writes:
 
 The script is deterministic scaffolding. Its automatic note-cards are starting points; use human/LLM review before treating them as final benchmark distillation.
 
+For batch collection, use `scripts/collect-watchlist.mjs`:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/collect-watchlist.mjs \
+  --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
+  --out-root "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD" \
+  --statuses search_only,active \
+  --limit 2
+```
+
+Then build a topic-specific RAG brief:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/build-rag-brief.mjs \
+  --input-dir "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD/watchlist-run" \
+  --topic "情绪内耗" \
+  --out-file "/path/to/private/output/rag-brief.md"
+```
+
 ## Adapter Output Requirements
 
 For each account collection, capture:

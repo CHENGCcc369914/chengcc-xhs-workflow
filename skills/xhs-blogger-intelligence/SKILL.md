@@ -40,16 +40,18 @@ For every run, read only the files needed for the request:
 2. `docs/redbook-adapter.md`
 3. `templates/watchlist.schema.json`
 4. `scripts/collect-search-read.mjs` only when running the search/read adapter
+5. `scripts/collect-watchlist.mjs` only when running watchlist batch collection
+6. `scripts/build-rag-brief.mjs` only when building a RAG brief from collected outputs
 
 For distillation or RAG work, also read:
 
-5. `templates/note-card.md`
-6. `templates/blogger-profile.md`
-7. `templates/rag-brief.md`
+7. `templates/note-card.md`
+8. `templates/blogger-profile.md`
+9. `templates/rag-brief.md`
 
 For 澄Cc default watchlist, read:
 
-8. `examples/watchlist-chengcc.example.json`
+10. `examples/watchlist-chengcc.example.json`
 
 ## 2. Replaceable Slots
 
@@ -100,6 +102,7 @@ Collection order:
 If redbook is unavailable or returns incomplete data, use fallback modes:
 
 - `scripts/collect-search-read.mjs` for search -> filter author -> read detail
+- `scripts/collect-watchlist.mjs` for low-frequency batch collection over eligible watchlist accounts
 - manual post URLs supplied by the user
 - browser-visible public page summary
 - previously collected raw data
@@ -165,6 +168,8 @@ Do not over-update a profile from one weak post.
 
 Use `templates/rag-brief.md`.
 
+When collected outputs already exist, use `scripts/build-rag-brief.mjs` to build a compact scaffold brief from normalized records and note-cards.
+
 For a specific writing topic, retrieve:
 
 - relevant recent note-cards
@@ -175,6 +180,8 @@ For a specific writing topic, retrieve:
 - risks and do-not-copy notes
 
 The RAG brief should be short enough to paste into a writing workflow.
+
+Automatic RAG briefs are retrieval scaffolds. If the final content decision is important, review the retrieved note-cards before handing the brief to the writer.
 
 ### Phase G: Handoff To Writer
 

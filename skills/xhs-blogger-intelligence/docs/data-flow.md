@@ -85,6 +85,28 @@ redbook search display name
 
 The script requires an explicit `--out-dir`. Keep that output directory in local/private Raw storage, not in this shareable repo.
 
+Use `scripts/collect-watchlist.mjs` when the search/read route should run across eligible watchlist accounts:
+
+```text
+watchlist
+-> select statuses such as search_only,active
+-> run collect-search-read.mjs per account
+-> write one batch directory with per-account outputs
+-> write batch-summary.json and collection-run.md
+```
+
+Use `scripts/build-rag-brief.mjs` after collection:
+
+```text
+batch directory
+-> find normalized-posts.jsonl
+-> find scaffold note-card files
+-> rank records by topic match
+-> write concise RAG brief for the writer skill
+```
+
+The RAG builder creates a retrieval scaffold. It does not replace human/LLM distillation of note-cards.
+
 ## Data Objects
 
 ### Raw Snapshot

@@ -120,6 +120,21 @@ node skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs \
 
 Keep `--out-dir` outside this shareable repo.
 
+For watchlist batches and writer-ready briefs:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/collect-watchlist.mjs \
+  --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
+  --out-root "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD" \
+  --statuses search_only,active \
+  --limit 2
+
+node skills/xhs-blogger-intelligence/scripts/build-rag-brief.mjs \
+  --input-dir "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD/watchlist-run" \
+  --topic "情绪内耗" \
+  --out-file "/path/to/private/output/rag-brief.md"
+```
+
 ## Install
 
 Manual install:
@@ -165,6 +180,8 @@ skills/xhs-blogger-intelligence/SKILL.md
 skills/xhs-blogger-intelligence/docs/data-flow.md
 skills/xhs-blogger-intelligence/docs/redbook-adapter.md
 skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs
+skills/xhs-blogger-intelligence/scripts/collect-watchlist.mjs
+skills/xhs-blogger-intelligence/scripts/build-rag-brief.mjs
 skills/xhs-blogger-intelligence/templates/watchlist.schema.json
 skills/xhs-blogger-intelligence/templates/note-card.md
 skills/xhs-blogger-intelligence/templates/blogger-profile.md
