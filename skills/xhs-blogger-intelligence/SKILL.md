@@ -39,16 +39,17 @@ For every run, read only the files needed for the request:
 1. `docs/data-flow.md`
 2. `docs/redbook-adapter.md`
 3. `templates/watchlist.schema.json`
+4. `scripts/collect-search-read.mjs` only when running the search/read adapter
 
 For distillation or RAG work, also read:
 
-4. `templates/note-card.md`
-5. `templates/blogger-profile.md`
-6. `templates/rag-brief.md`
+5. `templates/note-card.md`
+6. `templates/blogger-profile.md`
+7. `templates/rag-brief.md`
 
 For 澄Cc default watchlist, read:
 
-7. `examples/watchlist-chengcc.example.json`
+8. `examples/watchlist-chengcc.example.json`
 
 ## 2. Replaceable Slots
 
@@ -98,6 +99,7 @@ Collection order:
 
 If redbook is unavailable or returns incomplete data, use fallback modes:
 
+- `scripts/collect-search-read.mjs` for search -> filter author -> read detail
 - manual post URLs supplied by the user
 - browser-visible public page summary
 - previously collected raw data

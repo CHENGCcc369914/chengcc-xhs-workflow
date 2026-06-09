@@ -51,6 +51,30 @@ If only `xhs_red_id` is known, first use search by display name or profile looku
 
 In smoke testing on 2026-06-09 with redbook `0.7.2` and `0.8.0`, `user` and `user-posts` returned `code:-1` for both the public red id and discovered internal user id on the tested account, while `search` plus `read` succeeded. Treat `search -> filter author -> read detail` as the current fallback route until a later adapter test proves user-posts reliable.
 
+## Search/Read Script
+
+Use `scripts/collect-search-read.mjs` when an account is marked `search_only`, or when `user` / `user-posts` fail.
+
+Example:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs \
+  --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
+  --account "小柴人不纠结" \
+  --out-dir "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD/run-id" \
+  --limit 3
+```
+
+The script writes:
+
+- `raw-adapter-output/` with redbook stdout/stderr/exit files
+- `normalized/normalized-posts.jsonl`
+- `normalized/filtered-search-results.json`
+- `distilled/note-card-*.md`
+- `collection-run.md`
+
+The script is deterministic scaffolding. Its automatic note-cards are starting points; use human/LLM review before treating them as final benchmark distillation.
+
 ## Adapter Output Requirements
 
 For each account collection, capture:
@@ -96,6 +120,6 @@ Record fallback use in the collection run. Do not silently mix failed adapter ou
 - Do not bypass access controls.
 - Do not publish raw copied post text into shareable outputs.
 
-## Step 3 Handoff
+## Next Handoff
 
-The next implementation step should test redbook on one watchlist account and then add a small adapter script or runbook only after the output shape is confirmed.
+After the search/read script works on one account, the next implementation step is to add a small batch runner for watchlist accounts and a RAG brief builder that consumes the normalized records and reviewed note-cards.

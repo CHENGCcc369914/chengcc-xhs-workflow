@@ -70,6 +70,21 @@ Recommended windows:
 - last 30 days for profile update
 - last 7 days for recent signal
 
+## Current Adapter Script
+
+Use `scripts/collect-search-read.mjs` for the current verified fallback route:
+
+```text
+redbook search display name
+-> filter by author nickname/internal user id
+-> redbook read note URL
+-> raw-adapter-output
+-> normalized-posts.jsonl
+-> scaffold note-card files
+```
+
+The script requires an explicit `--out-dir`. Keep that output directory in local/private Raw storage, not in this shareable repo.
+
 ## Data Objects
 
 ### Raw Snapshot

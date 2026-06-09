@@ -108,6 +108,18 @@ xhs-blogger-intelligence
 -> Phase H performance loop
 ```
 
+For the current Xiaohongshu collection adapter, use the search/read fallback script when `user-posts` is unstable:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs \
+  --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
+  --account "小柴人不纠结" \
+  --out-dir "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD/run-id" \
+  --limit 3
+```
+
+Keep `--out-dir` outside this shareable repo.
+
 ## Install
 
 Manual install:
@@ -152,6 +164,7 @@ skills/chengcc-xhs-workflow/examples/sample-output.md
 skills/xhs-blogger-intelligence/SKILL.md
 skills/xhs-blogger-intelligence/docs/data-flow.md
 skills/xhs-blogger-intelligence/docs/redbook-adapter.md
+skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs
 skills/xhs-blogger-intelligence/templates/watchlist.schema.json
 skills/xhs-blogger-intelligence/templates/note-card.md
 skills/xhs-blogger-intelligence/templates/blogger-profile.md
