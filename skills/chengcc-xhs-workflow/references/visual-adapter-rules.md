@@ -32,6 +32,7 @@ Use for most posts.
 - small English editorial notes, numbering, arrows, and blue hand-drawn marks as atmosphere only
 - abstract color fields
 - bento-box / editorial composition
+- small narrative illustration scenes: album spread, chat-record booklet, sticky notes, tape, photos, phone, notebook, AI screenshot, and blue doodle arrows
 - premium but still Gen-Z
 - dopamine palette, controlled saturation
 - generous whitespace
@@ -41,6 +42,7 @@ Reference absorption rules:
 
 - Learn the editorial order, not the exact magazine image, people, outfits, layout, or copy.
 - Use one primary visual subject per page: screenshot, album spread, chat-record stack, orange-IP action, or one information structure.
+- Prefer small narrative illustration scenes for inner pages when the post is about emotion: show the action, not only the concept.
 - Treat whitespace as design. Do not fill empty space with stickers, arrows, icons, or extra text just to make the page look rich.
 - Microcopy, English labels, page numbers, circles, and arrows are atmosphere and navigation only; they must not become visual noise.
 - Align information blocks strictly: number, title, and body text should share a clear baseline / column logic.
@@ -115,6 +117,36 @@ Default inner-page logic for emotion/reflection posts:
 - Page 2: behavior scene. Example: the original orange IP browsing albums or old chat records; 2-3 small notes explain the feeling.
 - Page 3: reframe page. Example: two clean information blocks such as "I thought / Actually" or "old evidence / current need"; quietly embeds the method without sounding like a lecture.
 - Page 4: AI evidence page. The real AI chat screenshot or a blank screenshot frame is the main object; headline stays small and the margin notes explain what AI helped separate.
+
+## Orange IP System
+
+The original orange IP is the creator's emotional representative.
+
+- Keep one recognizable design: round orange body, green leaf, thick black outline, simple face, orange blush, warm but not overly childish.
+- Use action and expression variations to express the creator's state: browsing albums, reading chat records, holding a phone, staring blankly, lying low-battery on a desk, taking notes, hiding in a moon, holding a star, thinking, relaxing.
+- Expressions may vary: happy, confused, emo, relieved, serious note-taking, low-battery, healed.
+- In inner pages the orange acts as a small actor inside the scene, normally 10%-20% of the canvas. It should not block text or become a second headline.
+
+## Small Illustration System
+
+For emotion posts, page 2 from the night-emo post is the preferred format logic, not a fixed subject.
+
+- Build a life-like mini scene instead of one flat icon.
+- Fixed method: translate the abstract emotion into one visible action / scene.
+- Variable props: album, chat records, sticky notes, phone, laptop, desk, bed, subway, calendar, book, mirror, AI screenshot, etc. Choose props from the topic.
+- First infer the core emotion: wronged, anxious, disappointed, low-battery, conflicted, relieved, healed, restarting.
+- Then choose the matching orange-IP action: browsing, staring, holding, hiding, pausing, writing, handing to AI, separating, letting go, catching oneself, rebooting.
+- The illustration shows the action; the text states the discovery.
+- Keep whitespace and hierarchy. Rich illustration is allowed, clutter is not.
+
+Emotion-to-action references:
+
+- nostalgia / looking for proof: browsing albums, reading chat records, holding old photos.
+- anxiety / overthinking: orange tangled in a line, staring at phone, lying low-battery on desk.
+- hurt / stung by one sentence: orange holding a small note, hiding in the moon, worried expression.
+- self-doubt: orange looking at mirror, holding magnifier, question-mark sticky notes.
+- relief: orange putting phone down, breathing out, leaning on the moon.
+- AI reflection: orange handing a tangled line to AI, splitting notes into fact / thought / next step.
 
 Ending page:
 
