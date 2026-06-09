@@ -90,8 +90,9 @@ Avoid:
 
 ## Visual Identity
 
-- Name: `澄Cc`
-- Avatar subject: `Cc`, one uppercase C and one lowercase c.
+- Current name: `澄Cc` is temporary and may be renamed because it is not distinctive enough on Xiaohongshu.
+- Naming direction: preserve a memorable orange / C / 程 / 铖 association if useful, but do not force every content idea into orange wordplay.
+- Avatar subject: orange + C as the core memory mark; the avatar can include a large C and an original orange IP, with magazine-like design taste.
 - Symbol: orange, roundness, diary, light, paper, recording traces.
 - IP: original orange character only; moon, stars, plants, and small blue graffiti accents can support it.
 - Slogan direction: let the result slowly appear, with the orange/clear wordplay as a light touch.

@@ -7,6 +7,8 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 - Default to Style B: young lifestyle-aesthetic magazine cover, abstract, trendy, healing, premium, dopamine but controlled.
 - Current Style B cover default: trend magazine poster cover, white-space heavy, Chinese oversized typography as the primary visual, editorial annotations and numbering as secondary atmosphere.
 - Rhythm rule: Page 1 is the high-impact cover. Pages 2-4 are explanatory reading pages; reduce headline scale and prioritize content visualization.
+- Current Style B inner-page default: MUJI-like warm-white whitespace + Japanese lifestyle magazine order + healing small scenario illustration. Inner pages should be cleaner, whiter, and more scene-driven than the earlier retro-brown tests.
+- Separate the roles: page 1 is a poster cover with an exaggerated Chinese hook and a small orange-IP scene; pages 2-4 are illustration-led reading pages with smaller titles, quote cards / pop-up text, and life-like mini scenes.
 - Use Style A only for strong-emotion topics: Gen-Z emotional sticker poster, higher impact, street sticker collage.
 - Warm cream / light beige background.
 - Yellow, orange, light orange, and warm white as the core palette.
@@ -26,6 +28,7 @@ Use for most posts.
 - young lifestyle-aesthetic magazine
 - trend magazine poster cover
 - Japanese / lifestyle editorial page order: large whitespace, one dominant subject, strict alignment, sparse microcopy, corner numbering
+- MUJI-like warm-white whitespace: airy, premium, low-noise, not cold white, not heavy retro brown
 - white / warm-cream negative space
 - oversized Chinese headline as first visual focus
 - creative typography, diagonal / offset / circled / underlined emphasis
@@ -33,6 +36,7 @@ Use for most posts.
 - abstract color fields
 - bento-box / editorial composition
 - small narrative illustration scenes: album spread, chat-record booklet, sticky notes, tape, photos, phone, notebook, AI screenshot, and blue doodle arrows
+- complete small scenario illustrations for inner pages: an orange IP at a desk, browsing chat, checking a design draft, asking AI, relaxing with a game, or doing another concrete action tied to the topic
 - premium but still Gen-Z
 - dopamine palette, controlled saturation
 - generous whitespace
@@ -43,6 +47,7 @@ Reference absorption rules:
 - Learn the editorial order, not the exact magazine image, people, outfits, layout, or copy.
 - Use one primary visual subject per page: screenshot, album spread, chat-record stack, orange-IP action, or one information structure.
 - Prefer small narrative illustration scenes for inner pages when the post is about emotion: show the action, not only the concept.
+- Inner-page illustrations should feel like one lived-in moment, not a scattered sticker board. Cluster important props around the main scene: orange IP + 2-4 necessary props + one quote / pop-up / sticky-note text object.
 - Treat whitespace as design. Do not fill empty space with stickers, arrows, icons, or extra text just to make the page look rich.
 - Microcopy, English labels, page numbers, circles, and arrows are atmosphere and navigation only; they must not become visual noise.
 - Align information blocks strictly: number, title, and body text should share a clear baseline / column logic.
@@ -101,7 +106,8 @@ Inner pages:
 - Short sentences.
 - Headline size must be clearly smaller than the cover, usually 8%-18% of the page height.
 - The headline is navigation, not the main visual object.
-- Use content visualization before typographic impact: album cards, chat bubbles, sticky notes, timelines, real screenshot frames, or small orange-IP actions.
+- Use content visualization before typographic impact: full small scenario illustrations, album cards, chat bubbles, sticky notes, timelines, quote cards, real screenshot frames, or orange-IP actions.
+- Main information must be Chinese: inner-page headline, subtitle, speech bubbles, quote cards, and key OS text. English is allowed only as tiny decorative atmosphere and must not carry meaning.
 - Orange IP may demonstrate the page action, such as browsing an album, reading chat records, holding a phone, or asking AI, but it must not become the main subject.
 - Keep the same visual DNA as the cover: warm white space, black type, one orange emphasis, small blue hand-drawn marks, editorial numbering.
 - Visible hierarchy: main point, small note, optional example.
@@ -109,6 +115,7 @@ Inner pages:
 - Use big/small contrast; do not scatter equal-weight text around the page.
 - Preserve roughly 25%-40% whitespace.
 - Prefer one content object as the page center: a photo-album strip, chat record stack, two-column distinction, memo card, or real AI screenshot frame.
+- For scene-led inner pages, prefer one complete illustrated scene as the center: for example, a designer desk feedback scene with laptop, design draft, group chat window, low-battery orange IP, color swatches, and one quote card. Keep all important items in one cluster.
 - Reject and regenerate if an inner page looks like another cover, has a headline visually equal to the cover, or fills the page with same-weight text.
 - Reject and revise if any icon, label, sticker, or mascot overlaps readable text or breaks alignment.
 
@@ -134,6 +141,7 @@ For emotion posts, page 2 from the night-emo post is the preferred format logic,
 - Build a life-like mini scene instead of one flat icon.
 - Fixed method: translate the abstract emotion into one visible action / scene.
 - Variable props: album, chat records, sticky notes, phone, laptop, desk, bed, subway, calendar, book, mirror, AI screenshot, etc. Choose props from the topic.
+- Current preferred inner-page format: complete small scenario illustration + one Chinese quote/pop-up/sticky-note text object + 1-2 short Chinese OS lines. This is more important than decorative microcopy.
 - First infer the core emotion: wronged, anxious, disappointed, low-battery, conflicted, relieved, healed, restarting.
 - Then choose the matching orange-IP action: browsing, staring, holding, hiding, pausing, writing, handing to AI, separating, letting go, catching oneself, rebooting.
 - The illustration shows the action; the text states the discovery.
@@ -146,6 +154,7 @@ Emotion-to-action references:
 - hurt / stung by one sentence: orange holding a small note, hiding in the moon, worried expression.
 - self-doubt: orange looking at mirror, holding magnifier, question-mark sticky notes.
 - relief: orange putting phone down, breathing out, leaning on the moon.
+- relaxation / after-work buffer: orange wearing headphones, playing games with friends online, sitting at a desk with a drink and screen; keep the inner-page title small and let the scene carry the feeling.
 - AI reflection: orange handing a tangled line to AI, splitting notes into fact / thought / next step.
 
 Ending page:
