@@ -86,6 +86,7 @@ Minimum fields:
 
 - `platform`
 - `account_id`
+- `account_red_id`
 - `account_name`
 - `post_id`
 - `post_url`

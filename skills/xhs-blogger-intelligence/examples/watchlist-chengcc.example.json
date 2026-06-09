@@ -17,6 +17,7 @@
     {
       "display_name": "心理师 bestta",
       "xhs_user_id": null,
+      "xhs_red_id": null,
       "profile_url": null,
       "status": "pending_id_confirmation",
       "priority": "medium",
@@ -43,6 +44,7 @@
     {
       "display_name": "KnowYourself",
       "xhs_user_id": null,
+      "xhs_red_id": null,
       "profile_url": null,
       "status": "pending_id_confirmation",
       "priority": "medium",
@@ -68,9 +70,10 @@
     },
     {
       "display_name": "芝士Rebecca.",
-      "xhs_user_id": "6118470936",
+      "xhs_user_id": null,
+      "xhs_red_id": "6118470936",
       "profile_url": null,
-      "status": "active",
+      "status": "pending_internal_id_lookup",
       "priority": "high",
       "source_groups": [
         "previous_distilled_benchmark",
@@ -82,7 +85,7 @@
         "viewpoint",
         "life_daily"
       ],
-      "collection_reason": "Already in previous benchmark set and re-confirmed by user-provided profile snapshot.",
+      "collection_reason": "Already in previous benchmark set and re-confirmed by user-provided profile snapshot. Public red id is known; internal redbook user id still needs lookup.",
       "public_profile_snapshot": {
         "snapshot_date": "2026-06-09",
         "ip_location": "江苏",
@@ -100,6 +103,7 @@
     {
       "display_name": "小马赛克mosaic",
       "xhs_user_id": null,
+      "xhs_red_id": null,
       "profile_url": null,
       "status": "pending_id_confirmation",
       "priority": "medium",
@@ -126,6 +130,7 @@
     {
       "display_name": "莉至/利宝",
       "xhs_user_id": null,
+      "xhs_red_id": null,
       "profile_url": null,
       "status": "needs_name_confirmation",
       "priority": "low",
@@ -151,6 +156,7 @@
     {
       "display_name": "几口酱聊AI/几口猫聊AI",
       "xhs_user_id": null,
+      "xhs_red_id": null,
       "profile_url": null,
       "status": "needs_name_confirmation",
       "priority": "low",
@@ -176,9 +182,10 @@
     },
     {
       "display_name": "小柴人不纠结",
-      "xhs_user_id": "95070214643",
+      "xhs_user_id": "68220f74000000000e02c3af",
+      "xhs_red_id": "95070214643",
       "profile_url": null,
-      "status": "active",
+      "status": "search_only",
       "priority": "high",
       "source_groups": [
         "user_added_watchlist"
@@ -188,7 +195,7 @@
         "anxiety_relief",
         "happiness_collection"
       ],
-      "collection_reason": "New user-added benchmark for emotional stability and anti-overthinking topics.",
+      "collection_reason": "New user-added benchmark for emotional stability and anti-overthinking topics. Smoke test found search/read works, but user/user-posts APIs returned code -1.",
       "public_profile_snapshot": {
         "snapshot_date": "2026-06-09",
         "ip_location": "广东",
@@ -202,9 +209,10 @@
     },
     {
       "display_name": "林之的备忘录",
-      "xhs_user_id": "6861683503",
+      "xhs_user_id": null,
+      "xhs_red_id": "6861683503",
       "profile_url": null,
-      "status": "active",
+      "status": "pending_internal_id_lookup",
       "priority": "high",
       "source_groups": [
         "user_added_watchlist"
@@ -215,7 +223,7 @@
         "life_observation",
         "writing"
       ],
-      "collection_reason": "New user-added benchmark for growth writing, everyday observation, and memo-like rhythm.",
+      "collection_reason": "New user-added benchmark for growth writing, everyday observation, and memo-like rhythm. Public red id is known; internal redbook user id still needs lookup.",
       "public_profile_snapshot": {
         "snapshot_date": "2026-06-09",
         "ip_location": "江苏",

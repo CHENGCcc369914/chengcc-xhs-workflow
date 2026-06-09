@@ -70,12 +70,19 @@ Validate the watchlist against `templates/watchlist.schema.json`.
 Before collecting, check:
 
 - account id or profile URL exists
-- account status is `active`, `paused`, `pending_id_confirmation`, or `needs_name_confirmation`
+- public `xhs_red_id` and internal `xhs_user_id` are not confused
+- account status is `active`, `search_only`, `paused`, `pending_internal_id_lookup`, `pending_id_confirmation`, or `needs_name_confirmation`
 - collection cadence is reasonable
 - duplicate accounts are merged
 - private notes and public examples are kept separate
 
+Use `xhs_red_id` for the public Xiaohongshu number shown on profile. Use `xhs_user_id` for the internal id that redbook may require for `user` and `user-posts`.
+
 If account identity is uncertain, do not collect under a guessed id. Mark it `pending_id_confirmation`.
+
+If only the public red id is known, mark it `pending_internal_id_lookup`.
+
+If search/read works but `user` and `user-posts` fail, mark it `search_only` and collect through the search fallback until the adapter improves.
 
 ### Phase B: Collect Public Notes
 

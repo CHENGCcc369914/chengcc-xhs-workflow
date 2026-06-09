@@ -10,10 +10,11 @@ Run a smoke test on one low-risk public account:
 
 1. Verify the CLI or package is installed.
 2. Verify authentication or public access mode.
-3. Fetch one account's recent public posts.
-4. Read one public post detail.
-5. Save the raw output locally.
-6. Confirm the output can be normalized.
+3. Confirm whether the watchlist id is an internal `xhs_user_id` or public `xhs_red_id`.
+4. Fetch one account's recent public posts, or use search fallback if user-posts fails.
+5. Read one public post detail.
+6. Save the raw output locally.
+7. Confirm the output can be normalized.
 
 Do not run a full watchlist batch until the smoke test works.
 
@@ -38,6 +39,17 @@ redbook search "<query>" --json
 ```
 
 If the installed redbook version uses different flags, update this file after verification.
+
+## ID Semantics
+
+Do not confuse these two fields:
+
+- `xhs_red_id`: public Xiaohongshu number shown on profile, often numeric.
+- `xhs_user_id`: internal user id exposed by API/search results and used by redbook `user` / `user-posts`.
+
+If only `xhs_red_id` is known, first use search by display name or profile lookup to discover the internal `xhs_user_id`.
+
+In smoke testing on 2026-06-09 with redbook `0.7.2` and `0.8.0`, `user` and `user-posts` returned `code:-1` for both the public red id and discovered internal user id on the tested account, while `search` plus `read` succeeded. Treat `search -> filter author -> read detail` as the current fallback route until a later adapter test proves user-posts reliable.
 
 ## Adapter Output Requirements
 
@@ -67,10 +79,11 @@ For each post detail, capture:
 
 Use fallbacks when redbook fails, returns incomplete data, or is not installed:
 
-1. User-provided public post URLs.
-2. Browser-visible public page notes.
-3. Previously collected raw snapshots.
-4. Manual copy of short excerpts provided by the user.
+1. Search by display name, filter by author nickname/user id, then read returned note URLs.
+2. User-provided public post URLs.
+3. Browser-visible public page notes.
+4. Previously collected raw snapshots.
+5. Manual copy of short excerpts provided by the user.
 
 Record fallback use in the collection run. Do not silently mix failed adapter output with complete data.
 

@@ -96,6 +96,13 @@
               "null"
             ]
           },
+          "xhs_red_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Public Xiaohongshu number shown on profile. This is not always the internal user id required by redbook user/user-posts commands."
+          },
           "profile_url": {
             "type": [
               "string",
@@ -106,7 +113,9 @@
             "type": "string",
             "enum": [
               "active",
+              "search_only",
               "paused",
+              "pending_internal_id_lookup",
               "pending_id_confirmation",
               "needs_name_confirmation"
             ]

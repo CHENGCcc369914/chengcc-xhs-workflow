@@ -6,6 +6,7 @@ Use one profile per benchmark blogger. Update only when there is enough evidence
 
 - Blogger:
 - Account id:
+- Account red id:
 - Profile URL:
 - Status: active / paused / pending_id_confirmation / needs_name_confirmation
 - Last collected:

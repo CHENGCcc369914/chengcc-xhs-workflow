@@ -7,6 +7,7 @@ Use one note-card per useful public benchmark post. Distill reusable logic; do n
 - Platform: xiaohongshu
 - Blogger:
 - Account id:
+- Account red id:
 - Post title:
 - Post URL:
 - Publish time:
