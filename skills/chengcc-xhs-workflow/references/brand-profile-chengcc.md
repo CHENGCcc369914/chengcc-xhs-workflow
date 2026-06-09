@@ -33,6 +33,16 @@ Before drafting, generate 10 topic options that fit:
 
 Do not start with broad life advice.
 
+## Anti-Repetition Rule
+
+The same underlying logic may be reused, but the reader should not feel it is the same post again.
+
+- Do not reuse the previous published / approved cover-title sentence pattern.
+- Do not reuse the same emotional entry hook. If the recent post used "one sentence from someone made me overthink all day", avoid another "one sentence + overthinking all day" headline.
+- Change at least one of: concept, scene, hook, visual metaphor, or next action.
+- Valid angle shifts include: dullness / sensitivity filter, attention recovery, boundaries, fact-vs-interpretation, cognitive reappraisal, or self-agency.
+- Before drafting, compare with recent posts. If title hook, scene, core keyword, and ending action have two or more overlaps, revise the angle.
+
 ## Voice
 
 Use:
