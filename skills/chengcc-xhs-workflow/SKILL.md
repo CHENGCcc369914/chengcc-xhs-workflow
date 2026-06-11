@@ -1,6 +1,6 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this skill when the user wants a complete Xiaohongshu-first image-text workflow from creator defaults / media console to topic options, carousel copy, Image 2 full-card prompts, platform publish-safety review, WorkBuddy draft handoff, and post-publish performance loop. Triggers include 澄Cc默认资料, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 小红书工作流, 2026发布审核, WorkBuddy发布草稿, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends."
+description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> WorkBuddy draft handoff -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, WorkBuddy发布草稿, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops for real platform browsing/upload/comment actions."
 ---
 
 # ChengCc Xiaohongshu Workflow Skill
@@ -12,6 +12,24 @@ Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel
 It ships with 澄Cc defaults, but must be customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
 relative to this skill folder.
+
+## Suite Routing With XHS Skills
+
+When several Xiaohongshu skills could apply, route by the user's job:
+
+| User job | Primary skill | Handoff |
+|---|---|---|
+| Benchmark monitoring, watchlist refresh, blogger note-cards, RAG brief | `xhs-blogger-intelligence` | Pass only the compact RAG brief into this workflow or the writer. |
+| Writing-only task: title, body, cover copy, one selected topic, rewrite, comments | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, or WorkBuddy. |
+| Complete package: 10 topics, 4-page carousel, Image 2, publish review, WorkBuddy, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
+| Real platform operation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | This workflow supplies the approved package and handoff; platform actions follow `openclaw` rules. |
+
+Priority rules:
+
+1. If the request includes real browsing, searching, uploading, creator-center filling, commenting, or publishing, use `xiaohongshu-ops` for those platform actions.
+2. If the request asks how benchmark bloggers recently posted, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
+3. If the request includes full carousel production, Image 2, publish review, WorkBuddy, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
+4. If the request only asks for copy, title options, cover wording, or a single writing draft, `cc-xhs-personal-growth-writer` is the main skill.
 
 ## 0. Replaceable Creator Slots
 
