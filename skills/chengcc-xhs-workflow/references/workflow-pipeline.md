@@ -95,7 +95,7 @@ Prompt-only output is a fallback, not the normal path. Use it only when Image 2 
 
 ## Phase F: 2026 Publish Review
 
-Run the review after images/prompts and before WorkBuddy handoff.
+Run the review after images/prompts and before the manual publish checklist.
 
 First choose the target platform:
 
@@ -120,21 +120,21 @@ Check:
 
 If a problem exists, revise and rerun the affected platform review. Cross-posting requires a separate pass/revise/block decision for each platform.
 
-## Phase G: WorkBuddy Draft Handoff
+## Phase G: Manual Publish Checklist
 
 If review passes:
 
 - target platform and draft surface
-- prepare image order
+- image order
 - use image paths from the creator's image export folder
 - final title
 - final body
 - tags
 - AI label instruction
 - platform-specific risk notes
-- draft-save instruction
+- final human checks before clicking publish
 
-WorkBuddy should save as draft or stop before final publish unless the user explicitly asks it to publish in the current turn.
+The creator manually uploads images, pastes title/body/tags, checks AI label and privacy masking, then decides whether to click publish.
 
 ## Phase H: Performance Loop
 
@@ -150,7 +150,7 @@ This phase has two parts:
 1. Before final publish: score the final package and record predictions.
 2. After publish: compare real platform data with the prediction and update the creator rubric.
 
-Do not invent metrics. If the post is only saved as a draft, create the pre-publish score and prediction only. If the user later provides screenshots, WorkBuddy analytics, or platform numbers, run the retro section.
+Do not invent metrics. If the post is not published yet, create the pre-publish score and prediction only. If the user later provides screenshots, platform analytics, or platform numbers, run the retro section.
 
 Default score dimensions:
 

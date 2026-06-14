@@ -2,7 +2,7 @@
 
 This is a practical review index for draft publishing. It is based on the platform norm documents provided by the creator for 2026 review. Do not commit private local source paths into shared output.
 
-Use this file after final cards/prompts are ready and before WorkBuddy or any operator creates a platform draft.
+Use this file after final cards/prompts are ready and before the creator manually publishes on the target platform.
 
 ## Platform Codes
 

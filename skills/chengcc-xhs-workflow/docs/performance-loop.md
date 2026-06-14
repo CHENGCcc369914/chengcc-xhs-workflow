@@ -9,21 +9,21 @@ The loop is inspired by score / predict / retro / rubric thinking:
 3. Compare actual results against the prediction.
 4. Update the creator rubric only when the signal is useful.
 
-This is not a scraping or automation layer. It is a decision and learning layer. Use WorkBuddy, platform screenshots, creator-provided data, or an approved analytics source for actual numbers.
+This is not a scraping or automation layer. It is a decision and learning layer. Use platform screenshots, creator-provided data, platform analytics, or an approved analytics source for actual numbers.
 
 ## When To Run
 
 Run before final publish when:
 
 - cards, body, title, tags, and platform review are final
-- WorkBuddy draft is ready or the creator is about to publish
+- the manual publish checklist is ready or the creator is about to publish
 - the user asks for `score`, `predict`, `发布前打分`, or `发布前评估`
 
 Run after publish when:
 
 - the user says the post is published
 - 24-hour / 72-hour / 7-day data is available
-- the user provides analytics screenshots or WorkBuddy extracts
+- the user provides analytics screenshots or platform data exports
 - the user asks for `复盘`, `retro`, `数据怎么样`, or `更新 rubric`
 
 If data is not available, do not invent numbers. Output a blank retro template and list the data needed.

@@ -33,4 +33,4 @@ Choose one topic number. After you pick, I will create:
 - body copy
 - Image 2 full-card prompts
 - publish review
-- WorkBuddy draft handoff
+- manual publish checklist

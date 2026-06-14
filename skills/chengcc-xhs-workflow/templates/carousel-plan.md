@@ -52,11 +52,11 @@
 - Platform hygiene:
 - Decision: pass / revise / block
 
-## WorkBuddy Handoff Ready
+## Manual Publish Checklist Ready
 
 - [ ] Images/prompts ready.
 - [ ] Final images copied to export folder.
 - [ ] Title/body/tags final.
 - [ ] Target platform selected.
 - [ ] Platform review passed.
-- [ ] Draft-only instruction included.
+- [ ] Manual upload/paste checklist included.

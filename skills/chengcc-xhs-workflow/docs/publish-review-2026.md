@@ -1,6 +1,6 @@
 # 2026 Platform Publish Review
 
-This file is a practical review gate, not legal advice. It should be run after final card prompts/images and before any platform draft handoff.
+This file is a practical review gate, not legal advice. It should be run after final card prompts/images and before the manual publish checklist.
 
 ## Current Baseline
 
@@ -86,7 +86,7 @@ After the common rules, apply the matching section in `docs/platform-publish-rul
 
 Use three outcomes:
 
-- `pass`: ready for WorkBuddy/operator draft handoff
+- `pass`: ready for manual upload/paste/publish checklist
 - `revise`: fix listed issues, then rerun review
 - `block`: do not create a platform draft without creator/legal/platform review
 

@@ -29,9 +29,9 @@ Ask the friend to provide:
 - Draft carousel copy and body copy.
 - Wait for content approval before image generation.
 - Use Image 2 full-card mode only after copy is locked.
-- Select target platform and run publish safety review before handoff.
+- Select target platform and run publish safety review before the manual publish checklist.
 - If cross-posting, review each platform separately.
-- WorkBuddy or another operator saves draft / stops before final publish by default.
+- The creator manually uploads images, pastes copy, checks labels, and decides whether to publish.
 
 ## Replace 澄Cc Defaults
 
@@ -44,7 +44,7 @@ Replace:
 - Style A emotional sticker visual
 - graduation / workplace newcomer topics
 - Xiaohongshu as the default target platform, if the friend mainly publishes elsewhere
-- WorkBuddy account-specific instructions
+- platform-specific manual publishing instructions
 
 Keep:
 

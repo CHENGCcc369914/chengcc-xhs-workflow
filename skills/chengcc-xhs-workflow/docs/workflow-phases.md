@@ -73,11 +73,11 @@ Check:
 - platform-specific rules
 - platform hygiene
 
-If cross-posting, run one review per platform. If blocked, revise before handoff.
+If cross-posting, run one review per platform. If blocked, revise before publishing.
 
-## 6. WorkBuddy Handoff
+## 6. Manual Publish Checklist
 
-Output one precise instruction for WorkBuddy:
+Output one precise checklist for the creator's manual publishing flow:
 
 - target platform and draft surface
 - where to publish
@@ -87,9 +87,9 @@ Output one precise instruction for WorkBuddy:
 - tags
 - AI label
 - platform review result
-- save as draft / stop before publish
+- final human checks: image order, typo, tags, privacy masking, AI disclosure
 
-Final publish needs current-turn user confirmation.
+The creator manually uploads images, pastes title/body/tags, and decides whether to click publish.
 
 ## 7. Performance Loop
 

@@ -1,6 +1,6 @@
 # Platform Review
 
-Run this after final cards/prompts and before platform draft handoff.
+Run this after final cards/prompts and before the manual publish checklist.
 
 ## Target
 
@@ -8,7 +8,7 @@ Run this after final cards/prompts and before platform draft handoff.
 - Content format: image-text / video / article / short video
 - Cross-posting: yes / no
 - Review source: `docs/platform-publish-rules-2026.md`
-- Source refresh needed before handoff: yes / no
+- Source refresh needed before publishing: yes / no
 
 ## 2026 发布审核
 
@@ -25,5 +25,5 @@ Run this after final cards/prompts and before platform draft handoff.
 
 - 结论：pass / revise / block
 - 需要修改：
-- WorkBuddy disclosure instruction:
+- Manual disclosure instruction:
 - 修改后是否已复审：yes / no

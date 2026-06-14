@@ -4,12 +4,12 @@ A shareable Xiaohongshu-first content system.
 
 It currently contains two skills:
 
-- `chengcc-xhs-workflow`: turns creator positioning into publish-ready carousel packages, with Image 2, platform review, WorkBuddy handoff, and performance loop.
+- `chengcc-xhs-workflow`: turns creator positioning into publish-ready carousel packages, with Image 2, platform review, manual publish checklist, and performance loop.
 - `xhs-blogger-intelligence`: maintains benchmark blogger watchlists, collects public post signals through an adapter such as redbook, distills note-cards and blogger-profiles, and provides RAG briefs for the writer workflow.
 
 The main publishing workflow supports Xiaohongshu-first image-text drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
-The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and publishing handoff.
+The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and manual publishing flow.
 
 ## What This Workflow Does
 
@@ -22,7 +22,7 @@ The complete route is:
 5. Wait for content approval before image generation.
 6. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
 7. Select the target platform and run the 2026 platform publish safety review.
-8. If clean, output a WorkBuddy handoff instruction to upload images, fill title/body/tags, save as draft, and wait for human confirmation.
+8. If clean, output a manual publish checklist for the creator to upload images, paste title/body/tags, check labels, and decide whether to publish.
 9. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
 
 ## Default Trigger
@@ -48,7 +48,7 @@ The workflow is reusable because these parts are replaceable:
 | Visual system | `references/visual-adapter-rules.md` | own visual style and Image 2 rules |
 | Topic sources | emotion / graduation / workplace newcomer | own content pillars |
 | Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
-| Publishing operator | WorkBuddy | WorkBuddy / manual / browser automation |
+| Publishing flow | manual Xiaohongshu upload/paste/publish checklist | own manual platform workflow |
 | Target platform | `xiaohongshu` by default | `xiaohongshu` / `douyin` / `wechat_channels` / `wechat_official_account` |
 | Safety rules | `references/publish-safety.md` + `docs/platform-publish-rules-2026.md` | keep platform rules, add niche-specific rules |
 | Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
@@ -85,7 +85,7 @@ Use it in two moments:
 - Before final publish: score the final package and record a prediction.
 - After publish: compare real platform metrics against the prediction and update the creator rubric.
 
-The loop does not invent metrics and does not require a specific analytics tool. Use creator-provided screenshots, WorkBuddy output, platform analytics, or another approved data source.
+The loop does not invent metrics and does not require a specific analytics tool. Use creator-provided screenshots, platform analytics, or another approved data source.
 
 ## Recommended Skill Stack
 
@@ -94,8 +94,7 @@ This repo is the orchestration and intelligence layer. It can work alone, but wo
 - `xhs-blogger-intelligence` for benchmark monitoring and RAG briefs.
 - A creator-specific writing skill, such as `cc-xhs-personal-growth-writer`.
 - Image generation / Image 2.
-- WorkBuddy for Creator Center operations.
-- Optional Xiaohongshu browser/publishing skill for manual fallback checks.
+- Optional Xiaohongshu browser/publishing skill only when the creator explicitly wants browser help.
 
 The intended route is:
 
@@ -104,7 +103,7 @@ xhs-blogger-intelligence
 -> RAG brief
 -> cc-xhs-personal-growth-writer
 -> chengcc-xhs-workflow
--> WorkBuddy draft
+-> manual publish checklist
 -> Phase H performance loop
 ```
 
@@ -172,7 +171,7 @@ skills/chengcc-xhs-workflow/templates/topic-options.md
 skills/chengcc-xhs-workflow/templates/post-brief.md
 skills/chengcc-xhs-workflow/templates/carousel-plan.md
 skills/chengcc-xhs-workflow/templates/platform-review.md
-skills/chengcc-xhs-workflow/templates/workbuddy-handoff.md
+skills/chengcc-xhs-workflow/templates/manual-publish-checklist.md
 skills/chengcc-xhs-workflow/templates/performance-loop.md
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
@@ -192,6 +191,6 @@ skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json
 
 ## Safety Boundary
 
-The publishing workflow may prepare a WorkBuddy handoff. It should not silently publish. WorkBuddy should upload/fill/save draft and wait for the creator's confirmation unless the current-turn instruction explicitly asks to publish.
+The publishing workflow prepares a manual publish checklist. It should not silently publish or assume a platform operator. The creator uploads images, pastes copy, checks labels, and clicks publish manually.
 
 The blogger intelligence workflow should only use public benchmark content, keep raw collection data local/private, avoid storing credentials in the repo, and pass paraphrased learning briefs downstream instead of copied original posts.

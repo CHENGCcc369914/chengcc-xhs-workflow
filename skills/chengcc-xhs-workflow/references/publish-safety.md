@@ -2,13 +2,13 @@
 
 ## Default Rule
 
-Stop at draft or pre-publish by default.
+The creator controls final publishing manually.
 
-The user must explicitly confirm final publish in the current turn.
+The workflow should provide a checklist, not operate the platform by default.
 
 ## 2026 Review Gate
 
-Run this after image generation / final prompt output and before WorkBuddy handoff.
+Run this after image generation / final prompt output and before the manual publish checklist.
 
 First select the target platform:
 
@@ -52,7 +52,7 @@ Reject or revise if the post contains:
 
 ### 5. Platform Publishing Hygiene
 
-- Target platform is selected before handoff.
+- Target platform is selected before the manual publish checklist.
 - Title/cover exists and is readable for the target platform.
 - Body/caption exists and adds new value beyond card text.
 - Tags/topics are relevant, not spammy.
@@ -77,7 +77,7 @@ Use:
 - 商业/导流/活动：通过 / 需修改
 - 平台专项规则：通过 / 需修改
 - 平台发布卫生：通过 / 需修改
-- 结论：可交给 WorkBuddy / 需先修改
+- 结论：可手动发布 / 需先修改
 ```
 
 ## Sources To Refresh

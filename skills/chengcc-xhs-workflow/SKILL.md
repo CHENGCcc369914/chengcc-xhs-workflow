@@ -1,13 +1,13 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> WorkBuddy draft handoff -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, WorkBuddy发布草稿, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops for real platform browsing/upload/comment actions."
+description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> manual publish checklist -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, 手动发布清单, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops only when the user explicitly asks for real platform browsing/upload/comment actions."
 ---
 
 # ChengCc Xiaohongshu Workflow Skill
 
 This is a shareable orchestration skill:
 
-Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> WorkBuddy draft handoff -> performance loop.
+Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
 
 It ships with 澄Cc defaults, but must be customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
@@ -20,15 +20,15 @@ When several Xiaohongshu skills could apply, route by the user's job:
 | User job | Primary skill | Handoff |
 |---|---|---|
 | Benchmark monitoring, watchlist refresh, blogger note-cards, RAG brief | `xhs-blogger-intelligence` | Pass only the compact RAG brief into this workflow or the writer. |
-| Writing-only task: title, body, cover copy, one selected topic, rewrite, comments | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, or WorkBuddy. |
-| Complete package: 10 topics, 4-page carousel, Image 2, publish review, WorkBuddy, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
-| Real platform operation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | This workflow supplies the approved package and handoff; platform actions follow `openclaw` rules. |
+| Writing-only task: title, body, cover copy, one selected topic, rewrite, comments | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, manual publish checklist, or performance loop. |
+| Complete package: 10 topics, 4-page carousel, Image 2, publish review, manual publish checklist, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
+| Explicit platform automation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | Use only when the user explicitly asks for platform automation. The default publish flow is manual upload/paste by the creator. |
 
 Priority rules:
 
-1. If the request includes real browsing, searching, uploading, creator-center filling, commenting, or publishing, use `xiaohongshu-ops` for those platform actions.
+1. If the user explicitly asks for real browsing, searching, uploading, creator-center filling, commenting, or publishing automation, use `xiaohongshu-ops` for those platform actions. Otherwise, keep publishing manual.
 2. If the request asks how benchmark bloggers recently posted, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
-3. If the request includes full carousel production, Image 2, publish review, WorkBuddy, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
+3. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
 4. If the request only asks for copy, title options, cover wording, or a single writing draft, `cc-xhs-personal-growth-writer` is the main skill.
 
 ## 0. Replaceable Creator Slots
@@ -43,7 +43,7 @@ Before creating content, identify these slots:
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
 | Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
-| Publishing handoff | WorkBuddy draft for Xiaohongshu by default | own target platform and operator/manual flow |
+| Publishing handoff | manual Xiaohongshu publish checklist by default | own target platform and manual flow |
 | Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
 
 If a friend has no console yet, ask for or infer a minimal profile:
@@ -155,8 +155,8 @@ Execution rule:
 - If image generation fails, retry with a shorter prompt once.
 - Only fall back to a prompt pack when the tool is unavailable or repeated generation attempts fail.
 - State clearly whether images were generated or only prompts were produced.
-- If only prompts were produced, do not mark the workflow as ready for WorkBuddy image upload.
-- After images are generated, copy the final publish-ready images to the creator's image export folder and use those copied paths in the WorkBuddy handoff. Keep the original generated files in place.
+- If only prompts were produced, do not mark the workflow as ready for manual image upload.
+- After images are generated, copy the final publish-ready images to the creator's image export folder and use those copied paths in the manual publish checklist. Keep the original generated files in place.
 
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
@@ -177,21 +177,21 @@ If issues exist:
 3. revise the affected card/body/tag/prompt
 4. rerun the check
 
-If clean, continue to WorkBuddy handoff.
+If clean, continue to the manual publish checklist.
 
-### Phase G: WorkBuddy Draft Handoff
+### Phase G: Manual Publish Checklist
 
-Output a precise WorkBuddy instruction using `templates/workbuddy-handoff.md`.
+Output a precise manual publish checklist using `templates/manual-publish-checklist.md`.
 
-The instruction should say:
+The checklist should say:
 
 - target platform and draft surface
-- upload images in order
-- fill title/body/tags
+- image paths and upload order
+- title/body/tags to copy manually
 - mark AI-generated/AI-assisted content according to the target platform rules when final cards were generated by Image 2 or other AI tools
 - if no platform AI label field is visible, include the disclosure text required by the review in the body/caption
-- save as draft or stop before publish
-- do not click final publish unless the current user explicitly says so
+- final human checks before clicking publish: image order, typo, tags, privacy masking, AI disclosure
+- the creator clicks final publish manually
 
 ### Phase H: Performance Loop
 
@@ -208,7 +208,7 @@ Rules:
 
 - If no platform metrics are available yet, create the prediction and an empty retro template instead of inventing numbers.
 - Predictions must be written before looking at actual results.
-- Use actual platform data supplied by the user, WorkBuddy, screenshots, or an approved analytics source.
+- Use actual platform data supplied by the user, screenshots, platform analytics, or an approved analytics source.
 - Treat one post as a hypothesis, not a permanent rule. Update the rubric only when a signal is strong or repeated.
 - Keep the loop creator-specific and replaceable. A friend can use their own targets, metrics, and scoring weights.
 - Do not use the performance loop to justify fake engagement, bait, fake comments, fake purchases, or misleading growth tactics.
@@ -302,7 +302,7 @@ After the user picks:
 - 平台专项风险：
 - 结论：
 
-## WorkBuddy 草稿指令
+## 手动发布清单
 ...
 
 ## Phase H 发布后复盘
@@ -326,7 +326,7 @@ Before finishing, verify:
 - Is AI framed as a method share rather than hard-sold teaching?
 - Was the target platform selected?
 - Did the 2026 platform publish review run for every target platform?
-- Does WorkBuddy stop at draft / pre-publish unless explicitly told to publish?
+- Does the checklist leave final upload/paste/publish control to the creator?
 - Was a pre-publish score and prediction recorded when the user wants a performance loop?
 - Did the post-publish retro use real metrics rather than invented data?
 - Did the rubric update avoid overfitting to one weak signal?
