@@ -9,7 +9,7 @@ This is a shareable orchestration skill:
 
 Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
 
-It ships with 澄Cc defaults, but must be customizable for other creators.
+It ships with 澄Cc and Peyson starter defaults, but must remain customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
 relative to this skill folder.
 
@@ -37,12 +37,12 @@ Before creating content, identify these slots:
 
 | Slot | 澄Cc default | Friend replacement |
 |---|---|---|
-| Creator profile | `references/brand-profile-chengcc.md` | own profile |
+| Creator profile | `references/brand-profile-chengcc.md` | own profile, or `references/brand-profile-peyson.md` for Peyson |
 | Confirmed console | 澄Cc self-media console / default资料 | own creator console |
 | Visual style | `references/visual-adapter-rules.md` | own visual rules |
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
-| Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
+| Image export folder | creator's local publishing-image folder | own local publishing-image folder |
 | Publishing handoff | manual Xiaohongshu publish checklist by default | own target platform and manual flow |
 | Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
 
@@ -73,6 +73,16 @@ For 澄Cc:
 
 If the active environment also has `cc-xhs-personal-growth-writer`, use it for 澄Cc content voice and local console lookup.
 
+For Peyson:
+
+1. `references/brand-profile-peyson.md`
+2. `references/workflow-pipeline.md`
+3. `references/publish-safety.md`
+4. `docs/publish-review-2026.md`
+5. `docs/platform-publish-rules-2026.md`
+6. `docs/performance-loop.md`
+7. `examples/peyson-start-prompts.md` when the user needs copyable launch prompts
+
 For another creator:
 
 1. `docs/customize-for-friends.md`
@@ -89,7 +99,9 @@ For another creator:
 
 Confirm the creator profile and replaceable slots before generating ideas.
 
-For 澄Cc, use the bundled brand profile and confirmed console rules. For friends, use their own profile, positioning, visual system, topic map, image export folder, and publishing operator.
+For 澄Cc, use the bundled brand profile and confirmed console rules.
+For Peyson, use the bundled Peyson starter profile unless the user provides a newer console.
+For friends, use their own profile, positioning, visual system, topic map, image export folder, and publishing operator.
 
 If the user has not selected a creator profile, infer a minimal profile only when the input is enough. Otherwise ask for the missing creator basics.
 
@@ -239,6 +251,21 @@ Visual:
 
 - Style B default: young lifestyle-aesthetic magazine, abstract, trendy, healing, premium, dopamine but controlled.
 - Style A backup: Gen-Z emotional sticker poster, only for strong-emotion hooks.
+
+## 3.1 Peyson Defaults
+
+When the user says `Peyson 默认资料`, read `references/brand-profile-peyson.md` and use Peyson as the active creator.
+
+Default direction:
+
+- product-minded founder/operator.
+- more analytical and system-oriented than 澄Cc, but still human and friend-like.
+- writes about work clarity, AI-assisted practical problem solving, personal operating systems, product/founder thinking, emotion and relationship analysis.
+- AI appears as a helper near the end: sorting facts, extracting next actions, or turning records into clarity.
+- default platform is Xiaohongshu image-text.
+- default publish mode is manual upload / paste / final human publish decision.
+
+Do not use 澄Cc's orange IP, fresh-graduate voice, or exact topic map for Peyson unless the user explicitly asks for a shared account style.
 
 ## 4. Default Output Contract
 

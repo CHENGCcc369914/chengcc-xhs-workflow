@@ -20,7 +20,7 @@ For 澄Cc, use:
 - target readers: in-school, soon-to-graduate, fresh workplace peers
 - Style B default, Style A backup
 - AI as method sharing, not teaching
-- image export folder: `/Users/ccc/Pictures/小红书运营图片`
+- image export folder: creator's local publishing-image folder
 
 For friends, replace those defaults with their own.
 

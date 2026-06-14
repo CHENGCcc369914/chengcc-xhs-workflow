@@ -2,6 +2,12 @@
 
 A shareable Xiaohongshu-first content system.
 
+If you are Peyson, start here:
+
+- Read `QUICKSTART-FOR-PEYSON.md`.
+- Install `skills/chengcc-xhs-workflow` and `skills/xhs-blogger-intelligence`.
+- Start your robot with: `用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。`
+
 It currently contains two skills:
 
 - `chengcc-xhs-workflow`: turns creator positioning into publish-ready carousel packages, with Image 2, platform review, manual publish checklist, and performance loop.
@@ -9,7 +15,7 @@ It currently contains two skills:
 
 The main publishing workflow supports Xiaohongshu-first image-text drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
-The repo ships with `澄Cc` as the default example, but the workflow is designed to be replaced by a friend's own creator console, visual system, topic map, and manual publishing flow.
+The repo ships with `澄Cc` and `Peyson` starter profiles, but the workflow is designed to be replaced by any creator's own console, visual system, topic map, and manual publishing flow.
 
 ## What This Workflow Does
 
@@ -37,17 +43,23 @@ For friends, replace the first clause:
 用{账号名}默认资料，按{账号名}中控台确认版，先给我 10 个适合我的选题。
 ```
 
+For Peyson:
+
+```text
+用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。
+```
+
 ## Replaceable Slots
 
 The workflow is reusable because these parts are replaceable:
 
 | Slot | 澄Cc default | Friend replacement |
 |---|---|---|
-| Creator profile | `references/brand-profile-chengcc.md` | own creator profile |
+| Creator profile | `references/brand-profile-chengcc.md` | `references/brand-profile-peyson.md` or own creator profile |
 | Confirmed console | creator's local/cloud media console | own media console / positioning doc |
 | Visual system | `references/visual-adapter-rules.md` | own visual style and Image 2 rules |
 | Topic sources | emotion / graduation / workplace newcomer | own content pillars |
-| Image export folder | `/Users/ccc/Pictures/小红书运营图片` for 澄Cc | own local publishing-image folder |
+| Image export folder | creator's local publishing-image folder | own local publishing-image folder |
 | Publishing flow | manual Xiaohongshu upload/paste/publish checklist | own manual platform workflow |
 | Target platform | `xiaohongshu` by default | `xiaohongshu` / `douyin` / `wechat_channels` / `wechat_official_account` |
 | Safety rules | `references/publish-safety.md` + `docs/platform-publish-rules-2026.md` | keep platform rules, add niche-specific rules |
@@ -62,6 +74,16 @@ The workflow is reusable because these parts are replaceable:
 - Visual default: Style B, young lifestyle-aesthetic magazine cover.
 - Visual backup: Style A, Gen-Z emotional sticker poster for strong-emotion topics only.
 - Image mode: `image_gen full-card`; final Chinese text is baked into the card after copy lock.
+
+## Current Peyson Defaults
+
+- Persona: reflective product-minded founder/operator.
+- Audience: workplace newcomers, AI beginners, side-project builders, and people who want practical clarity.
+- Tone: calm, direct, analytical, friend-like, not teacher-like.
+- AI role: a helper for sorting facts, records, review, and next actions; not a hard-sold tool.
+- Content pillars: work clarity, AI-assisted problem solving, personal operating system, product/founder thinking, emotion and relationship analysis.
+- Visual default: clean, warm, structured, human; avoid cold tech and generic AI dashboards.
+- Profile file: `skills/chengcc-xhs-workflow/references/brand-profile-peyson.md`.
 
 ## 2026 Platform Publish Review
 
@@ -154,11 +176,18 @@ Then invoke it with a creator profile and console:
 用澄Cc默认资料，按中控台确认版，先给我 10 个适合我的选题。
 ```
 
+For Peyson:
+
+```text
+用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。
+```
+
 ## Repo Structure
 
 ```text
 skills/chengcc-xhs-workflow/SKILL.md
 skills/chengcc-xhs-workflow/references/brand-profile-chengcc.md
+skills/chengcc-xhs-workflow/references/brand-profile-peyson.md
 skills/chengcc-xhs-workflow/references/workflow-pipeline.md
 skills/chengcc-xhs-workflow/references/visual-adapter-rules.md
 skills/chengcc-xhs-workflow/references/publish-safety.md
@@ -175,6 +204,7 @@ skills/chengcc-xhs-workflow/templates/manual-publish-checklist.md
 skills/chengcc-xhs-workflow/templates/performance-loop.md
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
+skills/chengcc-xhs-workflow/examples/peyson-start-prompts.md
 skills/xhs-blogger-intelligence/SKILL.md
 skills/xhs-blogger-intelligence/docs/data-flow.md
 skills/xhs-blogger-intelligence/docs/redbook-adapter.md

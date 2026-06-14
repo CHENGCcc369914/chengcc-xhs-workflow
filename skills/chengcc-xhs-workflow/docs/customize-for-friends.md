@@ -2,6 +2,13 @@
 
 This workflow is shareable because it separates the fixed pipeline from creator-specific defaults.
 
+The repo includes two starter creator profiles:
+
+- `references/brand-profile-chengcc.md` for 澄Cc.
+- `references/brand-profile-peyson.md` for Peyson.
+
+For a third creator, copy one of those files and replace the slots below.
+
 ## Replace These Slots
 
 Ask the friend to provide:
@@ -45,6 +52,8 @@ Replace:
 - graduation / workplace newcomer topics
 - Xiaohongshu as the default target platform, if the friend mainly publishes elsewhere
 - platform-specific manual publishing instructions
+
+If the friend is Peyson, start from `references/brand-profile-peyson.md` instead of rebuilding from zero.
 
 Keep:
 
