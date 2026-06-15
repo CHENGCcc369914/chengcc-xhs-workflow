@@ -1,6 +1,29 @@
 # Visual Adapter Rules for 澄Cc
 
 These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
+Use them together with `visual-system-v2.md`. The V2 file defines the
+executable engine; this file defines the 澄Cc-specific look, IP, palette, and
+avoid list.
+
+## Visual System V2 Operating Rule
+
+Before writing Image 2 prompts, convert the post into:
+
+1. Content input: raw content, source type, context, time, related people, sensitivity.
+2. Meaning layer: core event, user problem, hidden emotion, key conflict, insight.
+3. Emotion layer: one primary type from `clarity`, `confusion`, `anxiety`, `reflection`, `calm`, `tension`, plus intensity 1-5.
+4. Layout engine: each page gets `[HEADER]`, `[MAIN]`, `[SIDE]`, `[FOOTER]` zones and a layout type from `HERO`, `GRID`, `SPLIT`, `EDITORIAL`.
+5. Editorial prompt: magazine-like hierarchy, one primary visual subject, high whitespace ratio, controlled density, and no generic social-template look.
+6. Validation: reject flat hierarchy, equal-weight elements, random decoration, unreadable Chinese, fake screenshots, or inner pages that look like another cover.
+
+Default page roles:
+
+- P1 `Editorial Cover`: strong title, main visual, high-contrast whitespace.
+- P2 `Emotion Page`: raw state and visible behavior.
+- P3 `System Page`: AI / reflection / method, modular and readable.
+- P4 `Insight Page`: AI evidence, screenshot frame, small action, or light conclusion.
+
+The goal is a computable magazine editing system, not decorative image prompts.
 
 ## Use This Direction
 
@@ -8,6 +31,7 @@ These rules adapt a generic Xiaohongshu visual director to the 澄Cc brand.
 - Current Style B cover default: trend magazine poster cover, white-space heavy, Chinese oversized typography as the primary visual, editorial annotations and numbering as secondary atmosphere.
 - Rhythm rule: Page 1 is the high-impact cover. Pages 2-4 are explanatory reading pages; reduce headline scale and prioritize content visualization.
 - Current Style B inner-page default: MUJI-like warm-white whitespace + Japanese lifestyle magazine order + healing small scenario illustration. Inner pages should be cleaner, whiter, and more scene-driven than the earlier retro-brown tests.
+- V2 hierarchy rule: every page must first define what the reader sees first, second, and third. If two elements compete for first attention, downscale or remove one.
 - Separate the roles: page 1 is a poster cover with an exaggerated Chinese hook and a small orange-IP scene; pages 2-4 are illustration-led reading pages with smaller titles, quote cards / pop-up text, and life-like mini scenes.
 - Use Style A only for strong-emotion topics: Gen-Z emotional sticker poster, higher impact, street sticker collage.
 - Warm cream / light beige background.

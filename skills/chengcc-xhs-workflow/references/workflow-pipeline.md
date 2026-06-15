@@ -9,6 +9,7 @@ Inputs:
 - creator profile
 - confirmed media console / positioning doc
 - visual rules
+- Visual System V2 rules
 - content pillars
 - hard avoids
 - publishing operator
@@ -19,6 +20,7 @@ For 澄Cc, use:
 - 00后应届生 / 初入职场新手
 - target readers: in-school, soon-to-graduate, fresh workplace peers
 - Style B default, Style A backup
+- Visual System V2 execution engine: content input -> meaning -> emotion -> layout -> editorial visual -> feedback
 - AI as method sharing, not teaching
 - image export folder: creator's local publishing-image folder
 
@@ -47,6 +49,7 @@ Default output:
 
 - final title
 - 4-page carousel plan
+- Visual System V2 design brief
 - page-by-page card copy
 - body copy
 - tags
@@ -56,10 +59,45 @@ Default output:
 
 Default 4 pages:
 
-1. Cover.
-2. Real feeling / brain-theater.
-3. Reframe / hidden method.
-4. AI answer / screenshot-frame.
+1. Cover / Editorial Cover.
+2. Emotion Page / real feeling and visible behavior.
+3. System Page / reframe, separation, AI thinking, or hidden method.
+4. Insight Page / AI answer, screenshot-frame, or one small next action.
+
+V2 design brief required before Image 2 prompts:
+
+```json
+{
+  "content_input": {
+    "raw_content": "",
+    "source_type": "life_record | work_feedback | emotion_fragment | ai_chat | topic_card | user_comment",
+    "context": "",
+    "time": "",
+    "related_people": "",
+    "sensitivity": "low | medium | high"
+  },
+  "meaning_layer": {
+    "core_event": "",
+    "user_problem": "",
+    "hidden_emotion": "",
+    "key_conflict": "",
+    "insight": ""
+  },
+  "emotion_layer": {
+    "emotion_type": "clarity | confusion | anxiety | reflection | calm | tension",
+    "emotion_intensity": 1,
+    "visual_implication": ""
+  },
+  "layout_engine": [
+    {"page": 1, "role": "Editorial Cover", "layout_type": "HERO | EDITORIAL"},
+    {"page": 2, "role": "Emotion Page", "layout_type": "EDITORIAL"},
+    {"page": 3, "role": "System Page", "layout_type": "GRID | SPLIT"},
+    {"page": 4, "role": "Insight Page", "layout_type": "GRID | EDITORIAL"}
+  ]
+}
+```
+
+Every page must define `[HEADER]`, `[MAIN]`, `[SIDE]`, and `[FOOTER]` zones. If a zone is intentionally quiet, mark it as whitespace / weak signal instead of omitting it.
 
 ## Phase D: Content Approval
 
@@ -84,6 +122,8 @@ Default to `image_gen full-card`:
 - use screenshot-frame mode when a real AI chat image should be inserted
 - copy final publish-ready images into the creator's image export folder
 - keep original generated files in their default generation directory
+- use the V2 editorial prompt spine from `references/visual-system-v2.md`
+- validate each card against structure, emotion, editorial feel, and information density before accepting it
 
 Fallback:
 
@@ -92,6 +132,15 @@ Fallback:
 - manual image production handoff
 
 Prompt-only output is a fallback, not the normal path. Use it only when Image 2 is unavailable or repeated generation attempts fail.
+
+Visual rejection rules:
+
+- reject equal-weight page layouts where the reader cannot tell what to see first
+- reject random sticker or scrapbook decoration unless Style A was explicitly chosen for a strong-emotion topic
+- reject fake screenshots or fake app UI
+- reject unreadable or overlapped Chinese core text
+- reject inner pages that look like another cover
+- reject pretty-but-empty layouts with no meaning layer or no visualized emotion
 
 ## Phase F: 2026 Publish Review
 
@@ -159,6 +208,7 @@ Default score dimensions:
 - card readability
 - body/card non-duplication
 - visual distinctiveness
+- Visual System V2 execution: meaning clarity, emotion-layout match, layout zones, editorial feel, and controlled density
 - AI method-share naturalness
 - save/comment potential
 - platform safety
@@ -175,5 +225,6 @@ Retro rules:
 - Compare prediction vs actual metrics.
 - Separate content-quality problems from distribution/timing noise.
 - Capture one next experiment.
+- Write visual feedback as a rule hypothesis: what worked, what failed, and what to test next.
 - Update the rubric only when the signal is strong or repeated across posts.
 - Never recommend fake engagement, fake comments, fake purchases, or misleading growth tactics.

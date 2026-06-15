@@ -7,6 +7,7 @@ Read creator-specific materials first:
 - default profile
 - confirmed media console
 - visual system
+- Visual System V2 engine
 - content pillars
 - target readers
 - examples of approved style
@@ -17,6 +18,7 @@ For 澄Cc, the current confirmed route is:
 - 00后应届生 / 初入职场新手
 - peers who are in school, close to graduation, or just started working
 - Style B default, Style A backup
+- Visual System V2: content input -> meaning -> emotion -> layout -> editorial visual -> feedback
 - AI as a method share
 
 ## 2. Topic Selection
@@ -31,6 +33,10 @@ Do not write a finished carousel until the creator picks one.
 
 For the selected topic:
 
+- capture the input as content input: raw content, source type, context, time, related people, sensitivity
+- extract meaning layer: core event, user problem, hidden emotion, key conflict, insight
+- select emotion type: clarity, confusion, anxiety, reflection, calm, or tension
+- assign layout type per page: HERO, GRID, SPLIT, or EDITORIAL
 - create 4-page carousel copy
 - body copy
 - tags
@@ -46,6 +52,13 @@ Use Image 2 full-card prompts after card text is locked.
 After content approval, the agent should actually call the image generation / Image 2 tool when it is available.
 
 Do not treat prompt output as completed image generation.
+
+Before accepting a generated card, run the Visual System V2 validation gate:
+
+- Structure: HEADER / MAIN / SIDE / FOOTER zones exist.
+- Emotion: visual rhythm matches the selected emotion type and intensity.
+- Editorial: it looks like a designed magazine page, not a generic social template.
+- Density: hierarchy is clear, Chinese core text is readable, and card/body copy are not duplicates.
 
 If Image 2 fails, retry once with a shorter prompt. If it still fails, output the prompt pack and mark the image step as blocked by tool failure.
 
@@ -101,6 +114,7 @@ This phase exists to make the workflow improve over time:
 - predict likely performance before looking at data
 - record actual platform data after publishing
 - compare prediction and reality
+- record visual feedback: views, saves, comments, engagement rate, what worked, what failed, and proposed visual rule update
 - update the creator rubric carefully
 
 Do not fabricate platform metrics. If the post has not been published or no data is available, output only the pre-publish score, prediction, and an empty retro shell.

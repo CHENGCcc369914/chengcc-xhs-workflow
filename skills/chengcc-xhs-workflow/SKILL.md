@@ -7,7 +7,7 @@ description: "Use this as the primary router for a complete Xiaohongshu-first im
 
 This is a shareable orchestration skill:
 
-Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
+Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> Visual System V2 design brief -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
 
 It ships with 澄Cc and Peyson starter defaults, but must remain customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
@@ -39,7 +39,7 @@ Before creating content, identify these slots:
 |---|---|---|
 | Creator profile | `references/brand-profile-chengcc.md` | own profile, or `references/brand-profile-peyson.md` for Peyson |
 | Confirmed console | 澄Cc self-media console / default资料 | own creator console |
-| Visual style | `references/visual-adapter-rules.md` | own visual rules |
+| Visual style | `references/visual-adapter-rules.md` + `references/visual-system-v2.md` | own visual rules and validation gates |
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
 | Image export folder | creator's local publishing-image folder | own local publishing-image folder |
@@ -65,11 +65,12 @@ For 澄Cc:
 1. `references/brand-profile-chengcc.md`
 2. `references/workflow-pipeline.md`
 3. `references/visual-adapter-rules.md`
-4. `references/publish-safety.md`
-5. `docs/workflow-phases.md`
-6. `docs/publish-review-2026.md`
-7. `docs/platform-publish-rules-2026.md`
-8. `docs/performance-loop.md`
+4. `references/visual-system-v2.md`
+5. `references/publish-safety.md`
+6. `docs/workflow-phases.md`
+7. `docs/publish-review-2026.md`
+8. `docs/platform-publish-rules-2026.md`
+9. `docs/performance-loop.md`
 
 If the active environment also has `cc-xhs-personal-growth-writer`, use it for 澄Cc content voice and local console lookup.
 
@@ -78,20 +79,22 @@ For Peyson:
 1. `references/brand-profile-peyson.md`
 2. `references/workflow-pipeline.md`
 3. `references/publish-safety.md`
-4. `docs/publish-review-2026.md`
-5. `docs/platform-publish-rules-2026.md`
-6. `docs/performance-loop.md`
-7. `examples/peyson-start-prompts.md` when the user needs copyable launch prompts
+4. `references/visual-system-v2.md`
+5. `docs/publish-review-2026.md`
+6. `docs/platform-publish-rules-2026.md`
+7. `docs/performance-loop.md`
+8. `examples/peyson-start-prompts.md` when the user needs copyable launch prompts
 
 For another creator:
 
 1. `docs/customize-for-friends.md`
 2. the creator's own profile / console / visual reference
 3. `references/workflow-pipeline.md`
-4. `references/publish-safety.md`
-5. `docs/publish-review-2026.md`
-6. `docs/platform-publish-rules-2026.md`
-7. `docs/performance-loop.md`
+4. `references/visual-system-v2.md` as the reusable V2 engine, replacing only the style specifics with the creator's own visual system
+5. `references/publish-safety.md`
+6. `docs/publish-review-2026.md`
+7. `docs/platform-publish-rules-2026.md`
+8. `docs/performance-loop.md`
 
 ## 2. Workflow Phases
 
@@ -128,6 +131,7 @@ After topic selection, produce:
 
 - final title
 - 4-page carousel structure by default
+- Visual System V2 design brief: content input, meaning layer, emotion layer, page layout types, and validation notes
 - per-page card text
 - body copy
 - tags
@@ -159,6 +163,7 @@ Default for 澄Cc:
 - Style A only for strong-emotion topics
 - original orange IP only, small and secondary
 - no other characters / borrowed IP / fake screenshots
+- every page must pass the Visual System V2 validation gate before being accepted: HEADER / MAIN / SIDE / FOOTER zones, one primary visual subject, clear hierarchy, emotion-layout match, editorial feel, and controlled density
 
 Execution rule:
 
@@ -171,6 +176,15 @@ Execution rule:
 - After images are generated, copy the final publish-ready images to the creator's image export folder and use those copied paths in the manual publish checklist. Keep the original generated files in place.
 
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
+
+Before generation, transform the carousel into the V2 prompt chain:
+
+1. Content input: source type, context, time, related people, sensitivity.
+2. Meaning layer: core event, user problem, hidden emotion, key conflict, insight.
+3. Emotion layer: `clarity`, `confusion`, `anxiety`, `reflection`, `calm`, or `tension`, with intensity 1-5.
+4. Layout engine: P1 cover, P2 emotion page, P3 system page, P4 insight page, each assigned `HERO`, `GRID`, `SPLIT`, or `EDITORIAL`.
+5. Editorial prompt: use the creator visual rules plus the V2 editorial spine from `references/visual-system-v2.md`.
+6. Validation gate: reject flat hierarchy, random decoration, scrapbook chaos, unreadable Chinese text, fake screenshots, or equal visual weight.
 
 ### Phase F: Publish Review
 
@@ -251,6 +265,7 @@ Visual:
 
 - Style B default: young lifestyle-aesthetic magazine, abstract, trendy, healing, premium, dopamine but controlled.
 - Style A backup: Gen-Z emotional sticker poster, only for strong-emotion hooks.
+- Visual System V2: content input -> meaning -> emotion -> layout -> editorial visual -> feedback.
 
 ## 3.1 Peyson Defaults
 
@@ -293,6 +308,13 @@ After the user picks:
 - 标题：
 - 页数：
 - 视觉路线：
+
+## Visual System V2 设计简报
+- Content Input：
+- Meaning Layer：
+- Emotion Layer：
+- Layout Engine：
+- Visual Validation：
 
 ## 4 页卡片
 1.

@@ -25,11 +25,12 @@ The complete route is:
 2. Generate 10 suitable topic options.
 3. Wait for the creator to pick one topic.
 4. Build the carousel plan, card copy, body copy, tags, and Image 2 full-card prompts.
-5. Wait for content approval before image generation.
-6. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
-7. Select the target platform and run the 2026 platform publish safety review.
-8. If clean, output a manual publish checklist for the creator to upload images, paste title/body/tags, check labels, and decide whether to publish.
-9. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
+5. Add the Visual System V2 design brief: content input -> meaning -> emotion -> layout -> editorial visual -> validation.
+6. Wait for content approval before image generation.
+7. Actually call Image 2 / image generation to create complete cards. Output prompts only if image generation is unavailable or repeatedly fails.
+8. Select the target platform and run the 2026 platform publish safety review.
+9. If clean, output a manual publish checklist for the creator to upload images, paste title/body/tags, check labels, and decide whether to publish.
+10. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
 
 ## Default Trigger
 
@@ -57,7 +58,7 @@ The workflow is reusable because these parts are replaceable:
 |---|---|---|
 | Creator profile | `references/brand-profile-chengcc.md` | `references/brand-profile-peyson.md` or own creator profile |
 | Confirmed console | creator's local/cloud media console | own media console / positioning doc |
-| Visual system | `references/visual-adapter-rules.md` | own visual style and Image 2 rules |
+| Visual system | `references/visual-adapter-rules.md` + `references/visual-system-v2.md` | own visual style, Image 2 rules, and validation gates |
 | Topic sources | emotion / graduation / workplace newcomer | own content pillars |
 | Image export folder | creator's local publishing-image folder | own local publishing-image folder |
 | Publishing flow | manual Xiaohongshu upload/paste/publish checklist | own manual platform workflow |
@@ -73,6 +74,7 @@ The workflow is reusable because these parts are replaceable:
 - AI role: share a method that worked in a real scene; no hard-selling prompts, no AI tool teaching posture.
 - Visual default: Style B, young lifestyle-aesthetic magazine cover.
 - Visual backup: Style A, Gen-Z emotional sticker poster for strong-emotion topics only.
+- Visual engine: V2 editorial system, turning content input into meaning, emotion, layout, prompt, validation, and feedback.
 - Image mode: `image_gen full-card`; final Chinese text is baked into the card after copy lock.
 
 ## Current Peyson Defaults
@@ -190,6 +192,7 @@ skills/chengcc-xhs-workflow/references/brand-profile-chengcc.md
 skills/chengcc-xhs-workflow/references/brand-profile-peyson.md
 skills/chengcc-xhs-workflow/references/workflow-pipeline.md
 skills/chengcc-xhs-workflow/references/visual-adapter-rules.md
+skills/chengcc-xhs-workflow/references/visual-system-v2.md
 skills/chengcc-xhs-workflow/references/publish-safety.md
 skills/chengcc-xhs-workflow/docs/customize-for-friends.md
 skills/chengcc-xhs-workflow/docs/workflow-phases.md
@@ -202,6 +205,7 @@ skills/chengcc-xhs-workflow/templates/carousel-plan.md
 skills/chengcc-xhs-workflow/templates/platform-review.md
 skills/chengcc-xhs-workflow/templates/manual-publish-checklist.md
 skills/chengcc-xhs-workflow/templates/performance-loop.md
+skills/chengcc-xhs-workflow/scripts/verify-visual-v2.mjs
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
 skills/chengcc-xhs-workflow/examples/peyson-start-prompts.md

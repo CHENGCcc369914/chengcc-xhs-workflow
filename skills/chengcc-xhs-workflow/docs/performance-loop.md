@@ -41,6 +41,7 @@ Default dimensions:
 | Carousel clarity | 15 | 4 pages have clear hierarchy and no repeated filler |
 | Body value | 10 | Body adds lived feeling or context instead of repeating cards |
 | Visual distinctiveness | 15 | Looks like the creator's system, not generic template output |
+| Visual System V2 execution | Included in visual distinctiveness | Meaning is clear, emotion maps to layout, layout zones exist, editorial feel is present, density is controlled |
 | AI role | 10 | AI appears naturally as a helper, not a sales pitch or tutorial |
 | Save/comment potential | 10 | Gives readers something to collect, reflect on, or comment about |
 | Platform safety | 10 | Passes platform review, privacy, AI label, originality, claims |
@@ -79,6 +80,7 @@ Compare:
 - follower conversion vs topic fit
 - visual performance vs content performance
 - timing/distribution noise vs content-quality signal
+- Visual System V2 hypothesis vs actual signal: which page role, layout type, visual subject, or hierarchy choice likely helped or hurt
 
 Then answer:
 
@@ -96,6 +98,7 @@ Allowed updates:
 - title pattern to try again
 - topic angle to continue / pause
 - visual move to reuse / avoid
+- Visual System V2 rule to test next: page role, emotion-layout mapping, layout type, visual subject, typography hierarchy, whitespace ratio, or density control
 - body length or CTA adjustment
 - AI appearance level
 - publish timing hypothesis

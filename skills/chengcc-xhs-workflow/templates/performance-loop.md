@@ -11,6 +11,7 @@ Use this template after the final package is ready. Fill the prediction before c
 - Publish time:
 - Content pillar:
 - Visual route:
+- Visual System V2: emotion type / layout types / primary visual subject:
 - Related workflow package:
 
 ## Pre-Publish Score
@@ -21,7 +22,7 @@ Use this template after the final package is ready. Fill the prediction before c
 | Hook strength /15 |  |  |
 | Carousel clarity /15 |  |  |
 | Body value /10 |  |  |
-| Visual distinctiveness /15 |  |  |
+| Visual distinctiveness /15 |  | Includes V2 execution: meaning clarity, emotion-layout match, layout zones, editorial feel, controlled density |
 | AI role /10 |  |  |
 | Save/comment potential /10 |  |  |
 | Platform safety /10 |  |  |
@@ -71,6 +72,11 @@ Use real platform data only. Leave blank if not available.
 - What underperformed:
 - Audience signal:
 - Visual signal:
+- Visual System V2 signal:
+  - Best page:
+  - Weakest page:
+  - Helpful layout type:
+  - Weak hierarchy / density issue:
 - Copy signal:
 - AI-method signal:
 - One thing to repeat:
@@ -83,5 +89,10 @@ Use real platform data only. Leave blank if not available.
 - Keep:
 - Improve:
 - Avoid:
+- Visual rule update:
+  - Performance: views / saves / comments / engagement rate:
+  - What worked:
+  - What failed:
+  - Rule update:
 - Next experiment:
 - Evidence strength: strong / medium / weak
