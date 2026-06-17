@@ -24,7 +24,9 @@ When several Xiaohongshu skills could apply, route by the user's job:
 | Complete package: 10 topics, 4-page carousel, Image 2, publish review, manual publish checklist, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
 | Explicit platform automation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | Use only when the user explicitly asks for platform automation. The default publish flow is manual upload/paste by the creator. |
 
-This skill is the orchestration truth source for 澄Cc complete Xiaohongshu production. Other XHS skills provide bounded services; they should not independently complete or override this workflow.
+This skill is the orchestration truth source for 澄Cc complete single-post Xiaohongshu production. Other XHS skills provide bounded services; they should not independently complete or override this workflow.
+
+For L4.5 / supervised L5 across-post loops, use `chengcc-content-loop-runtime` as the parent runtime. In that mode, this skill writes the single-post package into the current run folder and does not own long-term memory updates.
 
 Priority rules:
 
@@ -52,6 +54,7 @@ Before creating content, identify these slots:
 | Image export folder | creator's local publishing-image folder | own local publishing-image folder |
 | Publishing handoff | manual Xiaohongshu publish checklist by default | own target platform and manual flow |
 | Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
+| Loop runtime | `chengcc-content-loop-runtime` run folder when L4.5 is requested | own runtime root and gates |
 
 If a friend has no console yet, ask for or infer a minimal profile:
 
@@ -93,6 +96,18 @@ For 澄Cc requests involving topic research, low-follower/high-performing cases,
 `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
 
 Use the RAG result as a compact benchmark brief. Do not copy source paragraphs; extract reusable patterns such as opening setup, brain-voice lines, AI turning question, method names, collection CTA, and anti-patterns.
+
+If the active request comes from `chengcc-content-loop-runtime`, also read the current run's `01-bootstrap-context.md` and write outputs back into that run folder:
+
+- RAG brief: `02-rag-brief.md`
+- topic options: `03-topic-options.md`
+- selected hypothesis: `04-selected-hypothesis.md`
+- carousel package: `05-carousel-draft.md`
+- image manifest: `06-image-manifest.json`
+- publish checklist: `07-publish-checklist.md`
+- prediction: `08-prediction.md`
+
+Do not update long-term loop memory or durable rules from this skill. The parent runtime handles Gate 2.
 
 For Peyson:
 
@@ -286,6 +301,19 @@ Rules:
 - Keep the loop creator-specific and replaceable. A friend can use their own targets, metrics, and scoring weights.
 - Do not use the performance loop to justify fake engagement, bait, fake comments, fake purchases, or misleading growth tactics.
 
+### Phase I: Runtime Handoff
+
+Use this phase only when the request is running under `chengcc-content-loop-runtime`.
+
+Rules:
+
+- Treat the current run folder as the file boundary for this post.
+- Do not create a second unrelated run folder from inside this skill.
+- Keep final publish under the parent runtime's Gate 1.
+- Keep long-term rule or memory updates under the parent runtime's Gate 2.
+- If a post-publish retro discovers a durable lesson, write it as a proposal in `12-memory-update-proposal.md`, not directly into `state/next-run-context.md`.
+- If the current image set fails because it uses a stale visual, old run folder, wrong IP style, or mismatched copy hash, mark the image manifest as not publish-ready and return control to the parent runtime.
+
 ## 3. 澄Cc Defaults
 
 Persona:
@@ -416,6 +444,14 @@ After the user picks:
 - Actual metrics:
 - Retro:
 - Rubric update:
+
+## Runtime Handoff
+- Parent runtime: none / chengcc-content-loop-runtime
+- Run folder:
+- Files updated:
+- Gate 1 publish status:
+- Gate 2 memory status:
+- Next runtime action:
 ```
 
 ## 5. Quality Gate
@@ -440,3 +476,4 @@ Before finishing, verify:
 - Was a pre-publish score and prediction recorded when the user wants a performance loop?
 - Did the post-publish retro use real metrics rather than invented data?
 - Did the rubric update avoid overfitting to one weak signal?
+- If running under `chengcc-content-loop-runtime`, were outputs written into the current run folder and were long-term updates left to Gate 2?

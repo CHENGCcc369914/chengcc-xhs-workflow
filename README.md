@@ -8,10 +8,11 @@ If you are Peyson, start here:
 - Install `skills/chengcc-xhs-workflow` and `skills/xhs-blogger-intelligence`.
 - Start your robot with: `用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。`
 
-It currently contains two skills:
+It currently contains three skills:
 
 - `chengcc-xhs-workflow`: turns creator positioning into publish-ready carousel packages, with Image 2, platform review, manual publish checklist, and performance loop.
 - `xhs-blogger-intelligence`: maintains benchmark blogger watchlists, collects public post signals through an adapter such as redbook, distills note-cards and blogger-profiles, and provides RAG briefs for the writer workflow.
+- `chengcc-content-loop-runtime`: runs the L4.5 / supervised L5 loop across posts: creates run records, reads recent lessons, orchestrates RAG and the single-post workflow, enforces publish and memory-update gates, and prepares the next run.
 
 The main publishing workflow supports Xiaohongshu-first image-text drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
@@ -31,6 +32,8 @@ The complete route is:
 8. Select the target platform and run the 2026 platform publish safety review.
 9. If clean, output a manual publish checklist for the creator to upload images, paste title/body/tags, check labels, and decide whether to publish.
 10. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
+
+For L4.5 / supervised L5, use `chengcc-content-loop-runtime` above this workflow. It creates a durable run folder, reads previous run lessons, calls the RAG and workflow skills, stops before final publish, and stops again before long-term memory updates.
 
 ## Default Trigger
 
@@ -111,6 +114,49 @@ Use it in two moments:
 
 The loop does not invent metrics and does not require a specific analytics tool. Use creator-provided screenshots, platform analytics, or another approved data source.
 
+## L4.5 / Supervised L5 Runtime
+
+Use this when you want the system to keep memory across posts instead of only producing one post.
+
+Default runtime root:
+
+```text
+/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/Output/80-通用资产/小红书个人运营/content-loop-runtime
+```
+
+Initialize and create a run:
+
+```bash
+node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs init
+node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs new-run \
+  --intent "我想做一篇刚上班精神内耗的小红书" \
+  --creator chengcc
+```
+
+The runtime creates:
+
+```text
+runs/YYYY-MM-DD-topic/
+  00-intent.md
+  01-bootstrap-context.md
+  02-rag-brief.md
+  03-topic-options.md
+  04-selected-hypothesis.md
+  05-carousel-draft.md
+  06-image-manifest.json
+  07-publish-checklist.md
+  08-prediction.md
+  09-metrics-24h.md
+  10-metrics-72h.md
+  11-retro.md
+  12-memory-update-proposal.md
+```
+
+Human gates:
+
+- Gate 1: final publish/upload action requires explicit Cc approval.
+- Gate 2: updating long-term memory/rules requires explicit Cc approval.
+
 ## Recommended Skill Stack
 
 This repo is the orchestration and intelligence layer. It can work alone, but works best with:
@@ -123,12 +169,15 @@ This repo is the orchestration and intelligence layer. It can work alone, but wo
 The intended route is:
 
 ```text
+chengcc-content-loop-runtime
+-> next-run bootstrap
 xhs-blogger-intelligence
 -> RAG brief
 -> cc-xhs-personal-growth-writer
 -> chengcc-xhs-workflow
 -> manual publish checklist
--> Phase H performance loop
+-> metrics / retro / memory proposal
+-> next-run context
 ```
 
 For the current Xiaohongshu collection adapter, use the search/read fallback script when `user-posts` is unstable:
@@ -166,6 +215,7 @@ Manual install:
 mkdir -p ~/.agents/skills
 cp -R skills/chengcc-xhs-workflow ~/.agents/skills/
 cp -R skills/xhs-blogger-intelligence ~/.agents/skills/
+cp -R skills/chengcc-content-loop-runtime ~/.agents/skills/
 ```
 
 Each folder under `skills/` is self-contained. Do not copy only `SKILL.md`;
@@ -208,6 +258,11 @@ skills/chengcc-xhs-workflow/templates/performance-loop.md
 skills/chengcc-xhs-workflow/scripts/verify-visual-v2.mjs
 skills/chengcc-xhs-workflow/examples/sample-input.md
 skills/chengcc-xhs-workflow/examples/sample-output.md
+skills/chengcc-content-loop-runtime/SKILL.md
+skills/chengcc-content-loop-runtime/references/runtime-contract.md
+skills/chengcc-content-loop-runtime/references/gates-and-failure-modes.md
+skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs
+skills/chengcc-content-loop-runtime/test-prompts.json
 skills/chengcc-xhs-workflow/examples/peyson-start-prompts.md
 skills/xhs-blogger-intelligence/SKILL.md
 skills/xhs-blogger-intelligence/docs/data-flow.md

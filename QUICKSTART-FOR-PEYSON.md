@@ -25,11 +25,12 @@ cd chengcc-xhs-workflow
 mkdir -p ~/.agents/skills
 cp -R skills/chengcc-xhs-workflow ~/.agents/skills/
 cp -R skills/xhs-blogger-intelligence ~/.agents/skills/
+cp -R skills/chengcc-content-loop-runtime ~/.agents/skills/
 ```
 
 安装后最好重启一次你的机器人 / Codex / Claude Code 会话，让它重新读取 Skill 列表。
 
-## 3. 你需要安装哪两个 Skill
+## 3. 你需要安装哪些 Skill
 
 必装：
 
@@ -56,6 +57,14 @@ xhs-blogger-intelligence
 ```
 
 如果你只是先做一篇内容，可以先不用情报 Skill，直接用主工作流。
+
+如果你想要 L4.5 / supervised L5 的“跨篇闭环”，也安装：
+
+```text
+chengcc-content-loop-runtime
+```
+
+它负责保存每篇 run record、读取最近经验、调度 RAG 和单篇工作流、发布前停在 Gate 1、复盘后停在 Gate 2，再把确认后的经验放进下一篇启动上下文。
 
 ## 4. 直接复制给机器人的启动话术
 
@@ -88,6 +97,31 @@ xhs-blogger-intelligence
 流程必须是：先给 10 个选题，等我选；选完后写 4 页图文和正文，等我确认；确认后默认调用 Image 2 出图；最后做发布审核和手动发布清单。
 ```
 
+### L4.5 / supervised L5 跨篇闭环
+
+先初始化 runtime：
+
+```bash
+node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs init
+```
+
+然后创建一篇内容 run：
+
+```bash
+node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs new-run \
+  --intent "我想做一篇刚工作的人际关系内耗的小红书" \
+  --creator chengcc
+```
+
+也可以直接对机器人说：
+
+```text
+按 L4.5 / supervised L5 content loop 跑。
+我想做一篇「刚工作的人际关系内耗」的小红书。
+先创建 run record，读取最近经验，再 RAG、出 10 个选题、做图文和图片检测。
+发布前停在 Gate 1，长期经验更新前停在 Gate 2。
+```
+
 ## 5. 重要边界
 
 这套 Skill 会帮你准备发布包，但默认不会替你偷偷发布。
@@ -99,6 +133,13 @@ xhs-blogger-intelligence
 ```
 
 你自己上传图片、粘贴文案、检查 AI 标识和隐私信息，然后决定是否点击发布。
+
+L4.5 runtime 仍然保留两个强制人工 gate：
+
+```text
+Gate 1：最终发布/上传/点击发布前，需要你确认。
+Gate 2：把复盘经验写进长期规则前，需要你确认。
+```
 
 如果你的机器人环境没有 Image 2 / image generation 工具，它不能真正生成图片，只会输出完整图片 prompt。这个不是仓库的问题，是运行环境是否有出图工具的问题。
 
@@ -128,6 +169,8 @@ skills/chengcc-xhs-workflow/references/brand-profile-peyson.md
 ~/.agents/skills/chengcc-xhs-workflow/docs/
 ~/.agents/skills/chengcc-xhs-workflow/templates/
 ~/.agents/skills/chengcc-xhs-workflow/examples/
+~/.agents/skills/chengcc-content-loop-runtime/SKILL.md
+~/.agents/skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs
 ```
 
 然后重启机器人会话，再发送：

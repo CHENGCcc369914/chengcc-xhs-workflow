@@ -33,5 +33,10 @@
     "name": "performance-loop-no-fake-metrics",
     "prompt": "这篇还没发，先帮我做发布前评分和发布后复盘。",
     "expected_behavior": "Creates pre-publish score and prediction, leaves actual metrics and retro empty until real platform data exists, and does not invent views, likes, saves, comments, or follow data."
+  },
+  {
+    "name": "parent-loop-runtime-handoff",
+    "prompt": "这个请求来自 chengcc-content-loop-runtime，run 文件夹是 /tmp/content-loop/runs/2026-06-17-work-anxiety。请把单篇图文、图片 manifest、发布清单和 prediction 写回当前 run，不要直接更新长期记忆。",
+    "expected_behavior": "Uses chengcc-xhs-workflow for single-post production, writes outputs into the current run folder files, keeps publish under Gate 1, writes any durable lesson only as a Gate 2 memory proposal, and does not update next-run-context or durable rules directly."
   }
 ]
