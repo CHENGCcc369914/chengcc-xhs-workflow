@@ -1,5 +1,10 @@
 [
   {
+    "name": "default-chengcc-post-defers-to-runtime",
+    "prompt": "帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。",
+    "expected_behavior": "Routes upward to chengcc-content-loop-runtime as the default owner, creates or continues a run, then uses chengcc-xhs-workflow only as the single-post production child. It should not route directly to cc-xhs-personal-growth-writer unless the user explicitly asks for only copy/no run/no workflow."
+  },
+  {
     "name": "complete-workflow-topic-first",
     "prompt": "用澄Cc默认资料跑完整小红书工作流，主题是“刚下班脑子还在上班”。先给我 10 个选题。",
     "expected_behavior": "Uses chengcc-xhs-workflow as the primary skill, reads ChengCc defaults and Visual System V2 sources, returns 10 topic options first, and does not jump directly to final copy or images."

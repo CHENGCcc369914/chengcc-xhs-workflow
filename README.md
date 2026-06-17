@@ -5,8 +5,9 @@ A shareable Xiaohongshu-first content system.
 If you are Peyson, start here:
 
 - Read `QUICKSTART-FOR-PEYSON.md`.
-- Install `skills/chengcc-xhs-workflow` and `skills/xhs-blogger-intelligence`.
-- Start your robot with: `用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。`
+- Install `skills/chengcc-content-loop-runtime`, `skills/chengcc-xhs-workflow`, and `skills/xhs-blogger-intelligence`.
+- For ChengCc, start your robot with: `帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。`
+- For Peyson or another creator, replace the creator name/profile and ask for the same runtime-style flow.
 
 It currently contains three skills:
 
@@ -20,7 +21,9 @@ The repo ships with `澄Cc` and `Peyson` starter profiles, but the workflow is d
 
 ## What This Workflow Does
 
-The complete route is:
+The default ChengCc route is now L4.5 / supervised L5. A normal "做一篇澄Cc小红书" request should create a runtime run first, then use the workflow as the single-post production child.
+
+The single-post production route is:
 
 1. Read creator defaults and the confirmed creator console.
 2. Generate 10 suitable topic options.
@@ -33,12 +36,20 @@ The complete route is:
 9. If clean, output a manual publish checklist for the creator to upload images, paste title/body/tags, check labels, and decide whether to publish.
 10. After the package is ready or the post is published, run the performance loop: score, predict, retro, and update the rubric with real data.
 
-For L4.5 / supervised L5, use `chengcc-content-loop-runtime` above this workflow. It creates a durable run folder, reads previous run lessons, calls the RAG and workflow skills, stops before final publish, and stops again before long-term memory updates.
+For ChengCc, use `chengcc-content-loop-runtime` above this workflow by default. It creates a durable run folder, reads previous run lessons, calls the RAG and workflow skills, stops before final publish, and stops again before long-term memory updates. Skip the runtime only when the user explicitly says "只写文案 / 不建 run / 不跑流程 / 轻量草稿".
 
 ## Default Trigger
 
 ```text
-用澄Cc默认资料，按中控台确认版，做 4 页图文 + Image 2 完整卡片 prompt + 发布文案。
+帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。
+```
+
+This should trigger `chengcc-content-loop-runtime` first.
+
+Lightweight writing escape hatch:
+
+```text
+只写文案，不建 run，不跑完整流程：帮我写一篇关于刚下班脑子还在上班的小红书。
 ```
 
 For friends, replace the first clause:

@@ -1,6 +1,6 @@
 ---
 name: chengcc-content-loop-runtime
-description: "L4.5 / supervised L5 Xiaohongshu Content Loop Runtime for ChengCc. Use when Cc asks for Content Loop OS, L4.5, supervised L5, 全链路小红书循环, 从选题方向自动到 RAG/选题/图文/图片/检测/发布包/真实数据复盘/经验吸收/下一篇准备, or wants the Xiaohongshu workflow to run with memory across posts. This skill creates run records, bootstraps from recent runs, orchestrates xhs-blogger-intelligence and chengcc-xhs-workflow, enforces human Gate 1 before publish and Gate 2 before long-term rule updates, and keeps xiaohongshu-ops limited to explicitly authorized platform actions."
+description: "Default L4.5 / supervised L5 Xiaohongshu Content Loop Runtime for ChengCc. Use this by default whenever Cc asks to 做一篇澄Cc小红书, 给澄Cc做一篇, 用澄Cc默认资料写一篇/做一篇, 做一个澄Cc选题, 跑小红书流程, Content Loop OS, L4.5, supervised L5, 全链路小红书循环, or 从选题方向自动到 RAG/选题/图文/图片/检测/发布包/真实数据复盘/经验吸收/下一篇准备. Only skip this runtime when the user explicitly says 只写文案, 不建 run, 不跑流程, 轻量草稿, or no images/checklist/retro. This skill creates run records, bootstraps from recent runs, orchestrates xhs-blogger-intelligence and chengcc-xhs-workflow, enforces human Gate 1 before publish and Gate 2 before long-term rule updates, and keeps xiaohongshu-ops limited to explicitly authorized platform actions."
 ---
 
 # ChengCc Content Loop Runtime
@@ -15,11 +15,24 @@ intent -> next-run bootstrap -> RAG -> topic hypothesis -> single-post workflow 
 
 ## Boundary
 
-Use this skill when the user wants a loop across posts, not just one finished post.
+Use this skill as the default entry for ChengCc Xiaohongshu production, even when the user asks for only one new post. Each serious ChengCc post should become a run record so images, copy, checks, metrics, and lessons cannot drift across posts.
 
-Do not use this skill for a single writing-only task. Route writing-only tasks to `cc-xhs-personal-growth-writer`.
+Route to `cc-xhs-personal-growth-writer` only when the user explicitly asks for a lightweight writing-only draft, such as "只写文案", "不要建 run", "不要跑流程", "不要图片", or "先随便给我一个草稿".
 Do not use this skill for standalone platform operation. Route explicit browse/upload/comment/read actions to `xiaohongshu-ops`.
 Do not merge the sibling skills into this skill. This runtime coordinates them and stores state.
+
+## Default Trigger Policy
+
+If Cc says any of the following without an explicit lightweight exception, start this runtime:
+
+- "做一篇澄Cc小红书"
+- "帮我写一篇澄Cc小红书"
+- "用澄Cc默认资料做一篇"
+- "做一个澄Cc选题"
+- "我想写/做一篇关于 X 的小红书"
+- "继续我的小红书工作流"
+
+The user's mental model is that ChengCc post production is a supervised loop by default. Do not downgrade to a one-off writing draft just because the prompt uses "写一篇".
 
 ## Default Runtime Root
 
@@ -49,7 +62,7 @@ Then route to sibling skills as needed:
 
 ## First Move
 
-For a new L4.5 loop request:
+For a new L4.5 loop request or a default ChengCc post-production request:
 
 1. Initialize the runtime if needed.
 2. Create a new run with the user's intent.

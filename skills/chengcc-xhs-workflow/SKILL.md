@@ -1,6 +1,6 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> local case-library RAG when relevant -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> manual publish checklist -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, 手动发布清单, 发布后复盘, score/predict/retro/rubric, 低粉高爆案例参考, or shareable skill for friends. For 澄Cc, automatically apply the ChengCc IP Visual System V2.0 for avatar, mini-illustration, sticker, outfit, and Image 2 card prompts; the user should not need to mention it. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops only when the user explicitly asks for real platform browsing/upload/comment actions."
+description: "Single-post Xiaohongshu image-text production router used under ChengCc's L4.5 runtime, or directly for non-ChengCc/shareable creator workflows. For ChengCc, if the user says 做一篇澄Cc小红书, 用澄Cc默认资料做一篇/写一篇, 做一个澄Cc选题, or otherwise asks for normal ChengCc post production, route upward to chengcc-content-loop-runtime first unless the user explicitly says 只写文案, 不建 run, 不跑流程, or 轻量草稿. Use this skill for the single-post package itself: creator defaults / media console -> local case-library RAG when relevant -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> manual publish checklist -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, 手动发布清单, 发布后复盘, score/predict/retro/rubric, 低粉高爆案例参考, or shareable skill for friends. For 澄Cc, automatically apply the ChengCc IP Visual System V2.0 for avatar, mini-illustration, sticker, outfit, and Image 2 card prompts; the user should not need to mention it. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops only when the user explicitly asks for real platform browsing/upload/comment actions."
 ---
 
 # ChengCc Xiaohongshu Workflow Skill
@@ -19,23 +19,25 @@ When several Xiaohongshu skills could apply, route by the user's job:
 
 | User job | Primary skill | Handoff |
 |---|---|---|
+| Default ChengCc post production: "做一篇澄Cc小红书", "用澄Cc默认资料做一篇/写一篇", "做一个澄Cc选题" | `chengcc-content-loop-runtime` | This workflow becomes the single-post production child inside the run folder. |
 | Benchmark monitoring, watchlist refresh, blogger note-cards, local low-follower/high-performing case RAG brief | `xhs-blogger-intelligence` | Pass only the compact RAG brief into this workflow or the writer. |
-| Writing-only task: title, body, cover copy, one selected topic, rewrite, comments | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, manual publish checklist, or performance loop. |
+| Explicit lightweight writing-only task: title, body, cover copy, one selected topic, rewrite, comments, with "只写文案 / 不建 run / 不跑流程 / 轻量草稿" | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, manual publish checklist, or performance loop. |
 | Complete package: 10 topics, 4-page carousel, Image 2, publish review, manual publish checklist, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
 | Explicit platform automation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | Use only when the user explicitly asks for platform automation. The default publish flow is manual upload/paste by the creator. |
 
 This skill is the orchestration truth source for 澄Cc complete single-post Xiaohongshu production. Other XHS skills provide bounded services; they should not independently complete or override this workflow.
 
-For L4.5 / supervised L5 across-post loops, use `chengcc-content-loop-runtime` as the parent runtime. In that mode, this skill writes the single-post package into the current run folder and does not own long-term memory updates.
+For ChengCc, `chengcc-content-loop-runtime` is the default parent runtime for normal post production, not only when the user says "L4.5". In that mode, this skill writes the single-post package into the current run folder and does not own long-term memory updates.
 
 Priority rules:
 
 1. If the user explicitly asks for real browsing, searching, uploading, creator-center filling, commenting, or publishing automation, use `xiaohongshu-ops` for those platform actions. Otherwise, keep publishing manual.
-2. If the request asks how benchmark bloggers recently posted, how low-follower/high-performing notes are written, or asks for similar-case RAG, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
-3. For 澄Cc local work, the default manual case corpus is `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`. Retrieve only topic-relevant files/sections from this folder; do not bulk-read the whole corpus unless the user asks for a full audit.
-4. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
-5. If the request only asks for copy, title options, cover wording, or a single writing draft, `cc-xhs-personal-growth-writer` is the main skill.
-6. Do not route to `xiaohongshu-ops` for offline content strategy, copywriting, Image 2, run-manifest validation, or performance interpretation. It is a platform UI executor only.
+2. If the request is normal ChengCc post production, start or continue a `chengcc-content-loop-runtime` run first unless the user explicitly asks for lightweight writing-only output.
+3. If the request asks how benchmark bloggers recently posted, how low-follower/high-performing notes are written, or asks for similar-case RAG, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
+4. For 澄Cc local work, the default manual case corpus is `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`. Retrieve only topic-relevant files/sections from this folder; do not bulk-read the whole corpus unless the user asks for a full audit.
+5. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main single-post workflow even when the parent runtime owns the run.
+6. If the request explicitly asks only for copy, title options, cover wording, or a single lightweight writing draft with no run/workflow/images, `cc-xhs-personal-growth-writer` is the main skill.
+7. Do not route to `xiaohongshu-ops` for offline content strategy, copywriting, Image 2, run-manifest validation, or performance interpretation. It is a platform UI executor only.
 
 ## 0. Replaceable Creator Slots
 
@@ -54,7 +56,7 @@ Before creating content, identify these slots:
 | Image export folder | creator's local publishing-image folder | own local publishing-image folder |
 | Publishing handoff | manual Xiaohongshu publish checklist by default | own target platform and manual flow |
 | Performance loop | score / predict / retro / rubric with Xiaohongshu metrics | own metrics, scoring weights, and rubric |
-| Loop runtime | `chengcc-content-loop-runtime` run folder when L4.5 is requested | own runtime root and gates |
+| Loop runtime | `chengcc-content-loop-runtime` run folder by default for normal ChengCc post production | own runtime root and gates |
 
 If a friend has no console yet, ask for or infer a minimal profile:
 
