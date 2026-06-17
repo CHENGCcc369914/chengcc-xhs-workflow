@@ -7,8 +7,11 @@
 - Asset mode: Image 2 full-card after copy lock
 - Export folder:
 - Visual route: Style B default / Style A strong-emotion backup / custom
+- IP / character mode: ChengCc standard avatar / none / custom creator IP
 - Text handling: final Chinese text baked into generated cards after approval
 - Target platform: xiaohongshu / douyin / wechat_channels / wechat_official_account
+- Run ID:
+- Run manifest: `run-manifest.json`
 
 ## Visual System V2 Design Brief
 
@@ -42,6 +45,7 @@
 - Main copy:
 - Sub copy:
 - Visual anchor:
+- ChengCc avatar action / expression / prop, if used:
 - Layout type: HERO / EDITORIAL
 - Zones: HEADER / MAIN / SIDE / FOOTER
 - Image 2 prompt:
@@ -65,6 +69,7 @@
 - [ ] Density: not overloaded; no equal-weight element scatter.
 - [ ] Text: Chinese core copy is readable, not overlapped, and not duplicated verbatim in body copy.
 - [ ] Authenticity: no fake screenshot, fake metric, borrowed IP, or unrelated character.
+- [ ] ChengCc IP lock: if avatar appears, same face/hair/proportion, left ear 2 earlobe earrings, right ear 1 earlobe earring, subtle orange iris ring, visible orange C necklace, orange/C/orange-fruit outfit system.
 
 ## Body Copy
 
@@ -94,7 +99,13 @@
 ## Manual Publish Checklist Ready
 
 - [ ] Images/prompts ready.
-- [ ] Final images copied to export folder.
+- [ ] `run-manifest.json` exists in the export folder.
+- [ ] Every final page has manifest status `pass`.
+- [ ] Failed or stale visual attempts are recorded as rejected and are not listed for upload.
+- [ ] Final images copied to export folder only after validation.
+- [ ] Source generated paths differ from export paths.
+- [ ] Export paths are inside this run's export folder.
+- [ ] Card copy hash is a real `sha256:` value, not a placeholder.
 - [ ] Title/body/tags final.
 - [ ] Target platform selected.
 - [ ] Platform review passed.

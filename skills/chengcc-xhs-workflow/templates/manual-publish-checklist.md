@@ -33,12 +33,23 @@ Then the creator manually:
 
 ## Image Order
 
-Use the copied publish-ready files from the creator's image export folder.
+Use only copied publish-ready files from the creator's image export folder after `run-manifest.json` marks every listed page as `pass`.
 
 1.
 2.
 3.
 4.
+
+## Image Run Manifest
+
+- Run ID:
+- Manifest path:
+- Card copy hash:
+- Visual route:
+- Publish ready: true / false
+- Export paths verified inside this run folder: yes / no
+- Source generated paths differ from export paths: yes / no
+- Rejected attempts excluded from upload:
 
 ## Title
 

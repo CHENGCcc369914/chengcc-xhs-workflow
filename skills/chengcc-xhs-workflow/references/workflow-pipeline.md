@@ -9,7 +9,10 @@ Inputs:
 - creator profile
 - confirmed media console / positioning doc
 - visual rules
+- creator IP / avatar extension rules
+- creator IP visual spec
 - Visual System V2 rules
+- benchmark / RAG corpus
 - content pillars
 - hard avoids
 - publishing operator
@@ -20,6 +23,13 @@ For 澄Cc, use:
 - 00后应届生 / 初入职场新手
 - target readers: in-school, soon-to-graduate, fresh workplace peers
 - Style B default, Style A backup
+- ChengCc standard avatar IP V2.0 by default for character actions, expression stickers, outfit variations, and inner-page mini-scenes
+- V2.0 source: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
+- clothing asset reference: `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png`
+- Apply this V2.0 source automatically in normal 澄Cc Xiaohongshu workflow runs. The user does not need to mention it again.
+- orange `C` necklace, orange/C/orange-fruit outfit system, ChengCc/Cc/Ccc marks, and C-shaped symbols as the main memory system; orange phone case is optional when phone use is part of the scene
+- clothing is a scene-variable original asset system: do not use ordinary basic T-shirts or simple recolors; use orange/C/citrus details through silhouette, texture, patch, pocket, drawstring, hat, small bag, shoes, pajamas, and retro loose styling
+- local low-follower/high-performing case corpus: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
 - Visual System V2 execution engine: content input -> meaning -> emotion -> layout -> editorial visual -> feedback
 - AI as method sharing, not teaching
 - image export folder: creator's local publishing-image folder
@@ -29,6 +39,15 @@ For friends, replace those defaults with their own.
 ## Phase B: Generate 10 Topics
 
 Goal: help the creator choose, not force one direction.
+
+For 澄Cc, before generating topics or improving copy, run a bounded case-library retrieval when the task mentions traffic, low-follower/high-performing cases, similar notes, title/body optimization, RAG, "爆款", or "别人怎么写":
+
+- use `xhs-blogger-intelligence`
+- source folder: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- retrieve 3-8 cases close to the topic lane
+- extract: title hook, opening true setup, repeated brain-voice lines, AI turning question, practical method list, collection/save CTA
+- output a compact RAG brief before the topics or draft
+- do not copy source paragraphs; adapt only the structure and logic
 
 Each topic includes:
 
@@ -47,9 +66,11 @@ Goal: turn the chosen topic into a confirmable image-text package.
 
 Default output:
 
+- local RAG brief used, if relevant
 - final title
 - 4-page carousel plan
 - Visual System V2 design brief
+- ChengCc IP V2.0 action/scene direction when the avatar, mini-illustration, or sticker appears
 - page-by-page card copy
 - body copy
 - tags
@@ -63,6 +84,14 @@ Default 4 pages:
 2. Emotion Page / real feeling and visible behavior.
 3. System Page / reframe, separation, AI thinking, or hidden method.
 4. Insight Page / AI answer, screenshot-frame, or one small next action.
+
+Low-follower/high-performing case patterns to absorb for 澄Cc:
+
+- start with a specific lived setup: "我是一个..." / "那天..." / "有一次..." instead of a slogan
+- include the inner voice readers recognize, such as "是不是我又没做好"
+- make the AI moment a turning point, usually one question or one clear reframe
+- give 2-3 small methods with names, not abstract advice
+- end with a light save/try CTA that feels useful, not salesy
 
 V2 design brief required before Image 2 prompts:
 
@@ -116,14 +145,25 @@ If copy changes later, regenerate Image 2 prompts and affected images.
 Default to `image_gen full-card`:
 
 - lock exact card copy first
+- for 澄Cc, automatically load and apply the V2.0 IP spec before writing any avatar, outfit, mini-scene, sticker, or full-card prompt
+- for 澄Cc, automatically apply the clothing asset reference when writing any avatar outfit, action extension, scene illustration, avatar cover, or three-view prompt
 - call the available image generation / Image 2 tool after copy approval
 - generate complete 3:4 cards
 - include final Chinese text directly in the image
 - use screenshot-frame mode when a real AI chat image should be inserted
+- if a ChengCc character/action/sticker/mini-scene is useful, apply `references/chengcc-ip-extension-rules.md` before writing the Image 2 prompt
+- insert the avatar lock block: same face, same black loose 4/6 side-part short hair, slightly round chin, subtle orange iris ring, left ear exactly 2 silver earlobe earrings, right ear exactly 1 silver earlobe earring, visible orange C necklace, orange/C/orange-fruit outfit system, healing hand-drawn paper-grain illustration style
+- insert the clothing asset lock when the outfit is visible: original ChengCc outfit system, not plain clothing; orange element + C element + citrus motif + orange recognition color + retro loose designer silhouette + clean healing life-aesthetic details, with scene-appropriate work/outdoor/home/night/content-creation variants
 - copy final publish-ready images into the creator's image export folder
 - keep original generated files in their default generation directory
 - use the V2 editorial prompt spine from `references/visual-system-v2.md`
 - validate each card against structure, emotion, editorial feel, and information density before accepting it
+- create a per-post `run_id` and `run-manifest.json` before copying any image into the creator's image export folder
+- record topic, final card copy hash, page count, visual route, required IP source, generated source paths, copied export paths, validation status, and rejected attempts in the manifest
+- use a real `sha256:` card copy hash, not a placeholder; keep `export_path` inside the current run export folder; keep `source_generated_path` as the original generated candidate path and different from `export_path`
+- keep every generated image as a candidate until validation passes; only manifest entries with `status: "pass"` may be copied to the final export order or used in the manual publish checklist
+- mark images as `fail` and regenerate or stop if they contain current text but stale visuals, semi-realistic collage, old orange mascot direction, unrelated diagrams, missing ChengCc IP locks, unreadable Chinese, or any mismatch with approved copy
+- treat older generated images and local avatar assets as `reference_only` inputs unless the user explicitly asks to reuse that exact visual
 
 Fallback:
 
@@ -138,6 +178,8 @@ Visual rejection rules:
 - reject equal-weight page layouts where the reader cannot tell what to see first
 - reject random sticker or scrapbook decoration unless Style A was explicitly chosen for a strong-emotion topic
 - reject fake screenshots or fake app UI
+- reject generic 3D boys, old orange-mascot defaults, changed earrings, sharp V chin, cold eye ring, missing C necklace, or missing orange/C/orange-fruit outfit system when a ChengCc avatar is used
+- reject ordinary basic outfits, simple orange recolors, random real-brand streetwear, dark punk/skull styling, dirty textures, or plastic AI material when a ChengCc avatar is used
 - reject unreadable or overlapped Chinese core text
 - reject inner pages that look like another cover
 - reject pretty-but-empty layouts with no meaning layer or no visualized emotion
@@ -175,7 +217,7 @@ If review passes:
 
 - target platform and draft surface
 - image order
-- use image paths from the creator's image export folder
+- use only manifest-validated image paths from the creator's image export folder
 - final title
 - final body
 - tags

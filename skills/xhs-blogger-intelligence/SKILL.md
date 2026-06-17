@@ -1,6 +1,6 @@
 ---
 name: xhs-blogger-intelligence
-description: "Use this skill whenever the user wants Xiaohongshu benchmark blogger monitoring, watchlist maintenance, redbook-based public post collection, note-card distillation, blogger-profile updates, or a RAG brief for a writing workflow. Triggers include 对标博主, 博主动态采集, 监测最新动态, watchlist, redbook采集, note-card, blogger-profile, RAG brief, 给 cc-xhs-personal-growth-writer 提供参考, or 小红书博主情报层."
+description: "Xiaohongshu benchmark and RAG intelligence layer. Use when the user wants 对标博主, 博主动态采集, watchlist maintenance, redbook/public post collection, local low-follower/high-performing case retrieval, note-card distillation, blogger-profile updates, or a compact RAG brief for cc-xhs-personal-growth-writer / chengcc-xhs-workflow. Do not use this skill to write final posts, generate Image 2 cards, create publish checklists, operate the platform UI, or publish/comment; those belong to cc-xhs-personal-growth-writer, chengcc-xhs-workflow, and xiaohongshu-ops."
 ---
 
 # XHS Blogger Intelligence Skill
@@ -13,6 +13,14 @@ Default integration:
 
 Public benchmark posts -> note-cards -> blogger-profiles -> RAG brief -> `cc-xhs-personal-growth-writer` -> `chengcc-xhs-workflow`.
 
+For Cc, the default manual low-follower/high-performing case corpus lives at:
+
+```text
+/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章
+```
+
+When Cc asks for Xiaohongshu RAG retrieval, low-follower/high-performing case analysis, pre-writing benchmark lookup, or similar-topic examples, read this folder first. Treat it as Cc's private growing corpus, not as shareable Skill content.
+
 ## 0. Boundary
 
 This skill should:
@@ -23,6 +31,7 @@ This skill should:
 - distill each useful note into a note-card
 - update each blogger's profile
 - output topic-specific RAG briefs
+- hand off only a compact benchmark brief to downstream writing/workflow skills
 
 This skill should not:
 
@@ -31,6 +40,7 @@ This skill should not:
 - store cookies, tokens, or private credentials in this repo
 - invent latest-post data when collection fails
 - replace `cc-xhs-personal-growth-writer` or `chengcc-xhs-workflow`
+- decide final card copy, Image 2 prompts, publish checklist order, or post-publish retro conclusions
 
 ## 1. Required Reads
 
@@ -52,6 +62,8 @@ For distillation or RAG work, also read:
 For 澄Cc default watchlist, read:
 
 10. `examples/watchlist-chengcc.example.json`
+
+For Cc local low-follower/high-performing case RAG, also inspect the private corpus folder above and retrieve only the topic-relevant files or sections. Do not bulk-read the whole corpus unless the user asks for a full audit.
 
 ## 2. Replaceable Slots
 
@@ -168,6 +180,13 @@ Do not over-update a profile from one weak post.
 
 Use `templates/rag-brief.md`.
 
+For Cc writing work, first retrieve from the local case corpus folder:
+
+- similar topic lane, such as 情绪内耗 / AI个人成长 / 职场成长 / 第二大脑 / 读书复盘
+- 3-8 relevant cases by title, hook, reader scene, method list, and CTA
+- reusable expression patterns: opening pain, brain-voice lines, AI turning question, method names, collection CTA
+- do-not-copy notes: avoid copying original paragraphs, creator-specific stories, and unsupported metrics
+
 When collected outputs already exist, use `scripts/build-rag-brief.mjs` to build a compact scaffold brief from normalized records and note-cards.
 
 For a specific writing topic, retrieve:
@@ -245,3 +264,5 @@ Before finishing, verify:
 - Did blogger-profile updates avoid overfitting one weak signal?
 - Did the RAG brief explain what to borrow and what not to copy?
 - Did the handoff avoid replacing the writing workflow?
+- Did the output stay compact enough for downstream writer/workflow use?
+- Did the run avoid claiming "latest" when collection was a local or stale snapshot?

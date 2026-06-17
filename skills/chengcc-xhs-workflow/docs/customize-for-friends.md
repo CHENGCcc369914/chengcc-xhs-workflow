@@ -22,7 +22,9 @@ Ask the friend to provide:
 - Visual references:
 - Main colors:
 - Typography preference:
-- IP / symbol / mascot rules:
+- IP / avatar / symbol / mascot rules:
+- Standard character reference image, if any:
+- Non-negotiable identity locks, if any:
 - AI/tool boundary:
 - Hard avoid list:
 - Target platform(s):
@@ -36,6 +38,11 @@ Ask the friend to provide:
 - Draft carousel copy and body copy.
 - Wait for content approval before image generation.
 - Use Image 2 full-card mode only after copy is locked.
+- After image generation, create a fresh per-post `run-manifest.json`.
+- Only images with manifest status `pass` and `publish_ready: true` may enter
+  the manual upload order.
+- Reject stale visuals, old local assets, wrong style routes, copied old
+  mascot directions, unreadable text, or copy mismatches before the checklist.
 - Select target platform and run publish safety review before the manual publish checklist.
 - If cross-posting, review each platform separately.
 - The creator manually uploads images, pastes copy, checks labels, and decides whether to publish.
@@ -46,8 +53,9 @@ Replace:
 
 - `澄Cc`
 - 00后应届生 / 初入职场新手
-- orange IP
-- Style B lifestyle magazine visual
+- ChengCc standard avatar IP
+- orange C necklace / orange-C-citrus memory symbols
+- Style B healing hand-drawn IP visual
 - Style A emotional sticker visual
 - graduation / workplace newcomer topics
 - Xiaohongshu as the default target platform, if the friend mainly publishes elsewhere
@@ -60,6 +68,7 @@ Keep:
 - creator-defaults first
 - topic-selection gate
 - content-approval gate
+- run manifest gate after image generation
 - target-platform publish-review gate
 - final human publish confirmation
 
@@ -83,6 +92,10 @@ Keep:
 ## Hard Avoids
 
 ## Publishing Handoff
+
+- Image export folder:
+- Run manifest required: yes
+- Manual upload image source: manifest pass export paths only
 
 ## Target Platforms
 

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "benchmark-rag-brief-only",
+    "prompt": "帮我看一下小柴人不纠结这类账号最近值得学什么，然后给澄Cc这篇“刚下班脑子还在上班”提供参考。",
+    "expected_behavior": "Uses xhs-blogger-intelligence as the intelligence layer, checks watchlist/local corpus/available collection status, outputs a compact RAG brief with reusable structures and do-not-copy notes, and does not write the final post or Image 2 card prompts."
+  },
+  {
+    "name": "local-low-follower-case-retrieval",
+    "prompt": "这个选题先参考我本地低粉高爆案例：刚入职总怕被评价。",
+    "expected_behavior": "Retrieves only topic-relevant files or sections from the local Xiaohongshu case corpus, extracts hook, opening setup, AI turning question, method list, CTA/save logic, and hands off a short brief to the writer/workflow."
+  },
+  {
+    "name": "collection-failure-honesty",
+    "prompt": "redbook 采集失败了，但我还是想知道这个博主今天最新发了什么。",
+    "expected_behavior": "Reports the adapter failure honestly, uses approved fallbacks only if available, marks latest data as unavailable when no evidence exists, and does not invent recent posts or metrics."
+  },
+  {
+    "name": "uncertain-account-id",
+    "prompt": "把这个疑似账号加入 watchlist，但我只有小红书号，不确定 internal user id。",
+    "expected_behavior": "Distinguishes xhs_red_id from xhs_user_id, marks the account pending_internal_id_lookup or pending_id_confirmation, and avoids collecting under a guessed id."
+  },
+  {
+    "name": "handoff-to-complete-workflow",
+    "prompt": "用这些对标博主参考，直接给我做 4 页图文、Image 2、发布审核和手动发布清单。",
+    "expected_behavior": "Keeps this skill limited to the benchmark/RAG brief, then routes the complete package to chengcc-xhs-workflow and does not produce final card copy, image prompts, or checklist itself."
+  },
+  {
+    "name": "profile-update-no-overfit",
+    "prompt": "这位博主今天有一篇数据不错，帮我更新她的 blogger-profile。",
+    "expected_behavior": "Checks whether one post is enough for a profile update, records a weak or candidate signal when needed, and avoids rewriting stable blogger-profile patterns from a single weak sample."
+  }
+]

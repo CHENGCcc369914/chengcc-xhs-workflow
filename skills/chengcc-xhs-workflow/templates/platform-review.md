@@ -9,6 +9,8 @@ Run this after final cards/prompts and before the manual publish checklist.
 - Cross-posting: yes / no
 - Review source: `docs/platform-publish-rules-2026.md`
 - Source refresh needed before publishing: yes / no
+- Image run manifest checked: yes / no / prompt-only
+- Publish-ready image paths are manifest pass only: yes / no / prompt-only
 
 ## 2026 发布审核
 

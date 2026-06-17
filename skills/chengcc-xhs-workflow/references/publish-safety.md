@@ -37,7 +37,7 @@ If the user cross-posts, run the gate once per platform. Use `docs/platform-publ
 
 - Do not copy competitor text, titles, card layout, or images.
 - Do not use borrowed IP, celebrity likeness, brand logos, copyrighted characters, or unlicensed artwork.
-- Use only original orange IP for 澄Cc.
+- Use only the original ChengCc standard avatar IP for 澄Cc character visuals. The orange C necklace, orange/C/orange-fruit outfit system, ChengCc/Cc/Ccc marks, C-shaped symbols, and optional orange phone case are original memory symbols; do not use borrowed characters, real brand logos, or celebrity likeness.
 - If screenshots are used, remove private names, avatars, IDs, company/client info, and chat details.
 
 ### 4. Content Claims

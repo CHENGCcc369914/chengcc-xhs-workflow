@@ -54,6 +54,20 @@ Output/80-通用资产/小红书个人运营/blogger-intelligence/
   note-cards-YYYY-MM-DD.jsonl
 ```
 
+Cc's active manual corpus path for low-follower/high-performing Xiaohongshu case materials is:
+
+```text
+WiKi/来源/小红书案例库/小红书搜集文章/
+```
+
+Absolute path:
+
+```text
+/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章
+```
+
+Use this folder as the first lookup source when the task is writing-prep RAG, benchmark expression analysis, low-follower/high-performing case comparison, or "how similar posts are written". Store new manually collected case files here unless Cc specifies another location.
+
 For friends, replace these folders with their own local storage. Do not hard-code Cc's paths into a public handoff.
 
 ## Collection Cadence
@@ -155,3 +169,15 @@ It should distinguish:
 A RAG brief is the only object that should be passed into the writing workflow by default.
 
 It should be concise, topic-specific, and explicit about what can be learned vs what must not be copied.
+
+For Cc, the RAG brief should include a `Local Corpus Signals` section when using the manual case corpus:
+
+- source files checked
+- best 3-8 cases
+- title/hook lessons
+- opening/story lessons
+- AI-turning-question lessons
+- method-list lessons
+- CTA/collection lessons
+- what Cc can directly adapt
+- what Cc must not copy

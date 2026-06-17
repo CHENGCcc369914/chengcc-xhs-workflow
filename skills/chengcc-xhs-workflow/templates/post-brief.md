@@ -37,6 +37,16 @@
 - Visual route confirmed: yes / no
 - Ready for Image 2: yes / no
 
+## Image Run Gate
+
+- Run ID:
+- Export folder:
+- Manifest path:
+- Card copy hash:
+- Publish ready: true / false
+- Final upload paths source: manifest pass pages only
+- Rejected / reference_only / fail images excluded: yes / no
+
 ## Risk Notes
 
 - Privacy:

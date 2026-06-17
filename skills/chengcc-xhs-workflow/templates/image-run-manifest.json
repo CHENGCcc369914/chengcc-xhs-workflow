@@ -1,0 +1,43 @@
+{
+  "run_id": "YYYY-MM-DD-topic-slug",
+  "creator": "chengcc",
+  "topic": "",
+  "page_count": 4,
+  "created_at": "YYYY-MM-DDTHH:mm:ss+08:00",
+  "updated_at": "YYYY-MM-DDTHH:mm:ss+08:00",
+  "export_folder": "",
+  "visual_route": "Style B healing hand-drawn IP",
+  "required_sources": {
+    "ip_spec": "/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md",
+    "clothing_reference": "/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png",
+    "visual_rules": "references/visual-adapter-rules.md",
+    "ip_extension_rules": "references/chengcc-ip-extension-rules.md"
+  },
+  "card_copy_hash": "sha256:<64-hex-copy-lock>",
+  "pages": [
+    {
+      "page": 1,
+      "role": "Editorial Cover",
+      "approved_copy": "",
+      "source_generated_path": "/absolute/path/to/original-generated-image.png",
+      "export_path": "/absolute/path/to/current-export-folder/01-page.png",
+      "status": "pending",
+      "validation": {
+        "current_topic_text": "pending",
+        "visual_system_v2": "pending",
+        "chengcc_ip_v2": "pending",
+        "readable_chinese": "pending",
+        "no_stale_or_wrong_asset": "pending"
+      },
+      "notes": ""
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "page": 1,
+      "path": "",
+      "reason": "wrong visual route / stale asset / unrelated image / unreadable text"
+    }
+  ],
+  "publish_ready": false
+}

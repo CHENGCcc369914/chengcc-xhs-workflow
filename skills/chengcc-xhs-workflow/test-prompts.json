@@ -1,0 +1,37 @@
+[
+  {
+    "name": "complete-workflow-topic-first",
+    "prompt": "用澄Cc默认资料跑完整小红书工作流，主题是“刚下班脑子还在上班”。先给我 10 个选题。",
+    "expected_behavior": "Uses chengcc-xhs-workflow as the primary skill, reads ChengCc defaults and Visual System V2 sources, returns 10 topic options first, and does not jump directly to final copy or images."
+  },
+  {
+    "name": "image-generation-manifest-gate",
+    "prompt": "内容确认。目标平台是小红书。调用 Image 2 生成 4 张完整卡片，然后给我手动发布清单。",
+    "expected_behavior": "Creates a fresh run_id and export folder, writes run-manifest.json with page_count, card_copy_hash, required_sources, source_generated_path, export_path, validation status, and rejected_attempts, then lists only pages with status pass and publish_ready true in the manual checklist."
+  },
+  {
+    "name": "reject-stale-visual-with-current-text",
+    "prompt": "这 4 张图文字是这一篇的，但画面像上一篇的半写实本地拼图，帮我判断能不能保存发布。",
+    "expected_behavior": "Marks the images fail because current text with stale visuals is not publish-ready, records the attempt in rejected_attempts, excludes the files from the publish checklist, and regenerates or stops the image step instead of patching text onto old assets."
+  },
+  {
+    "name": "chengcc-ip-v2-not-old-mascot",
+    "prompt": "按澄Cc小红书工作流给这篇做 Image 2 卡片，人物要用我现在确认的 IP 风格。",
+    "expected_behavior": "Uses ChengCc V2.0 healing hand-drawn young male designer IP with locked face, hair, earrings, orange C necklace, and outfit asset system; does not revert to old orange fruit mascot, generic 3D boy, semi-realistic collage, or simple orange recolor."
+  },
+  {
+    "name": "copy-change-regenerate-image",
+    "prompt": "第 2 页卡片文字改成“以前我下班了，脑子还在加班”。其他内容不变。",
+    "expected_behavior": "Updates the approved copy and card_copy_hash, regenerates the affected image page, updates source_generated_path/export_path and validation in run-manifest.json, and does not patch text directly onto the old generated card."
+  },
+  {
+    "name": "manifest-path-boundary",
+    "prompt": "我把上一篇的 run-manifest.json 复制到这篇导出目录里，里面都是 pass，可以直接用吗？",
+    "expected_behavior": "Rejects the copied manifest because manifest.export_folder must equal the current export folder, export_path values must be inside the current run folder, source_generated_path must differ from export_path, and card_copy_hash must be a real non-placeholder sha256 copy lock."
+  },
+  {
+    "name": "performance-loop-no-fake-metrics",
+    "prompt": "这篇还没发，先帮我做发布前评分和发布后复盘。",
+    "expected_behavior": "Creates pre-publish score and prediction, leaves actual metrics and retro empty until real platform data exists, and does not invent views, likes, saves, comments, or follow data."
+  }
+]

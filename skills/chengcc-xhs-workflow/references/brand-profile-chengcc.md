@@ -92,9 +92,12 @@ Avoid:
 
 - Current name: `澄Cc` is temporary and may be renamed because it is not distinctive enough on Xiaohongshu.
 - Naming direction: preserve a memorable orange / C / 程 / 铖 association if useful, but do not force every content idea into orange wordplay.
-- Avatar subject: orange + C as the core memory mark; the avatar can include a large C and an original orange IP, with magazine-like design taste.
-- Symbol: orange, roundness, diary, light, paper, recording traces.
-- IP: original orange character only; moon, stars, plants, and small blue graffiti accents can support it.
+- Avatar subject: ChengCc V2.0 healing hand-drawn young male designer IP. The identity should feel like a stylized version of Cc, not a cute orange mascot or generic 3D boy.
+- Current IP source: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`.
+- Core memory symbol: orange `C` necklace first, then orange/C/orange-fruit outfit system, ChengCc/Cc/Ccc marks, C-shaped symbols, and optional orange phone when the scene involves phone use.
+- Locked avatar details: same face, black loose 4/6 side-part short hair, slightly rounder chin, subtle orange iris/pupil ring, left ear two silver earlobe earrings, right ear one silver earlobe earring, visible orange C necklace.
+- Symbol: orange C necklace, orange icon/slice, C-shaped moon/pocket/patch, diary, light, paper, recording traces, design-work details.
+- IP: use the ChengCc standard avatar by default. The old orange fruit mascot is legacy only and should not be the default image anchor.
 - Slogan direction: let the result slowly appear, with the orange/clear wordplay as a light touch.
 
 ## Visual Avoid List
@@ -103,8 +106,9 @@ Avoid:
 - Generic AI interface.
 - Purple-blue gradients.
 - Overly polished app icon.
-- Any non-orange IP or borrowed character.
-- Orange mascot dominance that competes with the message.
+- Any borrowed character, real brand logo, celebrity likeness, or unrelated IP.
+- Generic 3D boy that loses Cc's face/hair/earring/eye locks.
+- Orange mascot dominance that competes with the message or replaces the human avatar.
 - Influencer luxury lifestyle.
 - Corporate consulting deck.
 - Heavy sales feeling.

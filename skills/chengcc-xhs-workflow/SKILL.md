@@ -1,13 +1,13 @@
 ---
 name: chengcc-xhs-workflow
-description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> manual publish checklist -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, 手动发布清单, 发布后复盘, score/predict/retro/rubric, or shareable skill for friends. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops only when the user explicitly asks for real platform browsing/upload/comment actions."
+description: "Use this as the primary router for a complete Xiaohongshu-first image-text workflow: creator defaults / media console -> local case-library RAG when relevant -> topic options -> carousel copy -> Image 2 full-card prompts or generation -> platform publish-safety review -> manual publish checklist -> post-publish performance loop. Prefer this over cc-xhs-personal-growth-writer when the request includes 完整工作流, 中控台确认版, 10个选题, 4页图文, Image 2完整卡片, 2026发布审核, 手动发布清单, 发布后复盘, score/predict/retro/rubric, 低粉高爆案例参考, or shareable skill for friends. For 澄Cc, automatically apply the ChengCc IP Visual System V2.0 for avatar, mini-illustration, sticker, outfit, and Image 2 card prompts; the user should not need to mention it. Coordinate with xhs-blogger-intelligence for RAG briefs, cc-xhs-personal-growth-writer for 澄Cc voice/copy, and xiaohongshu-ops only when the user explicitly asks for real platform browsing/upload/comment actions."
 ---
 
 # ChengCc Xiaohongshu Workflow Skill
 
 This is a shareable orchestration skill:
 
-Creator defaults -> confirmed console -> 10 topics -> user picks one -> carousel plan -> Visual System V2 design brief -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
+Creator defaults -> confirmed console -> local case-library RAG when relevant -> 10 topics -> user picks one -> carousel plan -> Visual System V2 design brief -> content approval -> Image 2 full-card generation -> platform publish review -> manual publish checklist -> performance loop.
 
 It ships with 澄Cc and Peyson starter defaults, but must remain customizable for other creators.
 All referenced `docs/`, `references/`, `templates/`, and `examples/` paths are
@@ -19,17 +19,21 @@ When several Xiaohongshu skills could apply, route by the user's job:
 
 | User job | Primary skill | Handoff |
 |---|---|---|
-| Benchmark monitoring, watchlist refresh, blogger note-cards, RAG brief | `xhs-blogger-intelligence` | Pass only the compact RAG brief into this workflow or the writer. |
+| Benchmark monitoring, watchlist refresh, blogger note-cards, local low-follower/high-performing case RAG brief | `xhs-blogger-intelligence` | Pass only the compact RAG brief into this workflow or the writer. |
 | Writing-only task: title, body, cover copy, one selected topic, rewrite, comments | `cc-xhs-personal-growth-writer` | Use this workflow only if the user later asks for cards, images, publish review, manual publish checklist, or performance loop. |
 | Complete package: 10 topics, 4-page carousel, Image 2, publish review, manual publish checklist, performance loop | `chengcc-xhs-workflow` | Use `cc-xhs-personal-growth-writer` for 澄Cc voice and local console lookup. |
 | Explicit platform automation: browse/search Xiaohongshu, upload images, fill creator page, comment/reply | `xiaohongshu-ops` | Use only when the user explicitly asks for platform automation. The default publish flow is manual upload/paste by the creator. |
 
+This skill is the orchestration truth source for 澄Cc complete Xiaohongshu production. Other XHS skills provide bounded services; they should not independently complete or override this workflow.
+
 Priority rules:
 
 1. If the user explicitly asks for real browsing, searching, uploading, creator-center filling, commenting, or publishing automation, use `xiaohongshu-ops` for those platform actions. Otherwise, keep publishing manual.
-2. If the request asks how benchmark bloggers recently posted, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
-3. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
-4. If the request only asks for copy, title options, cover wording, or a single writing draft, `cc-xhs-personal-growth-writer` is the main skill.
+2. If the request asks how benchmark bloggers recently posted, how low-follower/high-performing notes are written, or asks for similar-case RAG, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
+3. For 澄Cc local work, the default manual case corpus is `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`. Retrieve only topic-relevant files/sections from this folder; do not bulk-read the whole corpus unless the user asks for a full audit.
+4. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main workflow even when the user also says "澄Cc默认资料".
+5. If the request only asks for copy, title options, cover wording, or a single writing draft, `cc-xhs-personal-growth-writer` is the main skill.
+6. Do not route to `xiaohongshu-ops` for offline content strategy, copywriting, Image 2, run-manifest validation, or performance interpretation. It is a platform UI executor only.
 
 ## 0. Replaceable Creator Slots
 
@@ -40,6 +44,9 @@ Before creating content, identify these slots:
 | Creator profile | `references/brand-profile-chengcc.md` | own profile, or `references/brand-profile-peyson.md` for Peyson |
 | Confirmed console | 澄Cc self-media console / default资料 | own creator console |
 | Visual style | `references/visual-adapter-rules.md` + `references/visual-system-v2.md` | own visual rules and validation gates |
+| IP visual spec | `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md` | own IP spec or no character system |
+| IP clothing asset reference | `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png` | own clothing / outfit reference, or none |
+| Benchmark / RAG corpus | 澄Cc local low-follower/high-performing case library | own case library folder, export, database, or no corpus |
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
 | Image export folder | creator's local publishing-image folder | own local publishing-image folder |
@@ -65,14 +72,27 @@ For 澄Cc:
 1. `references/brand-profile-chengcc.md`
 2. `references/workflow-pipeline.md`
 3. `references/visual-adapter-rules.md`
-4. `references/visual-system-v2.md`
-5. `references/publish-safety.md`
-6. `docs/workflow-phases.md`
-7. `docs/publish-review-2026.md`
-8. `docs/platform-publish-rules-2026.md`
-9. `docs/performance-loop.md`
+4. `references/chengcc-ip-extension-rules.md`
+5. `references/visual-system-v2.md`
+6. `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
+7. `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png` when avatar outfit / action / scene illustration / avatar cover / three-view generation is involved
+8. `references/publish-safety.md`
+9. `docs/workflow-phases.md`
+10. `docs/publish-review-2026.md`
+11. `docs/platform-publish-rules-2026.md`
+12. `docs/performance-loop.md`
 
 If the active environment also has `cc-xhs-personal-growth-writer`, use it for 澄Cc content voice and local console lookup.
+
+The ChengCc IP Visual System V2.0 is a default 澄Cc visual source, not an optional user-triggered add-on. In normal 澄Cc Xiaohongshu workflow runs, apply it automatically before visual route selection, Image 2 prompt writing, avatar action planning, sticker/mini-scene generation, and final image validation.
+
+The ChengCc clothing asset reference is also default when the avatar appears. Treat clothing as an original scene-variable asset system: keep the fixed face/hair/features/earrings/C necklace, then create page-specific outfits with orange elements, C-shaped structure, citrus motifs, orange recognition color, retro loose silhouettes, and clean healing life-aesthetic details. Do not reduce the avatar to ordinary basic clothes or a simple orange recolor.
+
+For 澄Cc requests involving topic research, low-follower/high-performing cases, similar-note references, title improvement, body structure learning, or "先看看别人怎么写", retrieve from the local case corpus first through `xhs-blogger-intelligence`:
+
+`/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+
+Use the RAG result as a compact benchmark brief. Do not copy source paragraphs; extract reusable patterns such as opening setup, brain-voice lines, AI turning question, method names, collection CTA, and anti-patterns.
 
 For Peyson:
 
@@ -103,6 +123,7 @@ For another creator:
 Confirm the creator profile and replaceable slots before generating ideas.
 
 For 澄Cc, use the bundled brand profile and confirmed console rules.
+For 澄Cc, also load and apply the ChengCc IP Visual System V2.0 during this phase. Do not wait for the user to say "按橙Cc IP 2.0"; the default visual identity already includes it.
 For Peyson, use the bundled Peyson starter profile unless the user provides a newer console.
 For friends, use their own profile, positioning, visual system, topic map, image export folder, and publishing operator.
 
@@ -112,6 +133,13 @@ If the user has not selected a creator profile, infer a minimal profile only whe
 
 First output 10 topics suitable for the creator. Do not jump straight into a finished article unless the user has already picked a topic.
 
+If the creator is 澄Cc and the request mentions traffic, benchmark, low-follower/high-performing notes, similar notes, RAG, "爆款", "怎么写", or content optimization, first run a bounded local corpus retrieval:
+
+- source folder: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- retrieve 3-8 topic-relevant cases
+- summarize title hook, true opening setup, emotional brain-voice, AI turning question, method list, CTA/save logic
+- mark which parts can be adapted by 澄Cc and which parts must not be copied
+
 Each topic must include:
 
 - title / hook
@@ -119,7 +147,7 @@ Each topic must include:
 - target reader
 - why it fits the creator
 - suggested carousel angle
-- visual route: Style B default or Style A strong-emotion backup
+- visual route: Style B default, Style A strong-emotion backup, or Style C Japanese editorial backup when explicitly requested
 
 Use `templates/topic-options.md`.
 
@@ -129,6 +157,7 @@ Then wait for the user to pick one.
 
 After topic selection, produce:
 
+- local RAG brief used, if any
 - final title
 - 4-page carousel structure by default
 - Visual System V2 design brief: content input, meaning layer, emotion layer, page layout types, and validation notes
@@ -138,6 +167,13 @@ After topic selection, produce:
 - comment CTA
 - Image 2 prompt for each complete card
 - privacy and risk notes
+
+For 澄Cc, absorb the local case-library patterns into the draft:
+
+- the opening must have a real scene and true emotional setup, not only a concept
+- the AI part must contain a useful turning question or analysis role, not a thin "AI says" decoration
+- the method section should give 2-3 usable actions or a small checklist
+- image text and body text must not repeat; image carries hierarchy, body carries lived detail and payoff
 
 Do not generate images before the user confirms the card copy.
 
@@ -161,7 +197,12 @@ Default for 澄Cc:
 - final Chinese text baked in
 - Style B as default visual
 - Style A only for strong-emotion topics
-- original orange IP only, small and secondary
+- ChengCc standard avatar IP by default when a character/action/sticker/scene is useful
+- preserve the avatar locks from `references/chengcc-ip-extension-rules.md` and the V2.0 spec: same face, same 4/6 black short hair, slightly round chin, subtle orange iris ring, left ear exactly 2 silver earlobe earrings, right ear exactly 1 silver earlobe earring, visible orange C necklace, orange/C/orange-fruit outfit system, healing hand-drawn paper-grain illustration style
+- treat the standard avatar as an identity lock, not a reusable pose asset: for every final card where the avatar appears, design a fresh page-specific action, expression, outfit, prop, and mini-scene from that page's meaning layer; existing avatar images may be used only for rough layout tests unless the user explicitly asks to reuse them
+- treat the clothing reference as an outfit-design lock, not a fixed costume: every visible outfit should keep ChengCc's orange/C/citrus/retro-healing language while changing by scene, such as work/design, commute/outdoor, home/healing, night/rest, or content-creation looks
+- before Image 2 generation, output or internally decide an `IP action brief` for each page: page meaning -> avatar action -> facial expression -> body posture -> props -> scene relation -> how the avatar supports the headline without stealing hierarchy
+- orange is a character-system color through C necklace, clothing, orange icons/slices, C-shaped symbols, props, and controlled accents; do not revert to an orange fruit mascot unless the user explicitly asks for legacy orange mascot styling
 - no other characters / borrowed IP / fake screenshots
 - every page must pass the Visual System V2 validation gate before being accepted: HEADER / MAIN / SIDE / FOOTER zones, one primary visual subject, clear hierarchy, emotion-layout match, editorial feel, and controlled density
 
@@ -174,6 +215,12 @@ Execution rule:
 - State clearly whether images were generated or only prompts were produced.
 - If only prompts were produced, do not mark the workflow as ready for manual image upload.
 - After images are generated, copy the final publish-ready images to the creator's image export folder and use those copied paths in the manual publish checklist. Keep the original generated files in place.
+- Before copying anything into the creator's image export folder, create a per-post `run_id` and a `run-manifest.json` in the target export folder. Use a date + topic slug, such as `2026-06-17-xiabanqian-3-lines`, and never reuse a previous post folder for a new post.
+- The manifest must record the topic, final card copy hash, page count, visual route, required IP source, generated source paths, copied export paths, validation status, and rejected attempts.
+- `card_copy_hash` must be a real `sha256:` copy lock, not a placeholder. `export_path` must point inside the current run's export folder. `source_generated_path` must point to the original generated candidate and differ from the copied `export_path`.
+- Treat generated files as candidates until validation passes. Do not list a candidate image in the manual publish checklist, copy it over an approved file, or call it publish-ready until the manifest marks that page `pass`.
+- If an image has the current post's text but the wrong visual route, stale local asset, semi-realistic collage, old mascot direction, unrelated diagram/infographic, missing ChengCc IP locks, unreadable Chinese, or any mismatch with the approved card copy, mark it `fail`, keep it out of the publish checklist, and regenerate or stop with a blocked image step.
+- Older generated images and local avatar assets may be used only as `reference_only` inputs. They must never be patched with new text and saved as final output unless the user explicitly asks to reuse that exact visual.
 
 If the user changes card text after images are generated, regenerate the affected image. Do not patch text by default.
 
@@ -263,9 +310,12 @@ Content pillars:
 
 Visual:
 
-- Style B default: young lifestyle-aesthetic magazine, abstract, trendy, healing, premium, dopamine but controlled.
+- Style B default: XHS-friendly healing hand-drawn IP illustration system: warm paper background, soft therapeutic mood, playful young illustration, clear hierarchy, Cc avatar mini-scene, orange C necklace / orange-fruit icon / C-shaped symbols / controlled blue accent as memory symbols.
+- Style C backup: Japanese Editorial Magazine System, only when the user explicitly wants high-end magazine, fashion lookbook, or strong typography-led pages.
 - Style A backup: Gen-Z emotional sticker poster, only for strong-emotion hooks.
-- Visual System V2: content input -> meaning -> emotion -> layout -> editorial visual -> feedback.
+- Visual System V2: content input -> meaning -> emotion -> layout -> visual prompt -> feedback.
+- ChengCc standard avatar IP: use the healing hand-drawn young male designer IP as the default character system. The old orange-fruit mascot is not the default. Orange should live in the C necklace, outfit system, orange/citrus icons, C-shaped details, props, and small accents.
+- ChengCc outfit default: follow the clothing asset reference. Outfits should feel like original IP clothing assets with design density, not normal T-shirts, plain pants, random brand-like streetwear, or simple orange recolors.
 
 ## 3.1 Peyson Defaults
 
@@ -280,7 +330,7 @@ Default direction:
 - default platform is Xiaohongshu image-text.
 - default publish mode is manual upload / paste / final human publish decision.
 
-Do not use 澄Cc's orange IP, fresh-graduate voice, or exact topic map for Peyson unless the user explicitly asks for a shared account style.
+Do not use 澄Cc's ChengCc avatar IP, C necklace/orange-citrus symbol system, fresh-graduate voice, or exact topic map for Peyson unless the user explicitly asks for a shared account style.
 
 ## 4. Default Output Contract
 
@@ -331,9 +381,15 @@ After the user picks:
 - Page 4:
 
 ## Image 2 生成状态
+- Run ID：
 - 结果：已生成 / 仅输出 prompt / 失败
 - 图片顺序：
 - 导出目录：
+- Manifest：
+- Card copy hash：
+- Publish ready：true / false
+- 通过验收：
+- 拒绝/废弃尝试：
 - 失败原因与下一步：
 
 ## 发布文案
@@ -367,10 +423,15 @@ After the user picks:
 Before finishing, verify:
 
 - Did the workflow start from creator defaults / confirmed console?
+- Did the workflow remain the primary orchestrator instead of letting `xiaohongshu-ops` or the writer skill independently finish a complete package?
 - Did it offer 10 topics before drafting if no topic was selected?
 - Did it wait for content approval before image generation?
 - Did it actually generate images when the image tool was available?
+- If images were generated, did the export folder contain `run-manifest.json` with every final page marked `pass`?
+- Were failed, stale, wrong-style, or reference-only images excluded from the manual publish checklist?
 - Are all creator-specific parts replaceable?
+- If 澄Cc visual character appears, did it follow `references/chengcc-ip-extension-rules.md` rather than a generic 3D boy or old orange mascot?
+- If 澄Cc visual character appears in final cards, did each page create a topic-specific action/expression/scene instead of merely pasting a standing pose or previously generated asset?
 - Is the body additive rather than a duplicate of card text?
 - Is AI framed as a method share rather than hard-sold teaching?
 - Was the target platform selected?

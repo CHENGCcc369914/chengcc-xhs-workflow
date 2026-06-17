@@ -3,9 +3,9 @@
 ## 读取和定位
 
 - 使用资料：澄Cc默认资料 + 中控台确认版
-- 可替换 slot：账号定位、目标读者、视觉系统、选题池、发布 operator
+- 可替换 slot：账号定位、目标读者、视觉系统、标准IP/符号、选题池、发布 operator
 - 账号定位：00后应届生 / 初入职场新手
-- 默认视觉：B版年轻生活美学杂志风；A版仅用于强情绪选题
+- 默认视觉：B版治愈系手绘个人IP图文；A版仅用于强情绪选题；人物默认使用橙Cc V2.0 标准IP，橙色C项链、橙子/C服装系统、ChengCc/Cc/Ccc符号作为记忆点
 
 ## 10 个选题
 
@@ -53,20 +53,26 @@
 
 ## Image 2 生成状态
 
+- Run ID：2026-06-17-friend-reply-score
 - 结果：已生成 4 张完整 3:4 图文卡片
+- 导出目录：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/`
+- Manifest：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/run-manifest.json`
+- Card copy hash：`sha256:example-lock-before-generation`
 - 图片顺序：
-  1. cover-friend-reply-01.png
-  2. cover-friend-reply-02.png
-  3. cover-friend-reply-03.png
-  4. cover-friend-reply-04.png
-- 失败原因与下一步：无；如果用户改卡片文字，需要重新生成对应页
+  1. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/01-cover-friend-reply.png`
+  2. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/02-emotion-page.png`
+  3. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/03-system-page.png`
+  4. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/04-insight-page.png`
+- 通过验收：4/4 pass；每页通过当前主题文字、Visual System V2、ChengCc IP V2.0、中文可读性、无旧图/错风格资产检查。
+- 拒绝/废弃尝试：无。若有旧图、半写实拼贴、旧 mascot、错视觉路线或文字不匹配，必须写入 manifest 的 `rejected_attempts`，并且不能出现在发布清单。
+- 失败原因与下一步：无；如果用户改卡片文字，需要重新生成对应页并更新 manifest。
 
 ## 发布审核
 
 - 目标平台：xiaohongshu
 - AI 标识：需标注图片 AI 辅助生成
 - 真实性：通过，正文为个人感受表达
-- 原创与版权：通过，使用原创橙子 IP
+- 原创与版权：通过，使用原创橙Cc标准人形 IP，未使用借用角色或真实品牌 logo
 - 隐私：通过，未出现真实朋友信息
 - 内容承诺：通过，无疗愈/收益承诺
 - 商业/导流/活动：通过，无广告、抽奖、导流
@@ -77,11 +83,13 @@
 ## 手动发布清单
 
 目标平台：xiaohongshu。
+Run ID：2026-06-17-friend-reply-score。
+Manifest：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/run-manifest.json`，发布前需确认 `publish_ready: true` 且 4 页均为 `pass`。
 1. 打开小红书创作者平台图文发布页。
-2. 按顺序上传 4 张图，确认封面是第 1 张。
+2. 只按上面 manifest pass 的 4 张导出图上传，确认封面是第 1 张。
 3. 复制标题、正文和标签。
 4. 如有 AI 内容标识选项，请选择 AI 辅助生成；如果没有看到 AI 标识入口，就在正文末尾保留“图片由 AI 辅助生成，内容来自我的真实经历整理。”
-5. 发布前人工检查图片顺序、错别字、标签、隐私打码和 AI 标识。
+5. 发布前人工检查图片顺序、错别字、标签、隐私打码、AI 标识，以及 manifest 没有把 rejected / reference_only / fail 图片列入上传顺序。
 6. 确认无误后由 Cc 自己点击发布。
 
 ## Phase H 发布后复盘
