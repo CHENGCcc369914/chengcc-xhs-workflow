@@ -6,10 +6,11 @@ executable engine; this file defines the 澄Cc-specific look, IP, palette, and
 avoid list.
 Use `chengcc-ip-extension-rules.md` whenever a ChengCc character, action sticker,
 expression sticker, outfit variation, or small scene is needed.
-For final ChengCc avatar/IP illustrations, also read the current V2.0 source:
-`/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`.
-For outfit design density, also use the current clothing asset reference:
-`/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png`.
+For final ChengCc avatar/IP illustrations, also read the active creator
+profile's `paths.creatorAssets` references. In Cc's private local profile,
+this includes the ChengCc IP Visual System V2.0 spec and clothing asset
+reference. In a friend/template profile, replace those files with the
+creator's own visual system and clothing references.
 
 ## Visual System V2 Operating Rule
 
@@ -181,9 +182,9 @@ Default inner-page logic for emotion/reflection posts:
 The ChengCc standard avatar is the creator's visual representative.
 
 - Source file: `references/chengcc-ip-extension-rules.md`.
-- V2.0 source: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`.
-- Clothing asset reference: `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png`.
-- Legacy standard image: `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP标准设定图-v0.1/01-橙Cc-IP标准设定图-三视图-细节-v0.1.png`.
+- V2.0 source: active creator profile `paths.creatorAssets/ip-visual-system.md` when available.
+- Clothing asset reference: active creator profile `paths.creatorAssets/clothing-reference.png` when available.
+- Legacy standard image: active creator profile `paths.creatorAssets/legacy-standard-image.png` when available.
 - Keep one recognizable young male designer IP: same face, black loose 4/6 side-part hair, slightly round chin, calm relaxed eyes, subtle blush/freckles, warm Asian skin texture, designer-newcomer proportion.
 - Required identity locks: subtle orange iris/pupil ring; left ear exactly two small silver earlobe earrings; right ear exactly one small silver earlobe earring; visible orange `C` necklace in front/half-side views; orange/C/orange-fruit outfit system.
 - Outfit quality lock: avoid ordinary basic T-shirts, designless solid-color clothes, random brand-like streetwear, dark punk/skull styling, dirty textures, or plastic AI materials. Each outfit should feel like a ChengCc-specific clothing asset and contain a main clothing memory point plus two local detail points.

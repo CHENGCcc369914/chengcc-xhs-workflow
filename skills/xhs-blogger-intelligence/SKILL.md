@@ -1,6 +1,6 @@
 ---
 name: xhs-blogger-intelligence
-description: "Xiaohongshu benchmark and RAG intelligence layer. Use when the user wants 对标博主, 博主动态采集, watchlist maintenance, redbook/public post collection, local low-follower/high-performing case retrieval, note-card distillation, blogger-profile updates, or a compact RAG brief for cc-xhs-personal-growth-writer / chengcc-xhs-workflow. Do not use this skill to write final posts, generate Image 2 cards, create publish checklists, operate the platform UI, or publish/comment; those belong to cc-xhs-personal-growth-writer, chengcc-xhs-workflow, and xiaohongshu-ops."
+description: "Xiaohongshu benchmark and RAG intelligence layer. Use when the user wants 对标博主, 博主动态采集, watchlist maintenance, redbook/public post collection, public comment/audience-language snapshots, local low-follower/high-performing case retrieval, note-card distillation, blogger-profile updates, or a compact RAG brief for cc-xhs-personal-growth-writer / chengcc-xhs-workflow. Do not use this skill to write final posts, generate Image 2 cards, create publish checklists, operate the platform UI, or publish/comment; those belong to cc-xhs-personal-growth-writer, chengcc-xhs-workflow, and xiaohongshu-ops."
 ---
 
 # XHS Blogger Intelligence Skill
@@ -13,13 +13,19 @@ Default integration:
 
 Public benchmark posts -> note-cards -> blogger-profiles -> RAG brief -> `cc-xhs-personal-growth-writer` -> `chengcc-xhs-workflow`.
 
-For Cc, the default manual low-follower/high-performing case corpus lives at:
+For shareable/template runs, the default low-follower/high-performing case corpus comes from the active `Creator Profile`:
 
 ```text
-/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章
+profile.paths.ragCaseLibrary
 ```
 
-When Cc asks for Xiaohongshu RAG retrieval, low-follower/high-performing case analysis, pre-writing benchmark lookup, or similar-topic examples, read this folder first. Treat it as Cc's private growing corpus, not as shareable Skill content.
+When a creator asks for Xiaohongshu RAG retrieval, low-follower/high-performing case analysis, pre-writing benchmark lookup, or similar-topic examples, read the profile corpus first. Treat Cc's private corpus as a local-only fallback, not as shareable Skill content.
+
+If this skill is invoked inside a `chengcc-content-loop-runtime` run and the current run's `01-bootstrap-context.md` contains a `## Creator Profile` section, use that profile first:
+
+- use `RAG case library` from the bootstrap profile instead of the Cc default corpus;
+- use the profile's creator name, niche, voice, and visual system in the RAG brief handoff;
+- if a profile path is missing or still a placeholder, mark it as `not configured` and ask for the correct path rather than falling back silently to Cc's private corpus.
 
 ## 0. Boundary
 
@@ -27,6 +33,7 @@ This skill should:
 
 - maintain a replaceable watchlist
 - collect public Xiaohongshu post metadata and text through an approved adapter
+- collect public comment snapshots when explicitly useful for audience-language intelligence
 - normalize collection results
 - distill each useful note into a note-card
 - update each blogger's profile
@@ -36,6 +43,7 @@ This skill should:
 This skill should not:
 
 - copy large amounts of original post text into shareable output
+- copy long original comment text into shareable output
 - publish, like, follow, comment, scrape private content, or bypass access controls
 - store cookies, tokens, or private credentials in this repo
 - invent latest-post data when collection fails
@@ -63,7 +71,7 @@ For 澄Cc default watchlist, read:
 
 10. `examples/watchlist-chengcc.example.json`
 
-For Cc local low-follower/high-performing case RAG, also inspect the private corpus folder above and retrieve only the topic-relevant files or sections. Do not bulk-read the whole corpus unless the user asks for a full audit.
+For local low-follower/high-performing case RAG, inspect only the active profile's configured corpus and retrieve only the topic-relevant files or sections. Do not bulk-read the whole corpus unless the user asks for a full audit.
 
 ## 2. Replaceable Slots
 
@@ -136,8 +144,34 @@ Normalize each collected item into a stable post record:
 - short excerpt or paraphrase
 - collection source
 - collection timestamp
+- optional `comment_snapshot` with short public comment excerpts, engagement score, reply count, author-reply hint, and raw local path
 
 Keep exact long original text in private raw storage only when allowed and needed. Long-term shareable summaries should be paraphrased.
+
+### Phase C2: Public Comment Snapshots
+
+Use comment collection only when the request needs audience reaction, real comment language, objection mining, or comment-trigger analysis.
+
+Current approved route:
+
+```bash
+node scripts/collect-search-read.mjs \
+  --watchlist examples/watchlist-chengcc.example.json \
+  --account "小柴人不纠结" \
+  --out-dir "/path/to/private/raw/run" \
+  --limit 3 \
+  --comments true \
+  --comments-limit 8 \
+  --comments-sort engagement
+```
+
+Comment handling rules:
+
+- Store full adapter comment output only in local/private raw output.
+- Normalize only short excerpts, public engagement counts, reply counts, author-reply hints, status, and raw path.
+- Default to `comments-sort engagement` so high-like/high-reply comments surface first.
+- If redbook returns captcha, session-expired, or access-control errors, report the failure and keep the post collection result; do not retry aggressively.
+- Treat comments as audience-language evidence, not writing copy. The writer may learn objections, resonance, and comment-trigger mechanics, but must not paste comment text as final content.
 
 ### Phase D: Build Note-Cards
 
@@ -153,6 +187,7 @@ Each note-card should capture:
 - structure
 - visual / format pattern
 - comment trigger
+- public comment signal when collected
 - what 澄Cc can borrow
 - what 澄Cc must not copy
 
@@ -171,6 +206,7 @@ Track:
 - visual habits
 - average body/card split
 - audience resonance mechanism
+- repeated audience comment motifs and objections when enough public comment snapshots exist
 - current 7-day signal
 - stable 30-day signal
 
@@ -196,11 +232,13 @@ For a specific writing topic, retrieve:
 - title/hook options to learn from
 - structure options to learn from
 - visual/page logic references
+- audience-language/comment-signal references when available
 - risks and do-not-copy notes
 
 The RAG brief should be short enough to paste into a writing workflow.
 
 Automatic RAG briefs are retrieval scaffolds. If the final content decision is important, review the retrieved note-cards before handing the brief to the writer.
+When comment snapshots are present, use them to infer reader language and resonance. Do not copy comment wording into final drafts.
 
 ### Phase G: Handoff To Writer
 
@@ -229,6 +267,7 @@ Use this structure unless the user asks for a specific file or template:
 - Adapter:
 - Time window:
 - New public notes found:
+- Public comment snapshots:
 - Failed accounts:
 - Raw storage:
 
@@ -242,6 +281,7 @@ Use this structure unless the user asks for a specific file or template:
 - Best references:
 - Reusable structures:
 - Title/hook lessons:
+- Audience/comment lessons:
 - Visual/page lessons:
 - Do-not-copy:
 - Handoff to writer:
@@ -260,6 +300,8 @@ Before finishing, verify:
 - Were duplicate or uncertain accounts handled explicitly?
 - Was collection status reported honestly?
 - Were public raw outputs kept local/private?
+- Were public comment snapshots kept short in normalized/shareable output?
+- Were captcha/session-expired comment failures reported honestly?
 - Were note-cards paraphrased rather than copied?
 - Did blogger-profile updates avoid overfitting one weak signal?
 - Did the RAG brief explain what to borrow and what not to copy?

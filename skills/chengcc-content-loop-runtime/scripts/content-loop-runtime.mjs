@@ -5,7 +5,28 @@ import path from "node:path";
 import crypto from "node:crypto";
 
 const DEFAULT_RUNTIME_ROOT =
-  "/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/Output/80-通用资产/小红书个人运营/content-loop-runtime";
+  path.resolve(process.cwd(), "runtime");
+
+const DEFAULT_CREATOR_PROFILE = {
+  profileVersion: "1.0.0",
+  creator: {
+    id: "chengcc",
+    displayName: "澄Cc",
+    accountName: "橙Cc / 澄Cc"
+  },
+  paths: {
+    runtimeRoot: DEFAULT_RUNTIME_ROOT,
+    ragCaseLibrary: "",
+    creatorAssets: "",
+    outputImages: "",
+    workbenchDir: ""
+  },
+  writing: {
+    positioning: "00后初入职场设计师，用真实场景、AI拆解和小方法整理情绪/工作/生活卡点。",
+    voice: "朋友感、真实小场景、不是老师、不硬塞AI。",
+    visualSystem: "治愈系手绘IP图文风，暖白纸感、橙色记忆点、清晰信息层级。"
+  }
+};
 
 const REQUIRED_RUN_FILES = [
   "run-status.json",
@@ -50,10 +71,40 @@ Status: active
 
 - Prefer concrete conflict over abstract self-improvement.
 - Make the reader recognize a real moment before offering a method.
+- Default title view is friend-to-friend complaint / case-solving, not teacher explanation.
+- Start from a gossipable contradiction: "I thought it was A, but it was B", "Does anyone else...", or a small embarrassing scene.
+- A title must create curiosity, self-recognition, and a safe comment opening before it promises a method.
 
 ## Watchlist
 
 - Check recent run titles before reusing a similar hook.
+- Block teacher-coded titles such as "提升X能力", "3个方法教你", "底层逻辑", "普通人一定要", unless the user explicitly asks for a tutorial.
+`,
+  "rules/friend-gossip-diagnosis-view.md": `# Friend Gossip Diagnosis View
+
+Status: active
+
+This is the default creator content view. It turns a topic into a small social/inner-life scene that readers can watch, recognize, and comment on.
+
+## Core Formula
+
+\`\`\`text
+gossipable scene -> wrong first explanation -> reversal / real problem -> AI as sidekick -> tiny reusable action -> comment opening
+\`\`\`
+
+## Required Checks
+
+- Is there a specific scene a friend would want to hear about?
+- Is there a contrast or reversal, not just a correct concept?
+- Can the reader think "this is me" within the first card or first 80 words?
+- Does the post give the reader one naming/tool/action they can steal?
+- Does the ending invite a story, choice, or self-disclosure instead of asking "did you learn it"?
+
+## Creator Voice
+
+- Use the creator profile's voice. Default to quiet friend complaint, self-mockery, and case-solving.
+- Keep AI as the helper that untangles the mess, not the teacher or protagonist.
+- Do not write from a lecturer, course, expert, or psychological counselor identity.
 `,
   "rules/visual-failure-rules.md": `# Visual Failure Rules
 
@@ -63,7 +114,7 @@ Status: active
 
 - Current post text on an old image.
 - Image path from a previous run used as final output.
-- Missing ChengCc IP locks when avatar appears.
+- Missing configured creator IP/avatar locks when avatar appears.
 - Semi-realistic collage or unrelated infographic when the approved route is healing hand-drawn IP.
 - Unreadable Chinese card text.
 
@@ -99,6 +150,12 @@ This file is the memory that should be read before starting a new Xiaohongshu co
 ## Last Accepted Lessons
 
 - No accepted lessons yet.
+
+## Current Default Content View
+
+- Use friend-to-friend complaint / case-solving as the default creator view.
+- Start with a gossipable scene and contrast, then reveal the real problem and let AI help sort one next action.
+- Avoid teacher-like framing unless the creator explicitly asks for tutorial content.
 
 ## Current Avoids
 
@@ -173,6 +230,45 @@ function readJson(filePath, fallback) {
   }
 }
 
+function loadProfile(args) {
+  const profilePath = args.profile || process.env.CONTENT_LOOP_PROFILE || "";
+  if (!profilePath) return DEFAULT_CREATOR_PROFILE;
+  const absoluteProfilePath = path.resolve(String(profilePath));
+  const profile = readJson(absoluteProfilePath, null);
+  if (!profile || typeof profile !== "object") {
+    throw new Error(`Invalid creator profile JSON: ${absoluteProfilePath}`);
+  }
+  const merged = {
+    ...DEFAULT_CREATOR_PROFILE,
+    ...profile,
+    creator: {
+      ...DEFAULT_CREATOR_PROFILE.creator,
+      ...(profile.creator || {})
+    },
+    paths: {
+      ...DEFAULT_CREATOR_PROFILE.paths,
+      ...(profile.paths || {})
+    },
+    writing: {
+      ...DEFAULT_CREATOR_PROFILE.writing,
+      ...(profile.writing || {})
+    },
+    __profilePath: absoluteProfilePath
+  };
+  merged.paths = resolveProfilePaths(merged.paths || {}, path.dirname(absoluteProfilePath));
+  return merged;
+}
+
+function resolveProfilePaths(paths, baseDir) {
+  const next = { ...paths };
+  for (const key of ["runtimeRoot", "ragCaseLibrary", "creatorAssets", "outputImages", "workbenchDir", "readerScript"]) {
+    const value = next[key];
+    if (!value || path.isAbsolute(String(value))) continue;
+    next[key] = path.resolve(baseDir, String(value));
+  }
+  return next;
+}
+
 function writeJson(filePath, value) {
   ensureDir(path.dirname(filePath));
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
@@ -200,11 +296,17 @@ function hashText(text) {
   return `sha256:${crypto.createHash("sha256").update(text || "").digest("hex")}`;
 }
 
-function runtimeRoot(args) {
-  return path.resolve(String(args["runtime-root"] || process.env.CHENGCC_CONTENT_LOOP_ROOT || DEFAULT_RUNTIME_ROOT));
+function runtimeRoot(args, profile = DEFAULT_CREATOR_PROFILE) {
+  return path.resolve(String(
+    args["runtime-root"] ||
+    process.env.CONTENT_LOOP_RUNTIME_ROOT ||
+    process.env.CHENGCC_CONTENT_LOOP_ROOT ||
+    profile.paths?.runtimeRoot ||
+    DEFAULT_RUNTIME_ROOT
+  ));
 }
 
-function initRuntime(root) {
+function initRuntime(root, profile = DEFAULT_CREATOR_PROFILE) {
   for (const dir of REQUIRED_RUNTIME_DIRS) ensureDir(path.join(root, dir));
 
   const writes = [];
@@ -212,7 +314,41 @@ function initRuntime(root) {
     if (writeIfMissing(path.join(root, relative), content)) writes.push(relative);
   }
   for (const [relative, content] of Object.entries(INITIAL_STATE_FILES)) {
+    if (relative === "state/loop-config.json") continue;
     if (writeIfMissing(path.join(root, relative), content)) writes.push(relative);
+  }
+
+  const loopConfig = {
+    version: "1.0.0",
+    mode: "L4.5-supervised-L5",
+    defaultCreator: profile.creator?.id || "chengcc",
+    publishGate: "human_required",
+    memoryUpdateGate: "human_required",
+    defaultRecentRunCount: 5,
+    requiredSiblingSkills: [
+      "xhs-blogger-intelligence",
+      "chengcc-xhs-workflow",
+      "cc-xhs-personal-growth-writer",
+      "xiaohongshu-ops"
+    ]
+  };
+  if (writeIfMissing(path.join(root, "state", "loop-config.json"), `${JSON.stringify(loopConfig, null, 2)}\n`)) {
+    writes.push("state/loop-config.json");
+  }
+
+  const creatorProfile = {
+    profileVersion: profile.profileVersion || "1.0.0",
+    profilePath: profile.__profilePath || "built-in-default",
+    creator: profile.creator || {},
+    paths: profile.paths || {},
+    writing: profile.writing || {}
+  };
+  const creatorProfilePath = path.join(root, "state", "creator-profile.json");
+  const creatorProfileContent = `${JSON.stringify(creatorProfile, null, 2)}\n`;
+  if (readText(creatorProfilePath) !== creatorProfileContent) {
+    ensureDir(path.dirname(creatorProfilePath));
+    fs.writeFileSync(creatorProfilePath, creatorProfileContent, "utf8");
+    writes.push("state/creator-profile.json");
   }
 
   const readme = `# ChengCc Content Loop Runtime
@@ -291,13 +427,14 @@ function excerpt(text, max) {
 }
 
 function createRun(root, args) {
-  initRuntime(root);
+  const profile = loadProfile(args);
+  initRuntime(root, profile);
 
   const intent = String(args.intent || "").trim();
   if (!intent) {
     throw new Error("Missing --intent. Example: --intent \"我想做一篇刚上班精神内耗选题\"");
   }
-  const creator = String(args.creator || "chengcc");
+  const creator = String(args.creator || profile.creator?.id || "chengcc");
   const topicSlug = slugify(args["topic-slug"] || intent);
   let runId = `${today()}-${topicSlug}`;
   let runDir = path.join(root, "runs", runId);
@@ -362,7 +499,7 @@ ${intent}
 - Do not update durable rules until Gate 2 is approved.
 `);
 
-  const bootstrap = buildBootstrap(root, runId, intent, Number(args.recent || 5));
+  const bootstrap = buildBootstrap(root, runId, intent, Number(args.recent || 5), profile);
   writeIfMissing(path.join(runDir, "01-bootstrap-context.md"), bootstrap);
 
   writeIfMissing(path.join(runDir, "02-rag-brief.md"), placeholder("02 RAG Brief", "Use xhs-blogger-intelligence. Record source files, reusable patterns, and do-not-copy notes."));
@@ -453,11 +590,12 @@ Status: waiting-for-data
 `;
 }
 
-function buildBootstrap(root, runId, intent, count) {
+function buildBootstrap(root, runId, intent, count, profile = DEFAULT_CREATOR_PROFILE) {
   const nextContext = readText(path.join(root, "state", "next-run-context.md")).trim();
   const ruleFiles = [
     "rules/topic-rubric.md",
     "rules/title-lessons.md",
+    "rules/friend-gossip-diagnosis-view.md",
     "rules/visual-failure-rules.md",
     "rules/publish-risk-rules.md"
   ];
@@ -465,6 +603,19 @@ function buildBootstrap(root, runId, intent, count) {
     .map((relative) => `## ${relative}\n\n${readText(path.join(root, relative)).trim() || "(missing)"}`)
     .join("\n\n");
   const recent = recentContext(root, count);
+  const profileBlock = [
+    `- Profile path: ${profile.__profilePath || "built-in-default"}`,
+    `- Creator ID: ${profile.creator?.id || "chengcc"}`,
+    `- Display name: ${profile.creator?.displayName || "澄Cc"}`,
+    `- Account name: ${profile.creator?.accountName || ""}`,
+    `- Positioning: ${profile.writing?.positioning || ""}`,
+    `- Voice: ${profile.writing?.voice || ""}`,
+    `- Visual system: ${profile.writing?.visualSystem || ""}`,
+    `- RAG case library: ${profile.paths?.ragCaseLibrary || "(not configured)"}`,
+    `- Creator assets: ${profile.paths?.creatorAssets || "(not configured)"}`,
+    `- Output images: ${profile.paths?.outputImages || "(not configured)"}`,
+    `- Workbench dir: ${profile.paths?.workbenchDir || "(not configured)"}`
+  ].join("\n");
   return `# 01 Bootstrap Context
 
 Status: ready
@@ -474,6 +625,10 @@ Intent hash: ${hashText(intent)}
 ## Current Intent
 
 ${intent}
+
+## Creator Profile
+
+${profileBlock}
 
 ## Next Run Context
 
@@ -589,24 +744,29 @@ function statusReport(root) {
 
 function usage() {
   return `Usage:
-  content-loop-runtime.mjs init [--runtime-root <path>]
-  content-loop-runtime.mjs new-run --intent <text> [--creator chengcc] [--topic-slug slug] [--recent 5] [--runtime-root <path>]
+  content-loop-runtime.mjs init [--profile <json>] [--runtime-root <path>]
+  content-loop-runtime.mjs new-run --intent <text> [--profile <json>] [--creator creator-id] [--topic-slug slug] [--recent 5] [--runtime-root <path>]
   content-loop-runtime.mjs validate-run --run-dir <path>
   content-loop-runtime.mjs approve-gate --run-dir <path> --gate publish|memory
-  content-loop-runtime.mjs promote-memory --run-dir <path> --approve [--runtime-root <path>]
-  content-loop-runtime.mjs status [--runtime-root <path>]
+  content-loop-runtime.mjs promote-memory --run-dir <path> --approve [--profile <json>] [--runtime-root <path>]
+  content-loop-runtime.mjs status [--profile <json>] [--runtime-root <path>]
+
+Environment:
+  CONTENT_LOOP_PROFILE=<profile.json>
+  CONTENT_LOOP_RUNTIME_ROOT=<runtime root>
 `;
 }
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const command = args._[0];
-  const root = runtimeRoot(args);
+  const profile = loadProfile(args);
+  const root = runtimeRoot(args, profile);
 
   try {
     if (command === "init") {
-      const writes = initRuntime(root);
-      console.log(JSON.stringify({ runtimeRoot: root, createdOrUpdated: writes }, null, 2));
+      const writes = initRuntime(root, profile);
+      console.log(JSON.stringify({ runtimeRoot: root, profile: profile.__profilePath || "built-in-default", createdOrUpdated: writes }, null, 2));
       return;
     }
     if (command === "new-run") {

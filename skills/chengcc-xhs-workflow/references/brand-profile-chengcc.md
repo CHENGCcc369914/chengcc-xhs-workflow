@@ -93,7 +93,7 @@ Avoid:
 - Current name: `澄Cc` is temporary and may be renamed because it is not distinctive enough on Xiaohongshu.
 - Naming direction: preserve a memorable orange / C / 程 / 铖 association if useful, but do not force every content idea into orange wordplay.
 - Avatar subject: ChengCc V2.0 healing hand-drawn young male designer IP. The identity should feel like a stylized version of Cc, not a cute orange mascot or generic 3D boy.
-- Current IP source: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`.
+- Current IP source: ChengCc private creator asset `ip-visual-system.md` configured by the active Cc creator profile.
 - Core memory symbol: orange `C` necklace first, then orange/C/orange-fruit outfit system, ChengCc/Cc/Ccc marks, C-shaped symbols, and optional orange phone when the scene involves phone use.
 - Locked avatar details: same face, black loose 4/6 side-part short hair, slightly rounder chin, subtle orange iris/pupil ring, left ear two silver earlobe earrings, right ear one silver earlobe earring, visible orange C necklace.
 - Symbol: orange C necklace, orange icon/slice, C-shaped moon/pocket/patch, diary, light, paper, recording traces, design-work details.

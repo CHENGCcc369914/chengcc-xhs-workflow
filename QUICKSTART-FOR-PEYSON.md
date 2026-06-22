@@ -1,205 +1,154 @@
 # Peyson Quick Start
 
-这份说明是给 Peyson 直接安装和使用的。目标是：你把仓库下载到本地后，机器人能默认按 L4.5 / supervised L5 小红书 loop 帮你完成选题、图文正文、出图提示或出图、发布审核、手动发布清单、真实数据复盘和下一篇经验吸收。
+这不是一组散装 prompt，而是一个可下载的 Xiaohongshu Content Loop 模板。
+
+目标：
+
+```text
+下载仓库 -> 替换成 Peyson 自己的社媒定位/声音/视觉/路径 -> 初始化 runtime -> 后面每篇内容都按同一个 Loop 跑
+```
 
 ## 1. 下载仓库
-
-如果你会用 Git：
 
 ```bash
 git clone https://github.com/CHENGCcc369914/chengcc-xhs-workflow.git
 cd chengcc-xhs-workflow
 ```
 
-如果你不用 Git：
+如果不用 Git，就在 GitHub 点 `Code -> Download ZIP`，解压后进入这个文件夹。
 
-1. 打开 GitHub 仓库页面。
-2. 点击 `Code` -> `Download ZIP`。
-3. 解压后进入 `chengcc-xhs-workflow` 文件夹。
+## 2. 一次性替换成 Peyson 资料
 
-## 2. 安装到机器人能读取的位置
-
-在终端里进入这个仓库，然后运行：
+最简单方式：
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R skills/chengcc-xhs-workflow ~/.agents/skills/
-cp -R skills/xhs-blogger-intelligence ~/.agents/skills/
-cp -R skills/chengcc-content-loop-runtime ~/.agents/skills/
+node scripts/setup-creator.mjs \
+  --id peyson \
+  --name "Peyson" \
+  --positioning "这里填 Peyson 的账号定位、目标读者、内容边界" \
+  --voice "这里填 Peyson 的写作声音、语气、禁区" \
+  --visual "这里填 Peyson 的视觉风格、IP/头像、字体、配色、出图规则"
 ```
 
-安装后最好重启一次你的机器人 / Codex / Claude Code 会话，让它重新读取 Skill 列表。
-
-## 3. 你需要安装哪些 Skill
-
-必装：
+这会生成：
 
 ```text
-chengcc-xhs-workflow
+profiles/peyson.creator-profile.json
+runtime/
+knowledge/xhs-case-library/
+assets/creator/
+outputs/images/
+workbench/
 ```
 
-它负责单篇小红书图文生产流程：
+并自动初始化 runtime。
+
+## 3. 如果让 Agent 替你填
+
+把这份指令发给你的 Agent：
 
 ```text
-读账号资料 -> 给 10 个选题 -> 等你选题 -> 写 4 页图文和正文 -> 等你确认 -> Image 2 出图或输出图片 prompt -> 发布审核 -> 手动发布清单 -> 发布后复盘
+请读取 docs/AGENT-REPLACE-CREATOR.md，
+然后把这个仓库从默认模板替换成 Peyson 的社媒 Content Loop。
+我的账号定位是：……
+我的写作声音是：……
+我的视觉风格是：……
+我的目标读者是：……
+我的内容禁区是：……
+完成后创建一条测试 run，并检查 01-bootstrap-context.md 是否已经显示 Peyson 的资料。
 ```
 
-建议一起装：
+Agent 应该只改：
 
 ```text
-xhs-blogger-intelligence
+profiles/peyson.creator-profile.json
 ```
 
-它负责上游情报：
+不要直接改 Skill 核心代码。
 
-```text
-博主监测 / 低粉高赞 / 案例拆解 / RAG brief
-```
+## 4. 后续每次跑内容
 
-如果你只是先做一篇内容，也建议走 runtime，因为一篇内容也应该留下 run record，避免图片、文案、复盘经验串到上一篇。
-
-默认必装 L4.5 / supervised L5 的“跨篇闭环”runtime：
-
-```text
-chengcc-content-loop-runtime
-```
-
-它负责保存每篇 run record、读取最近经验、调度 RAG 和单篇工作流、发布前停在 Gate 1、复盘后停在 Gate 2，再把确认后的经验放进下一篇启动上下文。
-
-## 4. 直接复制给机器人的启动话术
-
-### 默认做一篇澄Cc小红书
-
-```text
-帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。
-```
-
-机器人应该先创建 run record，读取最近经验，再进入 RAG、选题、图文、图片检测、发布包和复盘准备。
-
-Peyson 或其他账号替换成：
-
-```text
-按 L4.5 / supervised L5 content loop 跑。
-用 Peyson 默认资料做一篇小红书，主题是刚工作的人际关系内耗。
-```
-
-### 只要轻量文案，不建 run
-
-```text
-只写文案，不建 run，不跑完整流程：帮我写一篇关于刚下班脑子还在上班的小红书。
-```
-
-### 确认文案后出图和发布检查
-
-```text
-文案确认。目标平台是小红书。
-默认调用 Image 2 生成完整 3:4 图文卡片；如果你当前环境没有 Image 2，就输出可直接复制使用的完整图片 prompt。
-然后按 2026 小红书发布规范审核一遍，最后给我手动发布清单。
-```
-
-### 一句话跑完整流程
-
-```text
-用 Peyson 默认资料，跑完整小红书图文工作流。主题是「刚工作的人际关系内耗」。
-流程必须是：先给 10 个选题，等我选；选完后写 4 页图文和正文，等我确认；确认后默认调用 Image 2 出图；最后做发布审核和手动发布清单。
-```
-
-### L4.5 / supervised L5 跨篇闭环
-
-先初始化 runtime：
+先设置环境变量：
 
 ```bash
-node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs init
+export CONTENT_LOOP_PROFILE="$PWD/profiles/peyson.creator-profile.json"
 ```
 
 然后创建一篇内容 run：
 
 ```bash
 node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs new-run \
-  --intent "我想做一篇刚工作的人际关系内耗的小红书" \
-  --creator chengcc
+  --intent "我想做一篇刚工作的人际关系内耗的小红书"
 ```
 
-也可以直接对机器人说：
+或者直接对 Agent 说：
 
 ```text
-按 L4.5 / supervised L5 content loop 跑。
+按这个仓库的 content loop 跑。
+用 profiles/peyson.creator-profile.json 作为我的默认资料。
 我想做一篇「刚工作的人际关系内耗」的小红书。
-先创建 run record，读取最近经验，再 RAG、出 10 个选题、做图文和图片检测。
+先创建 run record，读取 bootstrap，再做 RAG、10 个选题、图文、出图、发布审核和手动发布清单。
 发布前停在 Gate 1，长期经验更新前停在 Gate 2。
 ```
 
-## 5. 重要边界
+## 5. 这个 Loop 会产出什么
 
-这套 Skill 会帮你准备发布包，但默认不会替你偷偷发布。
-
-默认终点是：
+每篇内容都会进入一个 run folder：
 
 ```text
-图片路径 + 标题 + 正文 + 标签 + 发布审核 + 手动发布清单
+runtime/runs/YYYY-MM-DD-topic/
+  00-intent.md
+  01-bootstrap-context.md
+  02-rag-brief.md
+  03-topic-options.md
+  04-selected-hypothesis.md
+  05-carousel-draft.md
+  06-image-manifest.json
+  07-publish-checklist.md
+  08-prediction.md
+  09-metrics-24h.md
+  10-metrics-72h.md
+  11-retro.md
+  12-memory-update-proposal.md
 ```
 
-你自己上传图片、粘贴文案、检查 AI 标识和隐私信息，然后决定是否点击发布。
+其中 `01-bootstrap-context.md` 是关键检查点。它必须显示 Peyson 的 profile，而不是澄Cc默认资料。
 
-L4.5 runtime 仍然保留两个强制人工 gate：
+## 6. 人工 Gate
 
-```text
-Gate 1：最终发布/上传/点击发布前，需要你确认。
-Gate 2：把复盘经验写进长期规则前，需要你确认。
-```
+默认不会偷偷发布。
 
-如果你的机器人环境没有 Image 2 / image generation 工具，它不能真正生成图片，只会输出完整图片 prompt。这个不是仓库的问题，是运行环境是否有出图工具的问题。
+- Gate 1：最终发布 / 上传 / 点击发布前，需要你确认。
+- Gate 2：复盘经验写进长期规则前，需要你确认。
 
-## 6. Peyson 默认资料在哪里
-
-你的账号默认资料在：
-
-```text
-skills/chengcc-xhs-workflow/references/brand-profile-peyson.md
-```
-
-如果后面你的定位、视觉风格、目标读者变了，优先改这个文件。
-
-不要直接改 `brand-profile-chengcc.md`，那是 Cc 的账号资料。
+如果你的环境没有 Image 2 / image generation 工具，系统会输出完整图片 prompt，而不是假装已经出图。
 
 ## 7. 常见问题
 
-### 机器人没有按这个流程跑
+### 它还是写得像 Cc
 
-先确认你是否把整个文件夹复制进去了，而不是只复制 `SKILL.md`。
-
-正确结构应该像这样：
+检查：
 
 ```text
-~/.agents/skills/chengcc-xhs-workflow/SKILL.md
-~/.agents/skills/chengcc-xhs-workflow/references/
-~/.agents/skills/chengcc-xhs-workflow/docs/
-~/.agents/skills/chengcc-xhs-workflow/templates/
-~/.agents/skills/chengcc-xhs-workflow/examples/
-~/.agents/skills/chengcc-content-loop-runtime/SKILL.md
-~/.agents/skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs
+runtime/runs/<latest-run>/01-bootstrap-context.md
 ```
 
-然后重启机器人会话，再发送：
+如果里面没有 Peyson 的 positioning / voice / visual system，说明 profile 没接上。
+
+### 它找不到案例库
+
+把低粉爆文、对标博主、历史案例放进：
 
 ```text
-用 Peyson 默认资料，按 Peyson 中控台确认版，先给我 10 个适合我的小红书选题。
+knowledge/xhs-case-library/
 ```
 
-### 它只给了 prompt，没有出图
+或者在 `profiles/peyson.creator-profile.json` 里修改 `paths.ragCaseLibrary`。
 
-说明当前机器人环境没有可用的 Image 2 / image generation 工具，或者生成失败。你可以把 prompt 复制到可用的出图工具里继续生成。
+### 它没有真实发布数据
 
-### 它写得像 Cc，不像 Peyson
+先手动填 `09-metrics-24h.md` / `10-metrics-72h.md`，或配置自己的平台数据读取脚本到：
 
-让机器人先读这个文件：
-
-```text
-skills/chengcc-xhs-workflow/references/brand-profile-peyson.md
-```
-
-然后说：
-
-```text
-这篇不要用澄Cc口吻，改用 Peyson 默认资料重写。
+```json
+"readerScript": "/your/path/to/read-creator-dashboard.mjs"
 ```

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "writing-only-draft",
+    "prompt": "只写文案，不建 run，不跑完整流程：用我的小红书创作系统写一篇，课题分离救了我一次职场内耗。",
+    "expected_behavior": "Uses cc-xhs-personal-growth-writer for writing, reads the local KB, outputs titles, cover copy, body, AI review action, comment CTA, tags, and risk check without pretending to generate final images."
+  },
+  {
+    "name": "default-chengcc-post-routes-to-runtime",
+    "prompt": "帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。",
+    "expected_behavior": "Does not independently produce a writing-only draft. Routes to chengcc-content-loop-runtime by default so the post enters an L4.5 run record, with this skill used only later for voice/copy support."
+  },
+  {
+    "name": "complete-package-routes-to-workflow",
+    "prompt": "用澄Cc默认资料做完整发布包：10 个选题、4 页图文、Image 2、发布审核和手动发布清单。",
+    "expected_behavior": "Routes the complete package to chengcc-xhs-workflow, keeps this skill as voice/copy support, and does not independently produce a publish checklist without the workflow manifest gate."
+  },
+  {
+    "name": "writer-visual-manifest-awareness",
+    "prompt": "帮我写完这篇并做图文卡片，如果出图后我改了第 1 页标题，怎么办？",
+    "expected_behavior": "Explains that card copy must be locked before Image 2, changed text requires regenerating the affected card, and final upload order must come only from run-manifest.json pages marked pass and publish_ready true."
+  },
+  {
+    "name": "local-case-rag-before-writing",
+    "prompt": "这个主题帮我参考低粉高爆案例：刚入职总怕被评价。",
+    "expected_behavior": "Retrieves a bounded RAG brief from the local case corpus, extracts title hook, true opening setup, AI turning question, method list, and CTA patterns, and does not copy source paragraphs."
+  },
+  {
+    "name": "no-old-orange-ip-default",
+    "prompt": "用澄Cc默认资料写一篇并给封面画面建议。",
+    "expected_behavior": "Uses the current visual truth source and describes Style B healing hand-drawn ChengCc standard human IP as default, with the old orange fruit mascot only if the user explicitly requests the legacy route."
+  },
+  {
+    "name": "friend-gossip-title-default",
+    "prompt": "只写文案，不建 run：用澄Cc默认资料写一篇，用AI提升财商能力。",
+    "expected_behavior": "Reframes the topic from a teacher-like concept into friend-to-friend complaint/case-solving, generates titles with a concrete scene and contrast such as 'I thought A but B', keeps AI as a sidekick, and avoids defaulting to tutorial titles like '提升X能力' or '3个方法'."
+  }
+]

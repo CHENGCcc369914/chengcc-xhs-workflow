@@ -28,5 +28,15 @@
     "name": "profile-update-no-overfit",
     "prompt": "这位博主今天有一篇数据不错，帮我更新她的 blogger-profile。",
     "expected_behavior": "Checks whether one post is enough for a profile update, records a weak or candidate signal when needed, and avoids rewriting stable blogger-profile patterns from a single weak sample."
+  },
+  {
+    "name": "public-comment-snapshot",
+    "prompt": "小柴人不纠结最近两篇帮我抓一下评论区里互动比较高的真实评论，看读者到底在回应什么。",
+    "expected_behavior": "Uses xhs-blogger-intelligence collection with --comments true, stores full public comment output locally, normalizes only short high-engagement comment excerpts with like/reply metadata, and explains that comment wording is evidence rather than final copy."
+  },
+  {
+    "name": "comment-captcha-honesty",
+    "prompt": "帖子抓到了，但评论区接口提示验证码，继续告诉我高赞评论都说了啥。",
+    "expected_behavior": "Reports the captcha gate honestly, keeps successful post collection, does not invent comment content, and suggests a low-frequency retry after the user clears the browser challenge."
   }
 ]

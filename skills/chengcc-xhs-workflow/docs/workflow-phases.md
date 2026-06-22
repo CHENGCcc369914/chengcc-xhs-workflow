@@ -15,17 +15,24 @@ Read creator-specific materials first:
 - local benchmark / RAG corpus
 - hard avoids
 
-For 澄Cc, the current confirmed route is:
+For runtime/template runs, the current confirmed route comes from `profiles/<creator-id>.creator-profile.json`:
+
+- creator identity / persona / target reader
+- content pillars and hard avoids
+- voice and AI boundary
+- visual system and creator asset folder
+- low-follower/high-performing case corpus from `paths.ragCaseLibrary`
+- publishing platform and output folders
+
+For 澄Cc local/private runs without an active profile, the confirmed route is:
 
 - 00后应届生 / 初入职场新手
 - peers who are in school, close to graduation, or just started working
 - Style B default, Style A backup
 - Visual System V2: content input -> meaning -> emotion -> layout -> editorial visual -> feedback
-- ChengCc IP Visual System V2.0 is automatically applied by default:
-  `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
+- ChengCc IP Visual System V2.0 is automatically applied by default from Cc's private local asset folder
 - AI as a method share
-- local low-follower/high-performing case corpus:
-  `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- local low-follower/high-performing case corpus from Cc's private local case-library folder
 
 ## 2. Topic Selection
 

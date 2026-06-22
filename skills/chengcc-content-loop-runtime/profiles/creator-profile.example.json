@@ -1,0 +1,32 @@
+{
+  "profileVersion": "1.0.0",
+  "creator": {
+    "id": "peyson",
+    "displayName": "Peyson",
+    "accountName": "Peyson",
+    "platform": "xiaohongshu"
+  },
+  "paths": {
+    "runtimeRoot": "/ABSOLUTE/PATH/TO/social-content-loop-runtime",
+    "ragCaseLibrary": "/ABSOLUTE/PATH/TO/xhs-case-library",
+    "creatorAssets": "/ABSOLUTE/PATH/TO/creator-assets",
+    "outputImages": "/ABSOLUTE/PATH/TO/publish-images",
+    "workbenchDir": "/ABSOLUTE/PATH/TO/social-growth-workbench",
+    "readerScript": "/ABSOLUTE/PATH/TO/xiaohongshu-ops/scripts/read-creator-dashboard.mjs"
+  },
+  "writing": {
+    "positioning": "Replace with the creator's public positioning and target reader.",
+    "voice": "Replace with the creator's writing voice, boundaries, and prohibited tones.",
+    "contentStandards": [
+      "Start from a real scene.",
+      "Use cases and evidence before conclusions.",
+      "Keep AI as a helper, not the whole identity."
+    ],
+    "visualSystem": "Replace with the creator's visual style, IP/avatar rules, typography, palette, and image-generation constraints."
+  },
+  "platformRules": {
+    "publishGate": "human_required",
+    "memoryUpdateGate": "human_required",
+    "manualPublishByDefault": true
+  }
+}

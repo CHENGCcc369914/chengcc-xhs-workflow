@@ -18,6 +18,9 @@ Required:
 Optional:
   --query <text>     Search query, defaults to account display_name
   --limit <n>        Notes to read after filtering, default 3, max 10
+  --comments <bool>  Collect public comment snapshots (off by default). Values: true/false
+  --comments-limit <n> Max comment snapshots per note, default 8, max 50
+  --comments-sort <mode> Comment snapshot ranking: engagement or source, default engagement
   --redbook <cmd>    redbook command, default "redbook"
 `;
 
@@ -80,6 +83,29 @@ function parseJson(text, label) {
   } catch (error) {
     throw new Error(`Failed to parse ${label} as JSON: ${error.message}`);
   }
+}
+
+function toSafeInt(value, fallback, min, max) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return fallback;
+  }
+  const rounded = Math.floor(parsed);
+  return Math.max(min, Math.min(rounded, max));
+}
+
+function parseCount(value) {
+  if (value == null || value === "") {
+    return 0;
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+  const text = String(value).trim();
+  const multiplier = text.includes("万") ? 10000 : 1;
+  const normalized = text.replace(/[^\d.]/g, "");
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? parsed * multiplier : 0;
 }
 
 function readWatchlist(path) {
@@ -200,9 +226,72 @@ function summarizeWithoutCopying(detail) {
   return `Public note about ${topic}; title-led format${mediaCount ? ` with ${mediaCount} media item(s)` : ""}. Use this as structure signal only.`;
 }
 
+function summarizeComments(raw, limit, options = {}) {
+  const container = raw?.data || raw || {};
+  const comments = Array.isArray(container)
+    ? container
+    : Array.isArray(container.comments)
+    ? container.comments
+    : (Array.isArray(container.items) ? container.items : []);
+  const total = toSafeInt(
+    container.total,
+    toSafeInt(
+      container.comment_count,
+      comments.length,
+      0,
+      Number.MAX_SAFE_INTEGER
+    ),
+    0,
+    Number.MAX_SAFE_INTEGER
+  );
+
+  const normalized = comments.map((item, index) => {
+      const author = item?.user_info || item?.user || item?.author || {};
+      const text = item?.content || item?.text || item?.comment_content || "";
+      const likeCount = item?.interact_info?.liked_count ?? item?.liked_count ?? item?.like_count ?? null;
+      const replyCount = item?.sub_comment_count ?? item?.reply_count ?? null;
+      const authorReply = (item?.sub_comments || []).find((reply) => {
+        const replyAuthor = reply?.user_info || reply?.user || reply?.author || {};
+        return (reply.show_tags || []).includes("is_author") || (options.authorUserId && replyAuthor.user_id === options.authorUserId);
+      });
+      const score = parseCount(likeCount) + parseCount(replyCount) * 2;
+      return {
+        comment_id: item?.id || item?.comment_id || null,
+        user_nickname: author.nickname || author.nick_name || author.name || "unknown",
+        user_id: author.user_id || author.id || null,
+        text_excerpt: String(text).slice(0, 120),
+        like_count: likeCount,
+        sub_comment_count: replyCount,
+        engagement_score: score,
+        ip_location: item?.ip_location || null,
+        status: item?.status ?? null,
+        author_reply_excerpt: authorReply?.content ? String(authorReply.content).slice(0, 120) : "",
+        posted_at: epochToIso(parseCount(item?.time || item?.create_time || item?.created_at)) || item?.time || item?.create_time || item?.created_at || null,
+        source_index: index
+      };
+    })
+    .filter((item) => item.text_excerpt);
+
+  const snapshots = (options.sortMode === "source" ? normalized : normalized.sort((a, b) => b.engagement_score - a.engagement_score))
+    .slice(0, limit);
+
+  return {
+    count: total,
+    selection: options.sortMode === "source" ? "source_order" : "top_by_engagement",
+    snapshots
+  };
+}
+
 function noteCardMarkdown(record) {
   const safeTitle = record.title || "(untitled)";
   const topicTags = (record.tag_names || []).slice(0, 8).join(" / ") || "unknown";
+  const commentSnapshot = record.comment_snapshot;
+  const commentSummary = commentSnapshot
+    ? `${commentSnapshot.snapshots.length} public sample(s), ${commentSnapshot.selection || "unknown selection"}`
+    : "not requested or unavailable";
+  const commentExamples = commentSnapshot?.snapshots?.length
+    ? commentSnapshot.snapshots.map((item) => `- ${item.text_excerpt} (score: ${item.engagement_score || 0})`).join("\n")
+    : "- none";
   return `# Note-Card
 
 ## Identity
@@ -225,6 +314,7 @@ function noteCardMarkdown(record) {
 - Reader emotion: infer from title and tags; verify before using in writing
 - Visible format: ${record.format || "unknown"}
 - Media count: ${record.media_count ?? "unknown"}
+- Public comment snapshot: ${commentSummary}
 
 ## Underlying Logic
 
@@ -235,6 +325,9 @@ function noteCardMarkdown(record) {
 - Turn / reframe: pending distillation
 - Ending move: pending distillation
 - Comment trigger: pending distillation
+- Actual audience reaction: pending distillation from comment snapshot if available
+- High-engagement comment samples:
+${commentExamples}
 
 ## Structure
 
@@ -254,7 +347,9 @@ function noteCardMarkdown(record) {
 ## Borrow / Avoid
 
 - What 澄Cc can borrow: topic lane, hook type, and page rhythm after review
+- What 澄Cc can learn from comments: audience language, objections, and resonance only
 - What 澄Cc should not copy: exact wording, creator-specific story, visual IP
+- Comment wording not to copy: all public comment excerpts are evidence, not final copy
 - Risk: automatic note-card is a scaffold, not final distillation
 - Fit score for 澄Cc /100: pending
 
@@ -268,10 +363,25 @@ function noteCardMarkdown(record) {
 }
 
 function collectionRunMarkdown({ args, account, searchResult, filtered, reads, outputPaths }) {
+  const commentRows = args.comments
+    ? reads
+      .filter((read) => read.comment_summary)
+      .map((read) => {
+        const commentSummary = read.comment_summary || { count: 0 };
+        return `| ${read.source.id || read.source.url} | ${commentSummary.count} | ${commentSummary.snapshots.length} |`;
+      })
+    : [];
+
   const rows = reads.map((read) => {
     const status = read.status === 0 ? "pass" : "fail";
     return `| ${account.display_name} | \`redbook read ${read.source.id || read.source.url}\` | ${status} | ${read.status === 0 ? 1 : 0} | search-read | ${read.error || read.stderr.split("\n").find(Boolean) || ""} |`;
   }).join("\n");
+  const commentFailures = args.comments
+    ? reads
+      .filter((read) => read.comment_error)
+      .map((read) => `- ${read.source.id || read.source.url}: ${read.comment_error}`)
+      .join("\n")
+    : "";
   return `# Collection Run
 
 ## Run Metadata
@@ -309,6 +419,8 @@ ${reads.filter((read) => read.status !== 0).map((read) => `- ${read.source.url}:
 - Note-cards created: ${reads.filter((r) => r.status === 0).length}
 - Blogger-profiles updated: 0
 - RAG briefs created: 0
+${args.comments ? `\n## Comment Snapshots\n\n- Notes with comments captured: ${commentRows.length}\n- Notes with no retrievable comments (after successful read): ${reads.filter((r) => r.status === 0 && !r.comment_summary).length}\n\n| Note / URL | Comments (raw total) | Samples saved |\n|---|---:|---:|\n${commentRows.join("\n")}` : ""}
+${args.comments && commentFailures ? `\n### Comment Capture Failures\n\n${commentFailures}` : ""}
 
 ## Next Action
 
@@ -332,6 +444,10 @@ function main() {
   }
   args.redbook = args.redbook || "redbook";
   args.limit = Math.max(1, Math.min(Number(args.limit || 3), 10));
+  args.comments = String(args.comments || "false").toLowerCase() === "true";
+  args.commentsLimit = toSafeInt(args["comments-limit"] || args.commentsLimit || 8, 8, 1, 50);
+  args.commentsSort = args["comments-sort"] || args.commentsSort || "engagement";
+  args.commentsSort = ["source", "engagement"].includes(args.commentsSort) ? args.commentsSort : "engagement";
   args.query = args.query || args.account;
 
   const watchlist = readWatchlist(args.watchlist);
@@ -364,7 +480,27 @@ function main() {
     const idSlug = slug(source.id || source.title || source.url);
     const readBase = join(rawDir, `read-${idSlug}`);
     const readResult = runCommand(args.redbook, ["read", source.url, "--json"], readBase);
-    const read = { ...readResult, source };
+    const read = { ...readResult, source, comment_summary: null, comment_error: "" };
+    if (readResult.status === 0 && args.comments) {
+      const commentsBase = join(rawDir, `comments-${idSlug}`);
+      const commentsResult = runCommand(args.redbook, ["comments", source.url, "--all", "--json"], commentsBase);
+      if (commentsResult.status === 0) {
+        const commentsPath = `${commentsBase}.json`;
+        const comments = parseJson(commentsResult.stdout, `redbook comments ${source.url}`);
+        writeText(commentsPath, JSON.stringify(comments, null, 2));
+        const commentSummary = summarizeComments(comments, args.commentsLimit, {
+          authorUserId: account.xhs_user_id,
+          sortMode: args.commentsSort
+        });
+        read.comment_summary = { ...commentSummary, raw_comment_path: commentsPath };
+      } else {
+        read.comment_error = commentsResult.stderr.split("\n").find((line) => line.includes("Error:")) || commentsResult.stderr.split("\n").find(Boolean) || commentsResult.error || "comments command failed";
+        appendFileSync(
+          errorLog,
+          `${JSON.stringify({ source, status: commentsResult.status, command: commentsResult.command, stderr: commentsResult.stderr, error: commentsResult.error })}\n`
+        );
+      }
+    }
     reads.push(read);
     if (readResult.status !== 0) {
       appendFileSync(errorLog, `${JSON.stringify({ source, status: readResult.status, stderr: readResult.stderr, error: readResult.error })}\n`);
@@ -374,6 +510,9 @@ function main() {
     const rawJsonPath = `${readBase}.json`;
     writeText(rawJsonPath, JSON.stringify(detail, null, 2));
     const record = normalizeDetail(detail, account, source, rawJsonPath);
+    if (read.comment_summary) {
+      record.comment_snapshot = read.comment_summary;
+    }
     normalizedRecords.push(record);
     writeText(join(distilledDir, `note-card-${slug(record.post_id || source.id)}.md`), noteCardMarkdown(record));
   }
@@ -398,6 +537,9 @@ function main() {
     query: args.query,
     filtered_count: filtered.length,
     detail_reads_ok: reads.filter((read) => read.status === 0).length,
+    comments_requested: args.comments,
+    comment_snapshots_ok: reads.filter((read) => read.comment_summary).length,
+    comment_snapshots_failed: reads.filter((read) => read.comment_error).length,
     out_dir: outDir,
     normalized: normalizedFile
   }, null, 2));

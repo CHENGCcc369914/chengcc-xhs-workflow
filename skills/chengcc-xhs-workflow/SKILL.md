@@ -29,12 +29,14 @@ This skill is the orchestration truth source for 澄Cc complete single-post Xiao
 
 For ChengCc, `chengcc-content-loop-runtime` is the default parent runtime for normal post production, not only when the user says "L4.5". In that mode, this skill writes the single-post package into the current run folder and does not own long-term memory updates.
 
+For GitHub/template use, the current run's `01-bootstrap-context.md` is the active creator contract. If it contains `## Creator Profile`, use that profile's creator identity, positioning, voice, visual system, RAG case library, asset paths, output image folder, and workbench path before any ChengCc defaults. Do not silently fall back to Cc local paths when the profile is missing or still a placeholder; report the missing profile field and pause.
+
 Priority rules:
 
 1. If the user explicitly asks for real browsing, searching, uploading, creator-center filling, commenting, or publishing automation, use `xiaohongshu-ops` for those platform actions. Otherwise, keep publishing manual.
 2. If the request is normal ChengCc post production, start or continue a `chengcc-content-loop-runtime` run first unless the user explicitly asks for lightweight writing-only output.
 3. If the request asks how benchmark bloggers recently posted, how low-follower/high-performing notes are written, or asks for similar-case RAG, run `xhs-blogger-intelligence` first, then use its RAG brief as context.
-4. For 澄Cc local work, the default manual case corpus is `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`. Retrieve only topic-relevant files/sections from this folder; do not bulk-read the whole corpus unless the user asks for a full audit.
+4. For runtime/template work, use the active creator profile's RAG case library. For Cc's own local work only, the Cc private corpus may be used as a fallback. Retrieve only topic-relevant files/sections; do not bulk-read the whole corpus unless the user asks for a full audit.
 5. If the request includes full carousel production, Image 2, publish review, manual publish checklist, or post-publish scoring, this skill is the main single-post workflow even when the parent runtime owns the run.
 6. If the request explicitly asks only for copy, title options, cover wording, or a single lightweight writing draft with no run/workflow/images, `cc-xhs-personal-growth-writer` is the main skill.
 7. Do not route to `xiaohongshu-ops` for offline content strategy, copywriting, Image 2, run-manifest validation, or performance interpretation. It is a platform UI executor only.
@@ -48,8 +50,8 @@ Before creating content, identify these slots:
 | Creator profile | `references/brand-profile-chengcc.md` | own profile, or `references/brand-profile-peyson.md` for Peyson |
 | Confirmed console | 澄Cc self-media console / default资料 | own creator console |
 | Visual style | `references/visual-adapter-rules.md` + `references/visual-system-v2.md` | own visual rules and validation gates |
-| IP visual spec | `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md` | own IP spec or no character system |
-| IP clothing asset reference | `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png` | own clothing / outfit reference, or none |
+| IP visual spec | ChengCc local visual spec when running Cc's own profile | own IP spec or no character system |
+| IP clothing asset reference | ChengCc local clothing reference when running Cc's own profile | own clothing / outfit reference, or none |
 | Benchmark / RAG corpus | 澄Cc local low-follower/high-performing case library | own case library folder, export, database, or no corpus |
 | Topic map | graduation / relationships / early career / self-doubt / AI sharing | own content pillars |
 | Image mode | Image 2 full-card | own image model/style |
@@ -72,15 +74,27 @@ Do not hard-code Cc's private local paths into shareable output.
 
 ## 1. Required Reads
 
-For 澄Cc:
+For runtime/template runs:
+
+1. Current run `01-bootstrap-context.md`
+2. Active creator profile paths from that bootstrap
+3. `references/workflow-pipeline.md`
+4. `references/publish-safety.md`
+5. `references/visual-system-v2.md`, adapted to the creator profile
+6. `docs/workflow-phases.md`
+7. `docs/publish-review-2026.md`
+8. `docs/platform-publish-rules-2026.md`
+9. `docs/performance-loop.md`
+
+For 澄Cc without a runtime profile:
 
 1. `references/brand-profile-chengcc.md`
 2. `references/workflow-pipeline.md`
 3. `references/visual-adapter-rules.md`
 4. `references/chengcc-ip-extension-rules.md`
 5. `references/visual-system-v2.md`
-6. `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
-7. `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png` when avatar outfit / action / scene illustration / avatar cover / three-view generation is involved
+6. ChengCc local IP visual spec when available
+7. ChengCc local clothing asset reference when available and avatar outfit / action / scene illustration / avatar cover / three-view generation is involved
 8. `references/publish-safety.md`
 9. `docs/workflow-phases.md`
 10. `docs/publish-review-2026.md`
@@ -93,9 +107,7 @@ The ChengCc IP Visual System V2.0 is a default 澄Cc visual source, not an optio
 
 The ChengCc clothing asset reference is also default when the avatar appears. Treat clothing as an original scene-variable asset system: keep the fixed face/hair/features/earrings/C necklace, then create page-specific outfits with orange elements, C-shaped structure, citrus motifs, orange recognition color, retro loose silhouettes, and clean healing life-aesthetic details. Do not reduce the avatar to ordinary basic clothes or a simple orange recolor.
 
-For 澄Cc requests involving topic research, low-follower/high-performing cases, similar-note references, title improvement, body structure learning, or "先看看别人怎么写", retrieve from the local case corpus first through `xhs-blogger-intelligence`:
-
-`/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+For requests involving topic research, low-follower/high-performing cases, similar-note references, title improvement, body structure learning, or "先看看别人怎么写", retrieve from the active creator profile's RAG case library first through `xhs-blogger-intelligence`.
 
 Use the RAG result as a compact benchmark brief. Do not copy source paragraphs; extract reusable patterns such as opening setup, brain-voice lines, AI turning question, method names, collection CTA, and anti-patterns.
 
@@ -150,12 +162,12 @@ If the user has not selected a creator profile, infer a minimal profile only whe
 
 First output 10 topics suitable for the creator. Do not jump straight into a finished article unless the user has already picked a topic.
 
-If the creator is 澄Cc and the request mentions traffic, benchmark, low-follower/high-performing notes, similar notes, RAG, "爆款", "怎么写", or content optimization, first run a bounded local corpus retrieval:
+If the request mentions traffic, benchmark, low-follower/high-performing notes, similar notes, RAG, "爆款", "怎么写", or content optimization, first run a bounded local corpus retrieval:
 
-- source folder: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- source folder: active creator profile `paths.ragCaseLibrary`
 - retrieve 3-8 topic-relevant cases
 - summarize title hook, true opening setup, emotional brain-voice, AI turning question, method list, CTA/save logic
-- mark which parts can be adapted by 澄Cc and which parts must not be copied
+- mark which parts can be adapted by the active creator and which parts must not be copied
 
 Each topic must include:
 

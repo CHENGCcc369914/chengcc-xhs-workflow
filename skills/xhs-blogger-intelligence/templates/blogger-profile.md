@@ -31,6 +31,8 @@ Use one profile per benchmark blogger. Update only when there is enough evidence
 - Repeated visual/page style:
 - Body/card split:
 - Comment CTA style:
+- Repeated public comment motifs:
+- Repeated objections / questions:
 
 ## Latest 7-Day Signal
 
@@ -39,6 +41,7 @@ Use one profile per benchmark blogger. Update only when there is enough evidence
 - New formats:
 - New visual moves:
 - Performance hints:
+- Comment/audience-language hints:
 - What may be a one-off experiment:
 
 ## Creator Logic
@@ -48,6 +51,7 @@ Use one profile per benchmark blogger. Update only when there is enough evidence
 - Why readers may save:
 - Why readers may comment:
 - Why readers may follow:
+- What high-engagement comments reveal:
 
 ## Lessons For 澄Cc
 
@@ -63,5 +67,6 @@ Use one profile per benchmark blogger. Update only when there is enough evidence
 
 - Note-cards used:
 - Raw snapshots:
+- Comment snapshots:
 - Confidence: high / medium / low
 - Last updated:

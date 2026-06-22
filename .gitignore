@@ -6,7 +6,20 @@ tmp/
 *.local.*
 .env
 .env.*
+.fenjue-source.json
+**/.fenjue-source.json
 outputs/private/
 raw/
 screenshots/private/
 
+# Local creator runtime state and private content
+runtime/
+workbench/data/
+outputs/images/
+outputs/publish-packages/
+knowledge/xhs-case-library/*
+knowledge/benchmark-watchlist/*
+assets/creator/private/
+
+!knowledge/xhs-case-library/.gitkeep
+!knowledge/benchmark-watchlist/.gitkeep

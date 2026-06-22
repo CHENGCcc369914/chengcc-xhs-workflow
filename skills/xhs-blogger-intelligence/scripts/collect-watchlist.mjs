@@ -23,6 +23,9 @@ Optional:
   --accounts <names>  Comma-separated display_name allowlist
   --statuses <list>   Comma-separated statuses, default "search_only,active"
   --limit <n>         Notes to read per account, default 2, max 10
+  --comments <bool>   Collect public comment snapshots per note, default false
+  --comments-limit <n> Max comment snapshots per note, default 8, max 50
+  --comments-sort <mode> Comment snapshot ranking: engagement or source, default engagement
   --redbook <cmd>     redbook command, default "redbook"
 `;
 
@@ -84,8 +87,8 @@ function assertPrivateOutRoot(outRoot) {
   }
 }
 
-function runAccount({ watchlistPath, accountName, outDir, limit, redbook }) {
-  const result = spawnSync(process.execPath, [
+function runAccount({ watchlistPath, accountName, outDir, limit, redbook, comments, commentsLimit, commentsSort }) {
+  const childArgs = [
     collectScript,
     "--watchlist",
     watchlistPath,
@@ -97,7 +100,12 @@ function runAccount({ watchlistPath, accountName, outDir, limit, redbook }) {
     String(limit),
     "--redbook",
     redbook
-  ], { encoding: "utf8", maxBuffer: 20 * 1024 * 1024 });
+  ];
+  if (comments) {
+    childArgs.push("--comments", "true", "--comments-limit", String(commentsLimit), "--comments-sort", commentsSort);
+  }
+
+  const result = spawnSync(process.execPath, childArgs, { encoding: "utf8", maxBuffer: 20 * 1024 * 1024 });
 
   writeText(join(outDir, "runner.stdout"), result.stdout || "");
   writeText(join(outDir, "runner.stderr"), result.stderr || "");
@@ -127,8 +135,10 @@ function batchMarkdown({ startedAt, finishedAt, args, selected, skipped, results
     const ok = item.status === 0;
     const reads = item.stdout_summary?.detail_reads_ok ?? 0;
     const filtered = item.stdout_summary?.filtered_count ?? 0;
-    return `| ${item.account} | ${ok ? "pass" : "fail"} | ${filtered} | ${reads} | ${item.out_dir} |`;
-  }).join("\n") || "| none | none | 0 | 0 | |";
+    const commentsOk = item.stdout_summary?.comment_snapshots_ok ?? 0;
+    const commentsFailed = item.stdout_summary?.comment_snapshots_failed ?? 0;
+    return `| ${item.account} | ${ok ? "pass" : "fail"} | ${filtered} | ${reads} | ${commentsOk} | ${commentsFailed} | ${item.out_dir} |`;
+  }).join("\n") || "| none | none | 0 | 0 | 0 | 0 | |";
 
   const skippedRows = skipped.map((item) => `| ${item.display_name} | ${item.status} | ${item.reason} |`).join("\n") || "| none | | |";
 
@@ -143,6 +153,7 @@ function batchMarkdown({ startedAt, finishedAt, args, selected, skipped, results
 - Status filter: \`${args.statuses}\`
 - Account filter: \`${args.accounts || "none"}\`
 - Limit per account: ${args.limit}
+- Comments: ${args.comments ? `yes, ${args.commentsLimit} per note, ${args.commentsSort} sort` : "no"}
 - Adapter: \`${args.redbook}\`
 
 ## Selected Accounts
@@ -152,8 +163,8 @@ function batchMarkdown({ startedAt, finishedAt, args, selected, skipped, results
 
 ## Results
 
-| Account | Status | Filtered Search Items | Detail Reads | Output |
-|---|---|---:|---:|---|
+| Account | Status | Filtered Search Items | Detail Reads | Comment Snapshots | Comment Failures | Output |
+|---|---|---:|---:|---:|---:|---|
 ${resultRows}
 
 ## Skipped Accounts
@@ -185,6 +196,10 @@ function main() {
   args.statuses = args.statuses || "search_only,active";
   args.redbook = args.redbook || "redbook";
   args.limit = Math.max(1, Math.min(Number(args.limit || 2), 10));
+  args.comments = String(args.comments || "false").toLowerCase() === "true";
+  args.commentsLimit = Math.max(1, Math.min(Number(args["comments-limit"] || args.commentsLimit || 8), 50));
+  args.commentsSort = args["comments-sort"] || args.commentsSort || "engagement";
+  args.commentsSort = ["source", "engagement"].includes(args.commentsSort) ? args.commentsSort : "engagement";
 
   if (!existsSync(args.watchlist)) {
     throw new Error(`Watchlist not found: ${args.watchlist}`);
@@ -221,7 +236,10 @@ function main() {
       accountName: account.display_name,
       outDir: accountDir,
       limit: args.limit,
-      redbook: args.redbook
+      redbook: args.redbook,
+      comments: args.comments,
+      commentsLimit: args.commentsLimit,
+      commentsSort: args.commentsSort
     }));
   }
 

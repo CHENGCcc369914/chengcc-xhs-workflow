@@ -1,0 +1,30 @@
+{
+  "skill_name": "cc-xhs-personal-growth-writer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "用我的小红书创作系统写一篇：课题分离救了我一次职场内耗",
+      "expected_output": "读取账号定位、内容公式和对应博主蒸馏资产后，输出标题、封面、正文、AI复盘动作、评论区引导、标签和风险检查。"
+    },
+    {
+      "id": 2,
+      "prompt": "我想写一个选题：用AI帮我拆清楚我为什么总是害怕被领导评价",
+      "expected_output": "将主题压成一个小道理，优先参考情绪/职场/AI相关博主，生成小红书草稿并包含事实/解释/情绪/下一步复盘表。"
+    },
+    {
+      "id": 3,
+      "prompt": "把“反求诸己不是怪自己，是找回主动权”拆成8个不同场景的小红书选题",
+      "expected_output": "围绕同一个知识点拆成多个场景，每个选题包含标题、场景、读者痛点、AI切入点和评论区问题。"
+    },
+    {
+      "id": 4,
+      "prompt": "用澄Cc默认资料做完整发布包：4页图文、Image 2、发布审核和手动发布清单",
+      "expected_output": "转交 chengcc-xhs-workflow 主导完整发布流程；如已出图，必须要求 run-manifest.json 且只允许 manifest pass、publish_ready true 的导出图进入发布清单。"
+    },
+    {
+      "id": 5,
+      "prompt": "图片文字是这篇的，但画面像上一套旧图或半写实拼贴，可以直接保存吗？",
+      "expected_output": "明确不能保存发布；标记为 fail/rejected_attempts，排除旧图、错视觉路线、旧橙子 mascot、reference_only 和文字不匹配图，要求重新生成。"
+    }
+  ]
+}

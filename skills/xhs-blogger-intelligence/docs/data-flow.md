@@ -9,6 +9,7 @@ watchlist
 -> public collection adapter
 -> raw collection snapshot
 -> normalized post records
+-> optional public comment snapshots
 -> note-cards
 -> blogger-profiles
 -> RAG brief
@@ -44,6 +45,7 @@ Raw/Agent/xhs-blogger-intelligence/YYYY-MM-DD/
   collection-run.json
   raw-adapter-output/
   normalized-posts.jsonl
+  comment-snapshots.jsonl
   errors.jsonl
 
 WiKi/来源/小红书博主/
@@ -54,19 +56,19 @@ Output/80-通用资产/小红书个人运营/blogger-intelligence/
   note-cards-YYYY-MM-DD.jsonl
 ```
 
-Cc's active manual corpus path for low-follower/high-performing Xiaohongshu case materials is:
+For template/runtime users, the active manual corpus path for low-follower/high-performing Xiaohongshu case materials is configured in:
+
+```text
+profile.paths.ragCaseLibrary
+```
+
+For Cc's private local install, this may point to her Obsidian case-library folder, for example:
 
 ```text
 WiKi/来源/小红书案例库/小红书搜集文章/
 ```
 
-Absolute path:
-
-```text
-/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章
-```
-
-Use this folder as the first lookup source when the task is writing-prep RAG, benchmark expression analysis, low-follower/high-performing case comparison, or "how similar posts are written". Store new manually collected case files here unless Cc specifies another location.
+Use the profile corpus folder as the first lookup source when the task is writing-prep RAG, benchmark expression analysis, low-follower/high-performing case comparison, or "how similar posts are written". Store new manually collected case files there unless the creator specifies another location.
 
 For friends, replace these folders with their own local storage. Do not hard-code Cc's paths into a public handoff.
 
@@ -92,6 +94,7 @@ Use `scripts/collect-search-read.mjs` for the current verified fallback route:
 redbook search display name
 -> filter by author nickname/internal user id
 -> redbook read note URL
+-> optional redbook comments note URL
 -> raw-adapter-output
 -> normalized-posts.jsonl
 -> scaffold note-card files
@@ -147,6 +150,31 @@ Minimum fields:
 - `engagement_snapshot`
 - `source_adapter`
 - `collection_status`
+- optional `comment_snapshot`
+
+### Comment Snapshot
+
+Comment snapshots are optional audience-language evidence from public comments.
+
+Minimum fields:
+
+- `count`
+- `selection`
+- `snapshots`
+- `raw_comment_path`
+
+Each snapshot should keep only short excerpts plus metadata:
+
+- `comment_id`
+- `text_excerpt`
+- `like_count`
+- `sub_comment_count`
+- `engagement_score`
+- `author_reply_excerpt`
+- `ip_location`
+- `posted_at`
+
+Use comment snapshots to infer reader language, objections, save/share reasons, and comment-trigger mechanics. Do not copy comment wording into final writing outputs.
 
 ### Note-Card
 
@@ -179,5 +207,6 @@ For Cc, the RAG brief should include a `Local Corpus Signals` section when using
 - AI-turning-question lessons
 - method-list lessons
 - CTA/collection lessons
+- public comment/audience-language lessons when available
 - what Cc can directly adapt
 - what Cc must not copy

@@ -1,0 +1,33 @@
+{
+  "profileVersion": "1.0.0",
+  "creator": {
+    "id": "replace-me",
+    "displayName": "Replace Me",
+    "accountName": "Replace Me",
+    "platform": "xiaohongshu"
+  },
+  "paths": {
+    "runtimeRoot": "../runtime",
+    "ragCaseLibrary": "../knowledge/xhs-case-library",
+    "creatorAssets": "../assets/creator",
+    "outputImages": "../outputs/images",
+    "workbenchDir": "../workbench",
+    "readerScript": ""
+  },
+  "writing": {
+    "positioning": "Replace with this creator's social media positioning, target audience, and content boundary.",
+    "voice": "Replace with this creator's writing voice. Include what it should sound like and what it must avoid.",
+    "contentStandards": [
+      "Start from a real scene.",
+      "Use cases and evidence before conclusions.",
+      "Keep AI as a helper, not the whole identity.",
+      "Give readers one practical takeaway."
+    ],
+    "visualSystem": "Replace with this creator's visual style, IP/avatar rules, typography, palette, and image-generation constraints."
+  },
+  "platformRules": {
+    "publishGate": "human_required",
+    "memoryUpdateGate": "human_required",
+    "manualPublishByDefault": true
+  }
+}

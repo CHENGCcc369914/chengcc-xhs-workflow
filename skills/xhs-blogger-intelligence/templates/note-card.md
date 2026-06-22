@@ -22,6 +22,7 @@ Use one note-card per useful public benchmark post. Distill reusable logic; do n
 - Reader emotion:
 - Visible format: carousel / video / article / mixed
 - Media count:
+- Public comment snapshot: yes / no / failed / not requested
 
 ## Underlying Logic
 
@@ -32,6 +33,8 @@ Use one note-card per useful public benchmark post. Distill reusable logic; do n
 - Turn / reframe:
 - Ending move:
 - Comment trigger:
+- Actual audience reaction:
+- High-engagement comment themes:
 
 ## Structure
 
@@ -53,7 +56,9 @@ Use short bullets. Do not paste the original post.
 ## Borrow / Avoid
 
 - What 澄Cc can borrow:
+- What 澄Cc can learn from comments:
 - What 澄Cc should not copy:
+- Comment wording not to copy:
 - Risk:
 - Fit score for 澄Cc /100:
 

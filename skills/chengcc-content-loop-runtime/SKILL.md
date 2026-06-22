@@ -37,10 +37,31 @@ The user's mental model is that ChengCc post production is a supervised loop by 
 ## Default Runtime Root
 
 ```text
-/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/Output/80-通用资产/小红书个人运营/content-loop-runtime
+./runtime
 ```
 
 This Output location is the durable runtime state. The Skill folder stores rules, scripts, and templates only.
+
+For friend/shared use, do not reuse the ChengCc runtime root or ChengCc identity paths. Use a creator profile:
+
+```bash
+node scripts/content-loop-runtime.mjs init --profile /ABSOLUTE/PATH/TO/creator-profile.json
+node scripts/content-loop-runtime.mjs new-run --profile /ABSOLUTE/PATH/TO/creator-profile.json --intent "<user intent>"
+```
+
+Profile template:
+
+```text
+profiles/creator-profile.example.json
+```
+
+Path and replacement contract:
+
+```text
+references/shareable-profile-and-paths.md
+```
+
+The key rule: Skill code is reusable; creator profile, RAG corpus, visual assets, runtime state, output images, and platform evidence are per-person.
 
 ## Required Reads
 
@@ -50,6 +71,10 @@ Read these files before executing a real loop:
 2. `references/gates-and-failure-modes.md`
 3. `scripts/content-loop-runtime.mjs` usage in this file
 4. The selected run's `01-bootstrap-context.md` after creating a run
+
+If the request is about sharing this loop with Peyson/a friend, path portability, replacing identity/materials, or installing the workflow on another machine, also read:
+
+5. `references/shareable-profile-and-paths.md`
 
 Then route to sibling skills as needed:
 
@@ -78,6 +103,7 @@ node scripts/content-loop-runtime.mjs status
 ```
 
 If the user provides a custom runtime root, pass `--runtime-root <path>`.
+If the user provides a creator profile, pass `--profile <path>` or set `CONTENT_LOOP_PROFILE`.
 
 ## Loop Phases
 
@@ -129,6 +155,8 @@ Select or recommend a topic only after checking:
 - repeated topic risk from recent runs
 - title similarity risk
 - whether the topic has a real scene
+- whether the topic has a gossipable contrast or reversal
+- whether the opening sounds like a friend telling a small case, not a teacher explaining a concept
 - whether it can produce P3 structure judgment and P4 action/method output
 
 Write the chosen hypothesis into:
@@ -186,6 +214,31 @@ node scripts/content-loop-runtime.mjs approve-gate --run-dir "<run dir>" --gate 
 
 After publishing, fill metrics manually or use `xiaohongshu-ops` only when explicitly authorized to read platform data.
 
+Default bridge:
+
+```bash
+node scripts/post-publish-metrics-bridge.mjs scan --always-update-workbench
+```
+
+Single-run test or forced early evidence snapshot:
+
+```bash
+node scripts/post-publish-metrics-bridge.mjs run --run-dir "<run dir>" --force-stage early
+```
+
+Bridge responsibilities:
+
+- scan published runs that are waiting for metrics;
+- call `xiaohongshu-ops` read-only creator backend script;
+- write sanitized evidence under the run's `evidence/post-publish-metrics/`;
+- update the local Growth Control workbench live metrics files;
+- write due 24h/72h metrics into the run;
+- draft `11-retro.md` from actual data;
+- prepare `12-memory-update-proposal.md` only after 72h data is present.
+
+The bridge must not update durable rules or `state/next-run-context.md`; Gate 2 still requires Cc approval.
+If the creator backend title differs from the run's expected publish title, mark it as a data-integrity warning and do not make title-performance conclusions until the mismatch is explained.
+
 Write metrics into:
 
 ```text
@@ -194,6 +247,7 @@ Write metrics into:
 ```
 
 Never invent platform metrics. If data is missing, keep the file as `waiting-for-data`.
+Do not treat an early backend smoke test as a formal 24h or 72h conclusion.
 
 ### Phase 6: Retro
 
@@ -287,3 +341,4 @@ Next-run context updated: yes/no
 - Do not copy full RAG source paragraphs into final content.
 - Do not use a previous run's image folder as the current run's final output.
 - Do not treat missing metrics as proof of failure.
+- Do not let ChengCc default back to teacher/course titles such as "提升X能力", "3个方法教你", or "底层逻辑" unless the user explicitly requests a tutorial.

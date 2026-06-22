@@ -18,32 +18,40 @@ Inputs:
 - publishing operator
 - image export folder
 
-For 澄Cc, use:
+For runtime/template runs, use the active `Creator Profile` first:
+
+- creator identity, target readers, voice, content pillars, and hard avoids
+- profile `paths.ragCaseLibrary` for low-follower/high-performing case retrieval
+- profile `paths.creatorAssets` for avatar/IP/spec/reference assets
+- profile `paths.outputImages` for export output
+- profile visual system as the default Image 2 style contract
+
+For 澄Cc local/private runs without an active profile, use:
 
 - 00后应届生 / 初入职场新手
 - target readers: in-school, soon-to-graduate, fresh workplace peers
 - Style B default, Style A backup
 - ChengCc standard avatar IP V2.0 by default for character actions, expression stickers, outfit variations, and inner-page mini-scenes
-- V2.0 source: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
-- clothing asset reference: `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png`
+- V2.0 source: ChengCc private `ip-visual-system.md` under Cc's local asset folder
+- clothing asset reference: ChengCc private clothing reference under Cc's local publishing-image folder
 - Apply this V2.0 source automatically in normal 澄Cc Xiaohongshu workflow runs. The user does not need to mention it again.
 - orange `C` necklace, orange/C/orange-fruit outfit system, ChengCc/Cc/Ccc marks, and C-shaped symbols as the main memory system; orange phone case is optional when phone use is part of the scene
 - clothing is a scene-variable original asset system: do not use ordinary basic T-shirts or simple recolors; use orange/C/citrus details through silhouette, texture, patch, pocket, drawstring, hat, small bag, shoes, pajamas, and retro loose styling
-- local low-follower/high-performing case corpus: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- local low-follower/high-performing case corpus: ChengCc private case-library folder
 - Visual System V2 execution engine: content input -> meaning -> emotion -> layout -> editorial visual -> feedback
 - AI as method sharing, not teaching
 - image export folder: creator's local publishing-image folder
 
-For friends, replace those defaults with their own.
+For friends, replace those defaults through `profiles/<creator-id>.creator-profile.json`; do not hard-code Cc private paths into their runnable loop.
 
 ## Phase B: Generate 10 Topics
 
 Goal: help the creator choose, not force one direction.
 
-For 澄Cc, before generating topics or improving copy, run a bounded case-library retrieval when the task mentions traffic, low-follower/high-performing cases, similar notes, title/body optimization, RAG, "爆款", or "别人怎么写":
+Before generating topics or improving copy, run a bounded case-library retrieval when the task mentions traffic, low-follower/high-performing cases, similar notes, title/body optimization, RAG, "爆款", or "别人怎么写":
 
 - use `xhs-blogger-intelligence`
-- source folder: `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/WiKi/来源/小红书案例库/小红书搜集文章`
+- source folder: active creator profile `paths.ragCaseLibrary`
 - retrieve 3-8 cases close to the topic lane
 - extract: title hook, opening true setup, repeated brain-voice lines, AI turning question, practical method list, collection/save CTA
 - output a compact RAG brief before the topics or draft

@@ -1,0 +1,34 @@
+{
+  "profileVersion": "1.0.0",
+  "creator": {
+    "id": "peyson",
+    "displayName": "Peyson",
+    "accountName": "Peyson",
+    "platform": "xiaohongshu"
+  },
+  "paths": {
+    "runtimeRoot": "../runtime",
+    "ragCaseLibrary": "../knowledge/xhs-case-library",
+    "creatorAssets": "../assets/creator",
+    "outputImages": "../outputs/images",
+    "workbenchDir": "../workbench",
+    "readerScript": ""
+  },
+  "writing": {
+    "positioning": "Peyson is a reflective product-minded founder/operator sharing AI-assisted work clarity, personal operating systems, side-project thinking, and practical self-review.",
+    "voice": "Calm, direct, analytical, friend-like, practical. Avoid teacher-like slogans, cold AI-tool tutorials, generic growth advice, and exaggerated success claims.",
+    "contentStandards": [
+      "Start from a real work or life scene.",
+      "Turn confusion into a clear problem statement.",
+      "Use AI as a sidekick for sorting facts, records, review, and next actions.",
+      "Give one reusable method or decision frame.",
+      "End with a concrete comment or reflection opening."
+    ],
+    "visualSystem": "Clean, warm, structured, human, product-minded. Avoid cold tech dashboards, generic AI stock style, and chaotic social-media templates."
+  },
+  "platformRules": {
+    "publishGate": "human_required",
+    "memoryUpdateGate": "human_required",
+    "manualPublishByDefault": true
+  }
+}

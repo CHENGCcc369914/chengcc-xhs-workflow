@@ -6,11 +6,11 @@ expression stickers, inner-page mini-scenes, or Image 2 card prompts.
 
 Current source of truth:
 
-- `/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md`
+- active creator profile `paths.creatorAssets/ip-visual-system.md`
 
 Current clothing asset reference for outfit design density:
 
-- `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png`
+- active creator profile `paths.creatorAssets/clothing-reference.png`
 
 Read the V2.0 spec whenever the task needs a new avatar action, outfit,
 sticker, small illustration, avatar cover, avatar prompt pack, or when the user
@@ -18,11 +18,11 @@ says `按橙Cc个人IP视觉体系规范2.0`.
 
 Legacy standard setting image:
 
-- `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP标准设定图-v0.1/01-橙Cc-IP标准设定图-三视图-细节-v0.1.png`
+- active creator profile `paths.creatorAssets/legacy-standard-image.png`
 
 Legacy long-form local spec:
 
-- `/Users/ccc/Pictures/小红书运营图片/橙Cc-IP标准设定图-v0.1/橙Cc-IP延展规范-v0.1.md`
+- active creator profile `paths.creatorAssets/ip-extension-spec.md`
 
 Use the V2.0 Markdown spec over older image/spec paths if there is any conflict.
 

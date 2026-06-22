@@ -55,14 +55,14 @@
 
 - Run ID：2026-06-17-friend-reply-score
 - 结果：已生成 4 张完整 3:4 图文卡片
-- 导出目录：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/`
-- Manifest：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/run-manifest.json`
+- 导出目录：`outputs/images/2026-06-17-friend-reply-score/`
+- Manifest：`outputs/images/2026-06-17-friend-reply-score/run-manifest.json`
 - Card copy hash：`sha256:example-lock-before-generation`
 - 图片顺序：
-  1. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/01-cover-friend-reply.png`
-  2. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/02-emotion-page.png`
-  3. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/03-system-page.png`
-  4. `/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/04-insight-page.png`
+  1. `outputs/images/2026-06-17-friend-reply-score/01-cover-friend-reply.png`
+  2. `outputs/images/2026-06-17-friend-reply-score/02-emotion-page.png`
+  3. `outputs/images/2026-06-17-friend-reply-score/03-system-page.png`
+  4. `outputs/images/2026-06-17-friend-reply-score/04-insight-page.png`
 - 通过验收：4/4 pass；每页通过当前主题文字、Visual System V2、ChengCc IP V2.0、中文可读性、无旧图/错风格资产检查。
 - 拒绝/废弃尝试：无。若有旧图、半写实拼贴、旧 mascot、错视觉路线或文字不匹配，必须写入 manifest 的 `rejected_attempts`，并且不能出现在发布清单。
 - 失败原因与下一步：无；如果用户改卡片文字，需要重新生成对应页并更新 manifest。
@@ -84,7 +84,7 @@
 
 目标平台：xiaohongshu。
 Run ID：2026-06-17-friend-reply-score。
-Manifest：`/Users/ccc/Pictures/小红书运营图片/2026-06-17-friend-reply-score/run-manifest.json`，发布前需确认 `publish_ready: true` 且 4 页均为 `pass`。
+Manifest：`outputs/images/2026-06-17-friend-reply-score/run-manifest.json`，发布前需确认 `publish_ready: true` 且 4 页均为 `pass`。
 1. 打开小红书创作者平台图文发布页。
 2. 只按上面 manifest pass 的 4 张导出图上传，确认封面是第 1 张。
 3. 复制标题、正文和标签。

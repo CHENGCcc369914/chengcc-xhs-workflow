@@ -103,6 +103,7 @@ function scoreRecord(record, noteCard, terms) {
     record.account_name,
     record.short_excerpt_or_paraphrase,
     ...(record.tag_names || []),
+    ...((record.comment_snapshot?.snapshots || []).map((item) => item.text_excerpt || "")),
     noteCard?.text || ""
   ].join("\n").toLowerCase();
   let score = 0;
@@ -112,6 +113,21 @@ function scoreRecord(record, noteCard, terms) {
   if (record.collection_status?.includes("detail_read_complete")) score += 5;
   if (record.media_count) score += Math.min(record.media_count, 5);
   return score;
+}
+
+function formatCommentSignal(record) {
+  const snapshot = record.comment_snapshot;
+  if (!snapshot || !Array.isArray(snapshot.snapshots) || snapshot.snapshots.length === 0) {
+    return "-";
+  }
+  return snapshot.snapshots
+    .slice(0, 3)
+    .map((item) => {
+      const score = item.engagement_score ? `score ${item.engagement_score}` : "public comment";
+      const text = String(item.text_excerpt || "").slice(0, 60);
+      return `${text}${text.length >= 60 ? "..." : ""} (${score})`;
+    })
+    .join(" / ");
 }
 
 function parseNoteCard(path) {
@@ -159,12 +175,14 @@ function buildBrief({ args, inputDir, records, noteById }) {
 
   const rows = ranked.map(({ record, score }) => {
     const tags = (record.tag_names || []).slice(0, 5).join(" / ") || "-";
-    return `| ${record.account_name || "-"} | ${record.title || "-"} | ${tags} | ${score} | ${record.post_id || "-"} |`;
-  }).join("\n") || "| none | none | none | 0 | none |";
+    return `| ${record.account_name || "-"} | ${record.title || "-"} | ${tags} | ${formatCommentSignal(record)} | ${score} | ${record.post_id || "-"} |`;
+  }).join("\n") || "| none | none | none | none | 0 | none |";
 
   const lessons = ranked.map(({ record }) => {
     const tags = (record.tag_names || []).join(" / ") || "no tags";
-    return `- ${record.account_name}: "${record.title}" uses topic lane ${tags}. Learn the hook/topic lane only; review the note-card before adapting structure.`;
+    const commentSignal = formatCommentSignal(record);
+    const commentPart = commentSignal === "-" ? "" : ` Public comment samples suggest audience language around: ${commentSignal}.`;
+    return `- ${record.account_name}: "${record.title}" uses topic lane ${tags}.${commentPart} Learn the hook/topic lane and audience reaction only; review the note-card before adapting structure.`;
   }).join("\n") || "- No usable records found.";
 
   const sourceList = ranked.map(({ record, noteCard }) => {
@@ -184,8 +202,8 @@ function buildBrief({ args, inputDir, records, noteById }) {
 
 ## Retrieved Signals
 
-| Blogger | Post / Note-Card | Useful Signal | Match Score | Post ID |
-|---|---|---|---:|---|
+| Blogger | Post / Note-Card | Useful Signal | Public Comment Signal | Match Score | Post ID |
+|---|---|---|---|---:|---|
 ${rows}
 
 ## Topic-Specific Lessons
@@ -204,6 +222,7 @@ ${lessons}
 ## Do-Not-Copy
 
 - Do not copy original wording from benchmark posts.
+- Do not copy public comment wording directly; use comment samples only to infer audience language, objections, and resonance.
 - Do not copy private or creator-specific experiences.
 - Do not copy visual IP, screenshots, or distinctive design systems.
 - Do not overfit one post; use this as retrieval context, not final truth.

@@ -5,9 +5,10 @@ A shareable Xiaohongshu-first content system.
 If you are Peyson, start here:
 
 - Read `QUICKSTART-FOR-PEYSON.md`.
-- Install `skills/chengcc-content-loop-runtime`, `skills/chengcc-xhs-workflow`, and `skills/xhs-blogger-intelligence`.
+- Run `scripts/setup-creator.mjs` or give your Agent `docs/AGENT-REPLACE-CREATOR.md`.
+- The intended setup is: clone this repo -> replace creator profile once -> run the same content loop repeatedly.
 - For ChengCc, start your robot with: `帮我做一篇澄Cc小红书，主题是刚下班脑子还在上班。`
-- For Peyson or another creator, replace the creator name/profile and ask for the same runtime-style flow.
+- For Peyson or another creator, replace `profiles/<creator>.creator-profile.json`, then ask for the same runtime-style flow.
 
 It currently contains three skills:
 
@@ -17,7 +18,44 @@ It currently contains three skills:
 
 The main publishing workflow supports Xiaohongshu-first image-text drafts, with 2026 platform review support for Xiaohongshu, Douyin, WeChat Channels, and WeChat Official Account, plus a post-publish performance loop.
 
-The repo ships with `澄Cc` and `Peyson` starter profiles, but the workflow is designed to be replaced by any creator's own console, visual system, topic map, and manual publishing flow.
+The repo ships with `澄Cc` and `Peyson` starter profiles, but the workflow is designed to be replaced by any creator's own social positioning, voice, visual system, topic map, case library, runtime state, and manual publishing flow.
+
+## Intended GitHub Template Flow
+
+```text
+git clone repo
+-> setup creator profile once
+-> initialize runtime
+-> create one run per post
+-> RAG / topic / writing / images / publish review / metrics / retro
+```
+
+For Peyson:
+
+```bash
+git clone https://github.com/CHENGCcc369914/chengcc-xhs-workflow.git
+cd chengcc-xhs-workflow
+
+node scripts/setup-creator.mjs \
+  --id peyson \
+  --name "Peyson" \
+  --positioning "Peyson 的社媒定位" \
+  --voice "Peyson 的写作声音和禁区" \
+  --visual "Peyson 的视觉风格"
+```
+
+Or give his Agent:
+
+```text
+docs/AGENT-REPLACE-CREATOR.md
+```
+
+After setup:
+
+```bash
+export CONTENT_LOOP_PROFILE="$PWD/profiles/peyson.creator-profile.json"
+node skills/chengcc-content-loop-runtime/scripts/content-loop-runtime.mjs new-run --intent "今天想做的内容方向"
+```
 
 ## What This Workflow Does
 
@@ -132,7 +170,7 @@ Use this when you want the system to keep memory across posts instead of only pr
 Default runtime root:
 
 ```text
-/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/Obsidian Vault/Wiki/Output/80-通用资产/小红书个人运营/content-loop-runtime
+./runtime
 ```
 
 Initialize and create a run:

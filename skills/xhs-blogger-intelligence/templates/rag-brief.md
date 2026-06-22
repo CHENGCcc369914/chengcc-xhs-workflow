@@ -20,6 +20,12 @@ Use this as the compact handoff from `xhs-blogger-intelligence` to a writer skil
 |---|---|---|---|
 |  |  |  |  |
 
+### Public Comment Signals
+
+| Blogger | Post | High-Engagement Comment Signal | How To Learn From It |
+|---|---|---|---|
+|  |  |  |  |
+
 ### Stable Blogger Patterns
 
 | Blogger | Stable Pattern | How To Learn From It |
@@ -34,6 +40,7 @@ Use this as the compact handoff from `xhs-blogger-intelligence` to a writer skil
 - Best body/card split:
 - Best visual/page logic:
 - Best comment trigger:
+- Best audience-language signal:
 
 ## For 澄Cc
 
@@ -43,10 +50,12 @@ Use this as the compact handoff from `xhs-blogger-intelligence` to a writer skil
 - Tone guardrail:
 - AI role guardrail:
 - Visual guardrail:
+- Comment guardrail:
 
 ## Do-Not-Copy
 
 - Do not copy original wording:
+- Do not copy public comment wording:
 - Do not copy private or creator-specific experiences:
 - Do not copy visual IP:
 - Do not overfit:

@@ -65,6 +65,19 @@ node skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs \
   --limit 3
 ```
 
+With public comment snapshots:
+
+```bash
+node skills/xhs-blogger-intelligence/scripts/collect-search-read.mjs \
+  --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
+  --account "小柴人不纠结" \
+  --out-dir "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD/run-id" \
+  --limit 3 \
+  --comments true \
+  --comments-limit 8 \
+  --comments-sort engagement
+```
+
 The script writes:
 
 - `raw-adapter-output/` with redbook stdout/stderr/exit files
@@ -72,6 +85,12 @@ The script writes:
 - `normalized/filtered-search-results.json`
 - `distilled/note-card-*.md`
 - `collection-run.md`
+
+When `--comments true` is used, it also writes:
+
+- `raw-adapter-output/comments-<note-id>.stdout|stderr|exit`
+- `raw-adapter-output/comments-<note-id>.json` when the adapter returns JSON successfully
+- `comment_snapshot` inside each normalized post record, with short excerpts and engagement metadata only
 
 The script is deterministic scaffolding. Its automatic note-cards are starting points; use human/LLM review before treating them as final benchmark distillation.
 
@@ -82,7 +101,9 @@ node skills/xhs-blogger-intelligence/scripts/collect-watchlist.mjs \
   --watchlist skills/xhs-blogger-intelligence/examples/watchlist-chengcc.example.json \
   --out-root "/path/to/private/raw/xhs-blogger-intelligence/YYYY-MM-DD" \
   --statuses search_only,active \
-  --limit 2
+  --limit 2 \
+  --comments true \
+  --comments-limit 8
 ```
 
 Then build a topic-specific RAG brief:
@@ -118,6 +139,18 @@ For each post detail, capture:
 - text excerpt or parsed text if allowed
 - collection timestamp
 
+For public comments when explicitly requested, capture:
+
+- command run
+- note URL or id
+- raw output file path
+- exit status and captcha/session errors if any
+- visible comment count if available
+- short excerpts only in normalized records
+- like count, reply count, author-reply hint, and public interaction score
+
+Do not publish long comment text into shareable outputs. Use comments as evidence for reader language and resonance, not as copy.
+
 ## Fallbacks
 
 Use fallbacks when redbook fails, returns incomplete data, or is not installed:
@@ -129,6 +162,17 @@ Use fallbacks when redbook fails, returns incomplete data, or is not installed:
 5. Manual copy of short excerpts provided by the user.
 
 Record fallback use in the collection run. Do not silently mix failed adapter output with complete data.
+
+## Comment Capture Failure Handling
+
+`redbook comments` may fail even when `search` and `read` succeed. Common failures:
+
+- `Session expired`: ask the user to re-login in the browser profile used by redbook, then run `redbook whoami`.
+- `Captcha required`: stop comment collection for that run and report the captcha gate. Do not loop retries.
+- Empty or partial comment response: store the raw response and mark comment coverage as partial.
+- Access-control or visibility failure: keep post-level collection and mark comments unavailable.
+
+Low-frequency monitoring should treat comments as an optional enrichment layer. A failed comment capture should not invalidate successful public post collection.
 
 ## Risk Controls
 

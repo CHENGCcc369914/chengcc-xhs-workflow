@@ -8,8 +8,8 @@
   "export_folder": "",
   "visual_route": "Style B healing hand-drawn IP",
   "required_sources": {
-    "ip_spec": "/Users/ccc/Library/Mobile Documents/iCloud~md~obsidian/Documents/CC-Obsidian/橙Cc 个人IP视觉体系规范2.0.md",
-    "clothing_reference": "/Users/ccc/Pictures/小红书运营图片/橙Cc-IP服装资产参考-v0.1/01-橙Cc-IP服装资产标准参考-v0.1.png",
+    "ip_spec": "{{creator_profile.paths.creatorAssets}}/ip-visual-system.md",
+    "clothing_reference": "{{creator_profile.paths.creatorAssets}}/clothing-reference.png",
     "visual_rules": "references/visual-adapter-rules.md",
     "ip_extension_rules": "references/chengcc-ip-extension-rules.md"
   },

@@ -19,5 +19,9 @@ Expected route: create a runtime run first, then continue through bootstrap, RAG
 ```
 
 ```text
+帮我做一篇澄Cc小红书，主题是用 AI 提升财商能力。默认先改成朋友吐槽式破案入口，不要写成老师讲财商。
+```
+
+```text
 这篇已经有 72h 数据了，帮我把 metrics、retro、memory update proposal 跑完，长期规则更新前等我确认。
 ```

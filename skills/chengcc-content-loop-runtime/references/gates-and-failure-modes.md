@@ -11,6 +11,7 @@ Approval checklist:
 - `06-image-manifest.json` has `publishReady: true`.
 - every final image belongs to the current run folder or the current run export folder.
 - failed/rejected image attempts are not listed in `07-publish-checklist.md`.
+- title and cover pass the friend-gossip diagnosis check: concrete scene, contrast/reversal, self-recognition, and comment opening.
 - AI-generated/AI-assisted disclosure is handled.
 - privacy review is clean.
 - title/body/tags match final approved card copy.
